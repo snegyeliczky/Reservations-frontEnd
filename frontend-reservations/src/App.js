@@ -13,8 +13,8 @@ class App extends Component {
     }
 
     componentDidMount() {
-        axios.get("http://localhost:8080/")
-        .then(response => this.setState({ guests: response.data }))    
+        axios.get('http://localhost:8080/')
+            .then(response => this.setState({ guests: response.data }))    
     }
     
     render() {
@@ -25,6 +25,7 @@ class App extends Component {
                         <Header />
                         <Route exact path="/" render={ props => (
                                 <React.Fragment>
+                                    <p>Name E-mail Status Room</p>
                                     <Guests guests={this.state.guests} />
                                 </React.Fragment>
                         )} />   

@@ -3,11 +3,11 @@ import PropTypes from "prop-types";
 
 export class Guest extends Component {
     render() {
-        const {name} = this.props.guest;
+        const {name, email, room, status} = this.props.guest;
         return (
             <div style={guestStyle}>
                 <p>
-                    {name} 
+                    {name + ' ' + email + ' ' + status + ' ' + room} 
                 </p>
             </div>
         );
@@ -25,4 +25,4 @@ Guest.protoTypes = {
     guest: PropTypes.object.isRequired
 };
 
-export default Guest
+export default Guest;
