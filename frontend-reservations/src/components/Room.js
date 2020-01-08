@@ -14,11 +14,9 @@ export class Room extends Component {
       margin: "1%"
     };
 
-    const isReserved = reserved ? "yes" : "no";
-
     return (
       <div style={roomStyle}>
-        <p>{"Room Number: " + roomNumber + " Reserved: " + isReserved}</p>
+        <p>{"Room: " + roomNumber}</p>
       </div>
     );
   }
