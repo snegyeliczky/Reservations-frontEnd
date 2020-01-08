@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from "prop-types";
-import {Form} from 'react-bootstrap'
+import {Form, Button, InputGroup, Col, Row} from 'react-bootstrap'
 
 export class Guest extends Component {
     state = {
@@ -9,32 +9,39 @@ export class Guest extends Component {
 
     handleChange = (event) => {
         this.setState({value: event.target.value});
-        console.log(this.state.value);
     }
 
     render() {
-        const {selectedValue} = this.state;
         const {id, name, email, room, status} = this.props.guest;
         return (
             <div style={guestStyle}>
                 <div>
-                    <div>
+                    <div style={rowStlye}>
+                        
                         <Form>
-                            <Form.Group controlId={id}>
-                                <Form.Control as="select" value={this.state.value} onSelect={this.handleChange} onBlur={this.props.changeStatus.bind(this, id, selectedValue)}>
-                                    <option value="CHECKIN">CheckIn</option>
-                                    <option value="IN">In</option>
-                                    <option value="CHECKOUT">CheckOut</option>
-                                    <option value="OUT">Out</option>
-                                </Form.Control>
-                            </Form.Group>
+                            <Row>
+                                {name + " " + email + " " + room}
+                                <Form.Group controlId={id}>
+                                    <Form.Control as="select" value={this.state.value} onChange={this.handleChange}>
+                                        <option value="CHECKIN">CheckIn</option>
+                                        <option value="IN">In</option>
+                                        <option value="CHECKOUT">CheckOut</option>
+                                        <option value="OUT">Out</option>
+                                    </Form.Control>
+                                </Form.Group>
+                                <Button variant="dark" type="submint" onClick={this.props.changeStatus.bind(this, id, this.state.value)}>Submit</Button>
+                            </Row>
                         </Form>
-                        {name + ' ' + email + ' ' + room }
                     </div>
+                        
                 </div>
             </div> 
         );
     }
+}
+
+const rowStlye = {
+    display: "inline-flex"
 }
 
 const guestStyle =  {
