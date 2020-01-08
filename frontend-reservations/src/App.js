@@ -3,20 +3,26 @@ import {BrowserRouter as Router, Route} from 'react-router-dom';
 import axios from "axios";
 
 import Header from "./components/layout/Header";
-import Guests from './components/Guests';
+import GuestList from './components/GuestList';
 
 import './App.css';
 
 class App extends Component {
     state = {
-        guests: []
+        guestList: []
     }
 
     componentDidMount() {
         axios.get('http://localhost:8080/')
-            .then(response => this.setState({ guests: response.data }))    
+            .then(response => this.setState({ guestList: response.data }))    
     }
     
+    checkInList() {
+        axios.get('http://localhost:8080/guest/checkin')
+            .then(response => this.setState({ checkInList: response.data }))    
+    }
+
+
     render() {
         return (
             <Router>
@@ -26,9 +32,16 @@ class App extends Component {
                         <Route exact path="/" render={ props => (
                                 <React.Fragment>
                                     <p>Name E-mail Status Room</p>
-                                    <Guests guests={this.state.guests} />
+                                    <GuestList guestList={this.state.guestList} />
                                 </React.Fragment>
-                        )} />   
+                        )} />
+                        <Route exact path="/checkin" render={ props => (
+                                <React.Fragment>
+                                    {this.checkInList()}
+                                    <p>Name E-mail Status Room</p>
+                                    <GuestList guestList={this.state.guestList} />
+                                </React.Fragment>
+                        )} />
                     </div>
                 </div>
             </Router>

@@ -3,9 +3,9 @@ import PropTypes from "prop-types";
 import Guest from './Guest';
 
 
-export class Guests extends Component {
+export class GuestList extends Component {
     render() {
-        return this.props.guests.map((guest) => (
+        return this.props.guestList.map((guest) => (
             <Guest key={guest.id} 
             guest={guest}/>
         ));
@@ -13,8 +13,8 @@ export class Guests extends Component {
 }
 
 //PropTypes
-Guests.protoTypes = {
-    guests: PropTypes.array.isRequired
+GuestList.protoTypes = {
+    GuestList: PropTypes.array.isRequired
 };
 
-export default Guests
+export default GuestList
