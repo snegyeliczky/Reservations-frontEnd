@@ -20,8 +20,8 @@ class App extends Component {
             .then(response => this.setState({ guestList: response.data }))    
     }
     
-    checkInList(url) {
-        axios.get(this.state.url)
+    checkInList() {
+        axios.get('http://localhost:8080/guest/checkin')
             .then(response => this.setState({ guestList: response.data }))    
     }
 
