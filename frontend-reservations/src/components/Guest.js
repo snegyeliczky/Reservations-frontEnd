@@ -3,22 +3,25 @@ import PropTypes from "prop-types";
 import {Form} from 'react-bootstrap'
 
 export class Guest extends Component {
+    state = {
+        value: ""
+    }
 
-    rowStyle = () => {
-        return {
-            background: '#f4f4f4'
-        }
-    };
+    handleChange = (event) => {
+        this.setState({value: event.target.value});
+        console.log(this.state.value);
+    }
 
     render() {
-        const {name, email, room, status} = this.props.guest;
+        const {selectedValue} = this.state;
+        const {id, name, email, room, status} = this.props.guest;
         return (
             <div style={guestStyle}>
-                <div style={this.rowStyle()}>
+                <div>
                     <div>
                         <Form>
-                            <Form.Group controlId="mainForm.Status">
-                                <Form.Control as="select">
+                            <Form.Group controlId={id}>
+                                <Form.Control as="select" value={this.state.value} onSelect={this.handleChange} onBlur={this.props.changeStatus.bind(this, id, selectedValue)}>
                                     <option value="CHECKIN">CheckIn</option>
                                     <option value="IN">In</option>
                                     <option value="CHECKOUT">CheckOut</option>

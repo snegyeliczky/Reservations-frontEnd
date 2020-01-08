@@ -23,6 +23,11 @@ class App extends Component {
             .then(response => this.setState({ checkInList: response.data }))    
     }
 
+    changeStatus(e, s) {
+        console.log(e)
+        console.log(s)
+    }
+
 
     render() {
         return (
@@ -34,14 +39,14 @@ class App extends Component {
                                 <React.Fragment>
                                     {this.componentDidMount()}
                                     <p>Name E-mail Status Room</p>
-                                    <GuestList guestList={this.state.guestList} />
+                                    <GuestList guestList={this.state.guestList} changeStatus={this.changeStatus} />
                                 </React.Fragment>
                         )} />
                         <Route exact path="/checkin" render={ props => (
                                 <React.Fragment>
                                     {this.checkInList()}
                                     <p>Name E-mail Status Room</p>
-                                    <GuestList guestList={this.state.guestList} />
+                                    <GuestList guestList={this.state.guestList} changeStatus={this.changeStatus} />
                                 </React.Fragment>
                         )} />
                     </div>
