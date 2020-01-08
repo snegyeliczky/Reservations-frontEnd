@@ -8,21 +8,21 @@ export class Guest extends Component {
         return (
             <div style={guestStyle}>
                 <div>
-                    <div style={rowStyle}>
+                    <div style={this.rowStyle()}>
                         <div>
                         {name + ' ' + email + ' ' }
                         </div>
                         <div>
-                            <Form>
-                            <Form.Group controlId="dropdown-basic-button">
-                                <Form.Control inputRef={ el => this.inputEl=el } componentClass="select" placeholder="select">
+                        <Form>
+                            <Form.Group controlId="mainForm.Status">
+                                <Form.Control as="select">
                                     <option value="CHECKIN">CheckIn</option>
                                     <option value="IN">In</option>
                                     <option value="CHECKOUT">CheckOut</option>
                                     <option value="OUT">Out</option>
                                 </Form.Control>
-                            </Form.Group> 
-                            </Form>
+                            </Form.Group>
+                        </Form>
                         </div>
                         <div>
                             { ' ' + room} 
@@ -37,14 +37,15 @@ export class Guest extends Component {
 }
 
 const guestStyle =  {
-    background: '#f4f4f4',
     padding: '10px',
     borderBottom: '1px #ccc dotted'
 };
 
-const rowStyle = {
-    display: 'inline-flex',
-    
+rowStyle = () => {
+    return {
+        background: '#f4f4f4',
+        display: 'inline-flex'
+    }
 };
 
 //PropTypes
