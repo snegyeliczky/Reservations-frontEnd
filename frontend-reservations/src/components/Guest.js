@@ -3,16 +3,19 @@ import PropTypes from "prop-types";
 import {Form} from 'react-bootstrap'
 
 export class Guest extends Component {
+
+    rowStyle = () => {
+        return {
+            background: '#f4f4f4'
+        }
+    };
+
     render() {
         const {name, email, room, status} = this.props.guest;
         return (
             <div style={guestStyle}>
-                <div>
-                    <div style={this.rowStyle()}>
-                        <div>
-                        {name + ' ' + email + ' ' }
-                        </div>
-                        <div>
+                <div style={this.rowStyle()}>
+                    <div>
                         <Form>
                             <Form.Group controlId="mainForm.Status">
                                 <Form.Control as="select">
@@ -23,15 +26,10 @@ export class Guest extends Component {
                                 </Form.Control>
                             </Form.Group>
                         </Form>
-                        </div>
-                        <div>
-                            { ' ' + room} 
-                        </div>
+                        {name + ' ' + email + ' ' + room }
                     </div>
                 </div>
-                
-            </div>
-            
+            </div> 
         );
     }
 }
@@ -41,12 +39,6 @@ const guestStyle =  {
     borderBottom: '1px #ccc dotted'
 };
 
-rowStyle = () => {
-    return {
-        background: '#f4f4f4',
-        display: 'inline-flex'
-    }
-};
 
 //PropTypes
 Guest.protoTypes = {
