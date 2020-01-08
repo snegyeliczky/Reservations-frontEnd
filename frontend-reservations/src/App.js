@@ -6,6 +6,7 @@ import Header from "./components/layout/Header";
 import GuestList from './components/GuestList';
 
 import './App.css';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 class App extends Component {
     state = {
@@ -31,6 +32,7 @@ class App extends Component {
                         <Header />
                         <Route exact path="/" render={ props => (
                                 <React.Fragment>
+                                    {this.componentDidMount()}
                                     <p>Name E-mail Status Room</p>
                                     <GuestList guestList={this.state.guestList} />
                                 </React.Fragment>
