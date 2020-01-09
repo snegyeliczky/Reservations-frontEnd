@@ -1,11 +1,12 @@
-import React from "react";
+import React, {Component} from "react";
 import { Link } from "react-router-dom";
 
-function Header() {
+class Header extends Component{
+  render() {
     return (
         <header style={headerStyle}>
-            <h1>Entertaiment Hotel</h1>
-            <Link style={linkStyle} to="/">Home</Link>
+            <h1>Reservations</h1>
+            <Link style={linkStyle} onClick={this.props.componentDidMount} to="/">Home</Link>
             {" "} |
             <Link style={linkStyle} to="/rooms">
             {" "}
@@ -14,6 +15,9 @@ function Header() {
         </header>
     )
 }
+
+};
+
 
 const headerStyle = {
   background: "#333",

@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import DateTimePicker from "react-datetime-picker";
+import { Button } from "react-bootstrap";
 
 class SearchFild extends Component {
   state = {
@@ -12,13 +13,15 @@ class SearchFild extends Component {
     const { date } = this.state;
     return (
       <div>
+        <br/>
         <DateTimePicker onChange={this.onChange} value={this.state.date} />
-        <button
+        <Button variant="dark"
+          style={{margin: '5px'}}
           type="submit"
           onClick={this.props.checkForActualDate.bind(this, date)}
         >
           Submit
-        </button>
+        </Button>
       </div>
     );
   }

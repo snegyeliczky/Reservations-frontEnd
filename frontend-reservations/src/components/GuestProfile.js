@@ -5,12 +5,13 @@ import { Button } from "react-bootstrap";
 export class GuestProfile extends Component {
   state = {
     guest: {},
-    room: {}
+    room: ""
   };
 
   handleChange = event => {
     event.preventDefault();
-    this.setState({ room: event.target.value });
+    this.state.room = event.target.value;
+    console.log(this.state.room);
   };
 
   getGuestById() {
@@ -23,38 +24,57 @@ export class GuestProfile extends Component {
 
   generateRoomOption(room) {
     if (room.reserved === false) {
-      return <option value={room}>{room.roomNumber}</option>;
+      return <option value={room.roomNumber}>{room.roomNumber}</option>;
     }
   }
 
   render() {
-    console.log(this.props);
-    console.log(this.props.guestList);
-    console.log(this.props.match.params.guestId);
+    const dropDownBtn = {
+      lineHeight: "1.5",
+      padding: ".375rem .75rem",
+      textAlign: "center",
+      verticalAlign: "middle",
+      userSelect: "none",
+      fonstSize: "1rem",
+      cursor: "pointer",
+      fontWeight: "400",
+      color: "#fff",
+      background: "#17a2b8",
+      bordelColor: "#17a2b8",
+      border: "1px solid transparent",
+      borderRadius: ".25rem",
+      margin: "5px"
+    };
     return (
-      <div>
+      <tr>
         {this.getGuestById()}
-        {this.state.guest.name}
-        {this.state.guest.email}
-        {this.state.guest.checkIn}
-        {this.state.guest.checkOut}
-        {this.state.guest.status}
-        {this.state.guest.id}
-        <select value={this.state.room} onChange={this.handleChange}>
-          {this.props.roomList.map(room => this.generateRoomOption(room))}
-        </select>
-        <Button
-          variant="dark"
-          type="submit"
-          onClick={this.props.setRoom.bind(
-            this,
-            this.state.room,
-            this.state.guest
-          )}
-        >
-          Save
-        </Button>
-      </div>
+        <td>{this.state.guest.name}</td>
+        <td>{this.state.guest.email}</td>
+        <td>{this.state.guest.checkIn}</td>
+        <td>{this.state.guest.checkOut}</td>
+        <td>{this.state.guest.status}</td>
+        <td>
+          <select
+            style={dropDownBtn}
+            value={this.state.room}
+            onChange={this.handleChange}
+          >
+            {this.props.roomList.map(room => this.generateRoomOption(room))}
+          </select>
+          <Button
+            style={{ margin: "5px" }}
+            variant="dark"
+            type="submit"
+            onClick={this.props.setRoom.bind(
+              this,
+              this.state.room,
+              this.state.guest
+            )}
+          >
+            Save
+          </Button>
+        </td>
+      </tr>
     );
   }
 }
