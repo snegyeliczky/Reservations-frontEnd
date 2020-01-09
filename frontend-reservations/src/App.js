@@ -38,8 +38,8 @@ class App extends Component {
       .then(response => this.setState({ guestList: response.data }));
   };
 
-  changeStatus(guestId, newStatus) {
-    let mess = "?id=" + guestId
+  changeStatus = (guestId, newStatus) => {
+    let mess = "?id=" + guestId + "&status=" + newStatus
     axios
       .get("http://localhost:8080/guest/changestatus" + mess)
       .then(response => this.setState({ guestList: response.data }))
