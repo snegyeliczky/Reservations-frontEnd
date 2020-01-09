@@ -13,13 +13,13 @@ export class Guest extends Component {
   };
 
   render() {
-    const { id, name, email, room, status} = this.props.guest;
+    const { id, name, room, status, checkIn, checkOut} = this.props.guest;
     return (
       <div style={guestStyle}>
         <div>
           <div style={rowStlye}>
             <Row>
-              {name + " " + email + " " + room}
+              {" room:"+room+" name: "+name+" check-in: "+checkIn+" check-out: "+checkOut}
               <select value={this.state.value} onChange={this.handleChange}>
                 <option >{status}</option>
                 <option value="CHECKIN">CHECKIN</option>
