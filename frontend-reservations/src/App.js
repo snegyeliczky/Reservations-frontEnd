@@ -5,6 +5,7 @@ import axios from "axios";
 import Header from "./components/layout/Header";
 import GuestList from "./components/GuestList";
 import RoomList from "./components/RoomList";
+import SearchField from "./components/search/SearchField";
 
 import "./App.css";
 import "bootstrap/dist/css/bootstrap.min.css";
@@ -27,6 +28,13 @@ class App extends Component {
       .then(response => this.setState({ roomList: response.data }));
   }
 
+  checkForActualDate = (year, month, day) => {
+    let date = year + "-" + month + "-" + day;
+    axios
+      .get("http://localhost:8080/guest/checkin?date=" + date)
+      .then(response => this.setState({ guestList: response.data }));
+  };
+
   changeStatus(e, s) {
     console.log(e);
     console.log(s);
@@ -38,12 +46,12 @@ class App extends Component {
         <div className="App">
           <div className="container">
             <Header />
+            <SearchField checkForActualDate={this.checkForActualDate} />
             <Route
               exact
               path="/"
               render={props => (
                 <React.Fragment>
-                  {this.componentDidMount()}
                   <p>Name E-mail Status Room</p>
                   <GuestList
                     guestList={this.state.guestList}
