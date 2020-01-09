@@ -5,7 +5,11 @@ import Guest from "./Guest";
 export class GuestList extends Component {
   render() {
     return this.props.guestList.map(guest => (
-      <Guest key={guest.id} guest={guest} />
+      <Guest
+        key={guest.id}
+        guest={guest}
+        changeStatus={this.props.changeStatus}
+      />
     ));
   }
 }

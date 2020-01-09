@@ -1,22 +1,30 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import { Form } from "react-bootstrap";
+import { Form, Button, InputGroup, Col, Row } from "react-bootstrap";
 
 export class Guest extends Component {
+  state = {
+    value: ""
+  };
+
+  handleChange = event => {
+    this.setState({ value: event.target.value });
+  };
+
   render() {
-    const { name, email, room, status } = this.props.guest;
+    const { id, name, email, room, status } = this.props.guest;
     return (
       <div style={guestStyle}>
         <div>
-          <div style={rowStyle}>
-            <div>{name + " " + email + " "}</div>
-            <div>
-              <Form>
-                <Form.Group controlId="dropdown-basic-button">
+          <div style={rowStlye}>
+            <Form>
+              <Row>
+                {name + " " + email + " " + room}
+                <Form.Group controlId={id}>
                   <Form.Control
-                    inputRef={el => (this.inputEl = el)}
-                    componentClass="select"
-                    placeholder="select"
+                    as="select"
+                    value={this.state.value}
+                    onChange={this.handleChange}
                   >
                     <option value="CHECKIN">CheckIn</option>
                     <option value="IN">In</option>
@@ -24,9 +32,19 @@ export class Guest extends Component {
                     <option value="OUT">Out</option>
                   </Form.Control>
                 </Form.Group>
-              </Form>
-            </div>
-            <div>{" " + room}</div>
+                <Button
+                  variant="dark"
+                  type="submint"
+                  onClick={this.props.changeStatus.bind(
+                    this,
+                    id,
+                    this.state.value
+                  )}
+                >
+                  Submit
+                </Button>
+              </Row>
+            </Form>
           </div>
         </div>
       </div>
@@ -34,14 +52,13 @@ export class Guest extends Component {
   }
 }
 
-const guestStyle = {
-  background: "#f4f4f4",
-  padding: "10px",
-  borderBottom: "1px #ccc dotted"
+const rowStlye = {
+  display: "inline-flex"
 };
 
-const rowStyle = {
-  display: "inline-flex"
+const guestStyle = {
+  padding: "10px",
+  borderBottom: "1px #ccc dotted"
 };
 
 //PropTypes
