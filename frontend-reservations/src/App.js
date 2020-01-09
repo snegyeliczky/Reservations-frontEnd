@@ -64,14 +64,13 @@ class App extends Component {
               path="/"
               render={props => (
                 <React.Fragment>
-                  <p>Name E-mail Status Room</p>
+                  <br/>
                   <Table striped bordered hover>
                     <thead>
                       <tr>
                         <th>Room</th>
-                        <th>Name</th>
-                        <th>E-mail</th>
                         <th>Check In Date</th>
+                        <th>Name</th>
                         <th>Check Out Date</th>
                         <th>Modify</th>
                       </tr>

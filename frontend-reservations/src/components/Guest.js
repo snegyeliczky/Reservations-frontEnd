@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import { Button, ButtonToolbar, Dropdown, DropdownButton } from "react-bootstrap";
+import { Button, ButtonToolbar} from "react-bootstrap";
 
 export class Guest extends Component {
   state = {
@@ -34,27 +34,42 @@ export class Guest extends Component {
   }
 
   render() {
-    const { id, name, room, email, status, checkIn, checkOut} = this.props.guest; 
+    const { id, name, room, status, checkIn, checkOut} = this.props.guest;    
     const btnStyle = {
-      margin: '5px'
-    } 
-
+      margin: "5px"
+    }
+    const dropDownBtn = {
+      lineHeight: '1.5',
+      padding: '.375rem .75rem',
+      textAlign: 'center',
+      verticalAlign: 'middle',
+      userSelect: 'none',
+      fonstSize: '1rem',
+      cursor: 'pointer',
+      fontWeight: '400',
+      color: '#fff',
+      background: '#17a2b8',
+      bordelColor: '#17a2b8',
+      border: '1px solid transparent',
+      borderRadius: '.25rem',
+      margin: "5px"
+    }
     return (
       <tr style={this.guestStyle()}>
         <td>{room}</td>
-        <td>{name}</td>
-        <td>{email}</td>
         <td>{checkIn}</td>
+        <td>{name}</td>
         <td>{checkOut}</td>
         <td>
           <ButtonToolbar>
-            <DropdownButton style={btnStyle} variant="info" id="status-changer" title={status} value={this.state.value} onChange={this.handleChange}>
-              <Dropdown.Item value="CHECKIN">CHECKIN</Dropdown.Item>
-              <Dropdown.Item value="IN">IN</Dropdown.Item>
-              <Dropdown.Item value="CHECKOUT">CHECKOUT</Dropdown.Item>
-            </DropdownButton>
+            <select style={dropDownBtn} value={this.state.value} onChange={this.handleChange}>
+              <option >{status}</option>
+              <option value="CHECKIN">CHECKIN</option>
+              <option value="IN">IN</option>
+              <option value="CHECKOUT">CHECKOUT</option>
+            </select>
             <Button
-              style={btnStyle}
+              style={{margin: "5px"}}
               variant="dark"
               type="submit"
               onClick={this.props.changeStatus.bind(
