@@ -28,8 +28,11 @@ class App extends Component {
       .then(response => this.setState({ roomList: response.data }));
   }
 
-  checkForActualDate = (year, month, day) => {
-    let date = year + "-" + month + "-" + day;
+  checkForActualDate = (data) => {
+    let month= (data.getMonth()+1)>10 ? data.getMonth()+1:"0"+(data.getMonth()+1);
+    let day= (data.getDay()+1)>10 ? data.getDay()+1:"0"+(data.getDay()+1);
+    let date = data.getFullYear() + "-" + month + "-" + day;
+    console.log(date)
     axios
       .get("http://localhost:8080/guest/checkin?date=" + date)
       .then(response => this.setState({ guestList: response.data }));
