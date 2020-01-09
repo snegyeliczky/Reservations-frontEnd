@@ -12,10 +12,36 @@ export class Guest extends Component {
     this.setState({ value: event.target.value });
   };
 
+  guestStyle = () => {
+    let statusColor = ""
+
+    switch(this.props.guest.status) {
+      case 'IN':
+        statusColor = 'lightgreen';
+        break
+      case 'CHECKOUT':
+        statusColor = 'lightcoral';
+        break
+      default:
+        statusColor = 'white';
+    }
+
+    return {
+      padding: "10px",
+      borderBottom: "1px #ccc dotted",
+      background: statusColor
+    }
+  }
+
   render() {
     const { id, name, email, room, status} = this.props.guest;
+
+    const rowStlye = {
+      display: "inline-flex"
+    };    
+
     return (
-      <div style={guestStyle}>
+      <div style={this.guestStyle()}>
         <div>
           <div style={rowStlye}>
             <Row>
@@ -25,7 +51,6 @@ export class Guest extends Component {
                 <option value="CHECKIN">CHECKIN</option>
                 <option value="IN">IN</option>
                 <option value="CHECKOUT">CHECKOUT</option>
-                <option value="OUT">OUT</option>
               </select>
               <Button
                 variant="dark"
@@ -36,7 +61,7 @@ export class Guest extends Component {
                   this.state.value
                 )}
               >
-                Submit
+                Save
               </Button>
             </Row>
           </div>
@@ -45,15 +70,6 @@ export class Guest extends Component {
     );
   }
 }
-
-const rowStlye = {
-  display: "inline-flex"
-};
-
-const guestStyle = {
-  padding: "10px",
-  borderBottom: "1px #ccc dotted"
-};
 
 //PropTypes
 Guest.protoTypes = {

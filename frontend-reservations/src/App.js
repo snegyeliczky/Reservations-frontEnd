@@ -36,12 +36,10 @@ class App extends Component {
   };
 
   changeStatus(guestId, newStatus) {
+    let mess = "?id=" + guestId
     axios
-      .put(`http://localhost:8080/guest/changestatus/${guestId}/${newStatus}`, {
-        guestId,
-        newStatus
-      })
-      .then(response => this.setState({ guestList: response.data }));
+      .get("http://localhost:8080/guest/changestatus" + mess)
+      .then(response => this.setState({ guestList: response.data }))
   }
 
   render() {
@@ -54,19 +52,6 @@ class App extends Component {
             <Route
               exact
               path="/"
-              render={props => (
-                <React.Fragment>
-                  <p>Name E-mail Status Room</p>
-                  <GuestList
-                    guestList={this.state.guestList}
-                    changeStatus={this.changeStatus}
-                  />
-                </React.Fragment>
-              )}
-            />
-            <Route
-              exact
-              path="/checkin"
               render={props => (
                 <React.Fragment>
                   <p>Name E-mail Status Room</p>
