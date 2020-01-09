@@ -6,7 +6,9 @@ import Header from "./components/layout/Header";
 import GuestList from "./components/GuestList";
 import RoomList from "./components/RoomList";
 
+
 import "./App.css";
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 class App extends Component {
   state = {
@@ -38,27 +40,20 @@ class App extends Component {
         <div className="App">
           <div className="container">
             <Header />
-            <Route
-              exact
-              path="/"
-              render={props => (
-                <React.Fragment>
-                  <p>Name E-mail Status Room</p>
-                  <GuestList guestList={this.state.guestList} />
-                </React.Fragment>
-              )}
-            />
-            <Route
-              exact
-              path="/checkin"
-              render={props => (
-                <React.Fragment>
-                  {this.checkInList()}
-                  <p>Name E-mail Status Room</p>
-                  <GuestList guestList={this.state.guestList} />
-                </React.Fragment>
-              )}
-            />
+            <Route exact path="/" render={ props => (
+                    <React.Fragment>
+                        {this.componentDidMount()}
+                        <p>Name E-mail Status Room</p>
+                        <GuestList guestList={this.state.guestList} />
+                    </React.Fragment>
+            )} />
+            <Route exact path="/checkin" render={ props => (
+                    <React.Fragment>
+                        {this.checkInList()}
+                        <p>Name E-mail Status Room</p>
+                        <GuestList guestList={this.state.guestList} />
+                    </React.Fragment>
+            )} />
             <Route
               exact
               path="/rooms"
@@ -75,6 +70,5 @@ class App extends Component {
       </Router>
     );
   }
-}
 
 export default App;
