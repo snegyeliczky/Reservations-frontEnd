@@ -14,7 +14,8 @@ import "bootstrap/dist/css/bootstrap.min.css";
 class App extends Component {
   state = {
     guestList: [],
-    roomList: []
+    roomList: [],
+    date:null,
   };
 
   componentDidMount() {
@@ -33,6 +34,7 @@ class App extends Component {
     let month= (data.getMonth()+1)>10 ? data.getMonth()+1:"0"+(data.getMonth()+1);
     let day= (data.getDate())>10 ? data.getDate():"0"+(data.getDate());
     let date = data.getFullYear() + "-" + month + "-" + day;
+    this.setState({date:data})
     console.log(date)
     axios
       .get("http://localhost:8080/guest/checkin?date=" + date)
@@ -43,8 +45,8 @@ class App extends Component {
     let mess = "?id=" + guestId + "&status=" + newStatus
     axios
       .get("http://localhost:8080/guest/changestatus" + mess)
-      .then(response => this.setState({ guestList: response.data }))
-  }
+      .then(this.checkForActualDate.bind(this, this.state.date))
+  };
 
   render() {
     return (
@@ -62,10 +64,12 @@ class App extends Component {
                   <Table striped bordered hover>
                     <thead>
                       <tr>
+                        <th>Room</th>
                         <th>Name</th>
                         <th>E-mail</th>
-                        <th>Room</th>
-                        <th>Status</th>
+                        <th>Check In Date</th>
+                        <th>Check Out Date</th>
+                        <th>Modify</th>
                       </tr>
                     </thead>
                     <tbody>

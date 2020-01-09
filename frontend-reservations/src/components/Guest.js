@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import { Button, Row } from "react-bootstrap";
+import { Button, ButtonToolbar, Dropdown, DropdownButton } from "react-bootstrap";
 
 export class Guest extends Component {
   state = {
@@ -34,36 +34,38 @@ export class Guest extends Component {
   }
 
   render() {
-    const { id, name, email, room, status} = this.props.guest;
-
-    const rowStlye = {
-      display: "inline-flex"
-    };    
+    const { id, name, room, email, status, checkIn, checkOut} = this.props.guest; 
+    const btnStyle = {
+      margin: '5px'
+    } 
 
     return (
       <tr style={this.guestStyle()}>
+        <td>{room}</td>
         <td>{name}</td>
         <td>{email}</td>
-        <td>{room}</td>
+        <td>{checkIn}</td>
+        <td>{checkOut}</td>
         <td>
-          <select value={this.state.value} onChange={this.handleChange}>
-            <option >{status}</option>
-            <option value="CHECKIN">CHECKIN</option>
-            <option value="IN">IN</option>
-            <option value="CHECKOUT">CHECKOUT</option>
-          </select>
-          {" "}
-          <Button
-            variant="dark"
-            type="submit"
-            onClick={this.props.changeStatus.bind(
-              this,
-              id,
-              this.state.value
-            )}
-          >
-            Save
-          </Button>
+          <ButtonToolbar>
+            <DropdownButton style={btnStyle} variant="info" id="status-changer" title={status} value={this.state.value} onChange={this.handleChange}>
+              <Dropdown.Item value="CHECKIN">CHECKIN</Dropdown.Item>
+              <Dropdown.Item value="IN">IN</Dropdown.Item>
+              <Dropdown.Item value="CHECKOUT">CHECKOUT</Dropdown.Item>
+            </DropdownButton>
+            <Button
+              style={btnStyle}
+              variant="dark"
+              type="submit"
+              onClick={this.props.changeStatus.bind(
+                this,
+                id,
+                this.state.value
+              )}
+            >
+              Save
+            </Button>
+          </ButtonToolbar>
         </td>
       </tr>
     );
