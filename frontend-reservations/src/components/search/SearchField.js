@@ -4,6 +4,9 @@ import DateTimePicker from "react-datetime-picker";
 
 class SearchFild extends Component {
   state = {
+    // year: newDate.getFullYear(),
+    // month: newDate.getMonth() + 1,
+    // day: newDate.getDate()
     date: new Date()
   };
 
