@@ -1,17 +1,8 @@
 import React, { Component } from "react";
 import DateTimePicker from "react-datetime-picker";
 
-const newDate = new Date();
-
-// let date = newDate.getDate();
-// let month = newDate.getMonth() + 1;
-// let year = newDate.getFullYear();
-
 class SearchFild extends Component {
   state = {
-    // year: newDate.getFullYear(),
-    // month: newDate.getMonth() + 1,
-    // day: newDate.getDate()
     date: new Date()
   };
 
@@ -34,21 +25,6 @@ class SearchFild extends Component {
     return (
       <div>
         <DateTimePicker onChange={this.onChange} value={this.state.date} />
-        {/* <input type="date" />
-        <label>Add year</label>
-        <input
-          name="year"
-          defaultValue={year}
-          onChange={this.handleYear}
-        ></input>
-        <label>Add month</label>
-        <input
-          name="weak"
-          defaultValue={month}
-          onChange={this.handleMonth}
-        ></input>
-        <label>Add day</label>
-        <input name="day" defaultValue={day} onChange={this.handleDay}></input> */}
         <button
           type="submit"
           onClick={this.props.checkForActualDate.bind(this, year, month, day)}

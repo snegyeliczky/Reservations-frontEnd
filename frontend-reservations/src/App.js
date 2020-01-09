@@ -83,7 +83,6 @@ class App extends Component {
               render={props => (
                 <React.Fragment>
                   {this.getRoomList()}
-                  <p>Name E-mail Status Room</p>
                   <RoomList roomList={this.state.roomList} />
                 </React.Fragment>
               )}
