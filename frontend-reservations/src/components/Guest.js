@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import { Form, Button, InputGroup, Col, Row } from "react-bootstrap";
+import { Button, Row } from "react-bootstrap";
 
 export class Guest extends Component {
   state = {
@@ -13,7 +13,7 @@ export class Guest extends Component {
   };
 
   render() {
-    const { id, name, email, room, status } = this.props.guest;
+    const { id, name, email, room, status} = this.props.guest;
     return (
       <div style={guestStyle}>
         <div>
@@ -21,10 +21,11 @@ export class Guest extends Component {
             <Row>
               {name + " " + email + " " + room}
               <select value={this.state.value} onChange={this.handleChange}>
-                <option value="CHECKIN">CheckIn</option>
-                <option value="IN">In</option>
-                <option value="CHECKOUT">CheckOut</option>
-                <option value="OUT">Out</option>
+                <option >{status}</option>
+                <option value="CHECKIN">CHECKIN</option>
+                <option value="IN">IN</option>
+                <option value="CHECKOUT">CHECKOUT</option>
+                <option value="OUT">OUT</option>
               </select>
               <Button
                 variant="dark"

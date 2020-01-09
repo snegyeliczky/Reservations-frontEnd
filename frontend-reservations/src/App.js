@@ -35,9 +35,13 @@ class App extends Component {
       .then(response => this.setState({ guestList: response.data }));
   };
 
-  changeStatus(e, s) {
-    console.log(e);
-    console.log(s);
+  changeStatus(guestId, newStatus) {
+    axios
+      .put(`http://localhost:8080/guest/changestatus/${guestId}/${newStatus}`, {
+        guestId,
+        newStatus
+      })
+      .then(response => this.setState({ guestList: response.data }));
   }
 
   render() {
