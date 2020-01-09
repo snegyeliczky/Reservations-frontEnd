@@ -31,14 +31,13 @@ class App extends Component {
   }
 
   checkForActualDate = (data) => {
-    if(data==null){
+    if (data == null){
         this.componentDidMount()
-    }else{
-        let month= (data.getMonth()+1)>10 ? data.getMonth()+1:"0"+(data.getMonth()+1);
-        let day= (data.getDate())>10 ? data.getDate():"0"+(data.getDate());
+    } else {
+        let month = (data.getMonth() + 1) > 10 ? data.getMonth() + 1 : "0" + (data.getMonth() + 1);
+        let day = (data.getDate()) > 10 ? data.getDate() : "0" + (data.getDate());
         let date = data.getFullYear() + "-" + month + "-" + day;
-        this.setState({date:data})
-        console.log(date)
+        this.setState({ date : data })
         axios
           .get("http://localhost:8080/guest/checkin?date=" + date)
           .then(response => this.setState({ guestList: response.data })); 

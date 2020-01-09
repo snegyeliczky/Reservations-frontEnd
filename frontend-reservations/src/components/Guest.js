@@ -35,9 +35,7 @@ export class Guest extends Component {
 
   render() {
     const { id, name, room, status, checkIn, checkOut} = this.props.guest;    
-    const btnStyle = {
-      margin: "5px"
-    }
+
     const dropDownBtn = {
       lineHeight: '1.5',
       padding: '.375rem .75rem',
