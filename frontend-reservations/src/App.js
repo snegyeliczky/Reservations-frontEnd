@@ -45,6 +45,7 @@ class App extends Component {
         newStatus
       })
       .then(response => this.setState({ guestList: response.data }));
+      console.log(this.state.guestList)
   }
 
   render() {
