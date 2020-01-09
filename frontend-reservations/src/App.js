@@ -13,7 +13,8 @@ import "bootstrap/dist/css/bootstrap.min.css";
 class App extends Component {
   state = {
     guestList: [],
-    roomList: []
+    roomList: [],
+    date:null,
   };
 
   componentDidMount() {
@@ -32,21 +33,19 @@ class App extends Component {
     let month= (data.getMonth()+1)>10 ? data.getMonth()+1:"0"+(data.getMonth()+1);
     let day= (data.getDate())>10 ? data.getDate():"0"+(data.getDate());
     let date = data.getFullYear() + "-" + month + "-" + day;
+    this.setState({date:data})
     console.log(date)
     axios
       .get("http://localhost:8080/guest/checkin?date=" + date)
       .then(response => this.setState({ guestList: response.data }));
   };
 
-  changeStatus(guestId, newStatus) {
+  changeStatus = (guestId, newStatus) => {
+    let mess = "?id=" + guestId + "&status=" + newStatus
     axios
-      .put(`http://localhost:8080/guest/changestatus/${guestId}/${newStatus}`, {
-        guestId,
-        newStatus
-      })
-      .then(response => this.setState({ guestList: response.data }));
-      console.log(this.state.guestList)
-  }
+      .get("http://localhost:8080/guest/changestatus" + mess)
+      .then(this.checkForActualDate.bind(this, this.state.date))
+  };
 
   render() {
     return (
@@ -58,19 +57,6 @@ class App extends Component {
             <Route
               exact
               path="/"
-              render={props => (
-                <React.Fragment>
-                  <p>Name E-mail Status Room</p>
-                  <GuestList
-                    guestList={this.state.guestList}
-                    changeStatus={this.changeStatus}
-                  />
-                </React.Fragment>
-              )}
-            />
-            <Route
-              exact
-              path="/checkin"
               render={props => (
                 <React.Fragment>
                   <p>Name E-mail Status Room</p>
