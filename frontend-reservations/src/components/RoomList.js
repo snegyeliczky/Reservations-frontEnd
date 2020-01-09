@@ -5,7 +5,11 @@ import Room from "./Room";
 export class RoomList extends Component {
   render() {
     return this.props.roomList.map(room => (
-      <Room key={room.roomNumber} room={room} />
+      <Room
+        key={room.roomNumber}
+        room={room}
+        getGuestProfile={this.props.getGuestProfile}
+      />
     ));
   }
 }

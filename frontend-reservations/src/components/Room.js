@@ -16,18 +16,22 @@ export class Room extends Component {
       borderRadius: "15px"
     };
 
-    const linkStyle = {
-      color: "black",
-      textDecoration: "none"
-    };
-
     return (
-      <div style={roomStyle}>
-        <p>
-          {"Room"}
-          <br />
-          {roomNumber}
-        </p>
+      <div
+        style={roomStyle}
+        onClick={this.props.getGuestProfile.bind(
+          this,
+          guest != null ? guest.id : null
+        )}
+      >
+        {" "}
+        <Link to={"/guest/" + guest.id}>
+          <p>
+            Room
+            <br />
+            {roomNumber}
+          </p>
+        </Link>
       </div>
     );
   }

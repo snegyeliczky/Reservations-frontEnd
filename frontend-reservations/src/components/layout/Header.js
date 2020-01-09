@@ -5,11 +5,11 @@ function Header() {
     return (
         <header style={headerStyle}>
             <h1>Entertaiment Hotel</h1>
-            <Link style={linkStyle} to="/">Home</Link> | 
-            <Link style={linkStyle} to="/checkin"> Checkin</Link>
+            <Link style={linkStyle} to="/">Home</Link>
+            {" "} |
             <Link style={linkStyle} to="/rooms">
-        {" "}
-        | Rooms
+            {" "}
+            Rooms
       </Link>
         </header>
     )

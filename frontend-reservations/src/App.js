@@ -6,6 +6,7 @@ import Header from "./components/layout/Header";
 import GuestList from "./components/GuestList";
 import RoomList from "./components/RoomList";
 import SearchField from "./components/search/SearchField";
+import GuestProfile from "./components/GuestProfile";
 
 import "./App.css";
 import "bootstrap/dist/css/bootstrap.min.css";
@@ -20,29 +21,36 @@ class App extends Component {
     axios
       .get("http://localhost:8080/")
       .then(response => this.setState({ guestList: response.data }));
-  }
-
-  getRoomList() {
     axios
       .get("http://localhost:8080/rooms/list")
       .then(response => this.setState({ roomList: response.data }));
   }
 
-  checkForActualDate = (year, month, day) => {
-    let date = year + "-" + month + "-" + day;
+  checkForActualDate = data => {
+    let month =
+      data.getMonth() + 1 > 10
+        ? data.getMonth() + 1
+        : "0" + (data.getMonth() + 1);
+    let day = data.getDate() > 10 ? data.getDate() : "0" + data.getDate();
+    let date = data.getFullYear() + "-" + month + "-" + day;
+    console.log(date);
     axios
       .get("http://localhost:8080/guest/checkin?date=" + date)
       .then(response => this.setState({ guestList: response.data }));
   };
 
-  changeStatus(guestId, newStatus) {
+  changeStatus = (guestId, newStatus) => {
+    let mess = "?id=" + guestId + "&status=" + newStatus;
     axios
-      .put(`http://localhost:8080/guest/changestatus/${guestId}/${newStatus}`, {
-        guestId,
-        newStatus
-      })
+      .get("http://localhost:8080/guest/changestatus" + mess)
       .then(response => this.setState({ guestList: response.data }));
-  }
+  };
+
+  getGuestProfile = guestId => {};
+
+  setRoom = (room, guest) => {
+    console.log(room + " " + guest + " fasza");
+  };
 
   render() {
     return (
@@ -66,25 +74,26 @@ class App extends Component {
             />
             <Route
               exact
-              path="/checkin"
+              path="/rooms"
               render={props => (
                 <React.Fragment>
-                  <p>Name E-mail Status Room</p>
-                  <GuestList
-                    guestList={this.state.guestList}
-                    changeStatus={this.changeStatus}
+                  <RoomList
+                    roomList={this.state.roomList}
+                    getGuestProfile={this.getGuestProfile}
                   />
                 </React.Fragment>
               )}
             />
             <Route
               exact
-              path="/rooms"
-              render={props => (
-                <React.Fragment>
-                  {this.getRoomList()}
-                  <RoomList roomList={this.state.roomList} />
-                </React.Fragment>
+              path="/guest/:guestId"
+              render={route => (
+                <GuestProfile
+                  match={route.match}
+                  guestList={this.state.guestList}
+                  roomList={this.state.roomList}
+                  setRoom={this.setRoom}
+                />
               )}
             />
           </div>
