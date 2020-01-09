@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { BrowserRouter as Router, Route } from "react-router-dom";
 import axios from "axios";
+import { Table } from "react-bootstrap";
 
 import Header from "./components/layout/Header";
 import GuestList from "./components/GuestList";
@@ -58,10 +59,21 @@ class App extends Component {
               render={props => (
                 <React.Fragment>
                   <p>Name E-mail Status Room</p>
+                  <Table striped bordered hover>
+                    <thead>
+                      <tr>
+                        <th>Name</th>
+                        <th>E-mail</th>
+                        <th>Room</th>
+                        <th>Status</th>
+                      </tr>
+                    </thead>
+                    <tbody>
                   <GuestList
                     guestList={this.state.guestList}
-                    changeStatus={this.changeStatus}
-                  />
+                    changeStatus={this.changeStatus} />
+                    </tbody>
+                  </Table>
                 </React.Fragment>
               )}
             />

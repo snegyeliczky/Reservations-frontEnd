@@ -41,32 +41,31 @@ export class Guest extends Component {
     };    
 
     return (
-      <div style={this.guestStyle()}>
-        <div>
-          <div style={rowStlye}>
-            <Row>
-              {name + " " + email + " " + room}
-              <select value={this.state.value} onChange={this.handleChange}>
-                <option >{status}</option>
-                <option value="CHECKIN">CHECKIN</option>
-                <option value="IN">IN</option>
-                <option value="CHECKOUT">CHECKOUT</option>
-              </select>
-              <Button
-                variant="dark"
-                type="submit"
-                onClick={this.props.changeStatus.bind(
-                  this,
-                  id,
-                  this.state.value
-                )}
-              >
-                Save
-              </Button>
-            </Row>
-          </div>
-        </div>
-      </div>
+      <tr style={this.guestStyle()}>
+        <td>{name}</td>
+        <td>{email}</td>
+        <td>{room}</td>
+        <td>
+          <select value={this.state.value} onChange={this.handleChange}>
+            <option >{status}</option>
+            <option value="CHECKIN">CHECKIN</option>
+            <option value="IN">IN</option>
+            <option value="CHECKOUT">CHECKOUT</option>
+          </select>
+          {" "}
+          <Button
+            variant="dark"
+            type="submit"
+            onClick={this.props.changeStatus.bind(
+              this,
+              id,
+              this.state.value
+            )}
+          >
+            Save
+          </Button>
+        </td>
+      </tr>
     );
   }
 }
