@@ -30,7 +30,7 @@ class App extends Component {
 
   checkForActualDate = (data) => {
     let month= (data.getMonth()+1)>10 ? data.getMonth()+1:"0"+(data.getMonth()+1);
-    let day= (data.getDay()+1)>10 ? data.getDay()+1:"0"+(data.getDay()+1);
+    let day= (data.getDay()+1)>10 ? data.getDay():"0"+(data.getDay());
     let date = data.getFullYear() + "-" + month + "-" + day;
     console.log(date)
     axios
