@@ -11,8 +11,8 @@ export class Room extends Component {
       transition: "0.3s",
       backgroundColor: reserved ? "orangered" : "lightgreen",
       display: "inline-flex",
-      padding: "1%",
-      margin: "1%",
+      padding: "1.5%",
+      margin: "1.5%",
       borderRadius: "15px"
     };
 

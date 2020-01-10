@@ -11,7 +11,6 @@ export class GuestProfile extends Component {
   handleChange = event => {
     event.preventDefault();
     this.state.room = event.target.value;
-    console.log(this.state.room);
   };
 
   getGuestById() {

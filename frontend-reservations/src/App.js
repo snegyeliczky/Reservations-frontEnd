@@ -57,7 +57,6 @@ class App extends Component {
   getGuestProfile = guestId => {};
 
   setRoom = (room, guest) => {
-    console.log(room);
     let mess = "?roomId=" + room + "&guestId=" + guest.id;
     axios
       .get("http://localhost:8080/guest/setroom" + mess)
