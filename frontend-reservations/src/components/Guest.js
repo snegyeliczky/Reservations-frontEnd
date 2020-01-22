@@ -6,6 +6,7 @@ import { HotelContext } from "./HotelContext";
 const Guest = ({ guest }) => {
   const { id, name, room, status, checkIn, checkOut } = guest;
   const [updatedStatus, setUpdatedStatus] = useState("");
+  const { updateGuestStatus } = useContext(HotelContext);
 
   const guestStyle = () => {
     let statusColor = "";
@@ -47,11 +48,12 @@ const Guest = ({ guest }) => {
 
   const handleChange = event => {
     event.preventDefault();
-    setUpdatedStatus({ updatedStatus: event.target.updatedStatus });
+    setUpdatedStatus(event.target.value);
+    updateGuestStatus(id, event.target.value);
   };
 
   // const changeStatus = (id, updatedStatus) => {
-  //   setIsUpdated({ isUpdated: true });
+  //   updateGuestStatus()
   // };
 
   return (
@@ -72,14 +74,14 @@ const Guest = ({ guest }) => {
             <option value="IN">IN</option>
             <option value="CHECKOUT">CHECKOUT</option>
           </select>
-          <Button
+          {/* <Button
             style={{ margin: "5px" }}
             variant="dark"
             type="submit"
-            // onClick={changeStatus(id, updatedStatus)}
+            onClick={changeStatus(id, updatedStatus)}
           >
             Save
-          </Button>
+          </Button> */}
         </ButtonToolbar>
       </td>
       <td>

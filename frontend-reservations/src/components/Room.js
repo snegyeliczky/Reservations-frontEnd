@@ -2,12 +2,12 @@ import React from "react";
 import { Link } from "react-router-dom";
 
 export const Room = ({ room }) => {
-  const { roomNumber, reserved, guest } = room;
+  const { roomNumber, reserved, guests } = room;
 
   const roomStyle = {
     boxShadow: "0 4px 8px 0 rgba(0,0,0,0.2)",
     transition: "0.3s",
-    backgroundColor: reserved ? "orangered" : "lightgreen",
+    backgroundColor: guests.length !== 0 ? "orangered" : "lightgreen",
     display: "inline-flex",
     padding: "1.5%",
     margin: "1.5%",
@@ -27,13 +27,13 @@ export const Room = ({ room }) => {
       //   )}
     >
       {" "}
-      <Link style={linkStyle} to={"/guest/" + guest.id}>
-        <p>
-          Room
-          <br />
-          {roomNumber}
-        </p>
-      </Link>
+      {/* <Link style={linkStyle} to={"/guest/" + guest.id}> */}
+      <p>
+        Room
+        <br />
+        {roomNumber}
+      </p>
+      {/* </Link> */}
     </div>
   );
 };

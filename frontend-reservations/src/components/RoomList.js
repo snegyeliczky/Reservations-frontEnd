@@ -3,13 +3,13 @@ import Room from "./Room";
 import { HotelContext } from "./HotelContext";
 
 const RoomList = () => {
-  const [roomList, fetchRoomList] = useContext(HotelContext);
+  const { roomList, fetchRoomList } = useContext(HotelContext);
 
-  useEffect(async () => {
+  useEffect(() => {
     fetchRoomList();
   }, []);
 
-  return roomList.map(room => <Room room={room} key={room.roomNumber} />);
+  return roomList.map(room => <Room room={room} key={room.id} />);
 };
 
 export default RoomList;

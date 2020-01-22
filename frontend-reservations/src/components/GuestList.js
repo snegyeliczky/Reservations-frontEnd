@@ -4,7 +4,7 @@ import { Table } from "react-bootstrap";
 import { HotelContext } from "./HotelContext";
 
 const GuestList = () => {
-  const [guestList, fetchGuestList] = useContext(HotelContext);
+  const { guestList, fetchGuestList } = useContext(HotelContext);
 
   useEffect(() => {
     fetchGuestList();
