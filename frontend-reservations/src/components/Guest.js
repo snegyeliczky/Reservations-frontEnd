@@ -1,12 +1,13 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import { Button, ButtonToolbar } from "react-bootstrap";
 import GuestProfile from "./GuestList";
 import { HotelContext } from "./HotelContext";
 import { Link } from "react-router-dom";
 
 const Guest = ({ guest }) => {
-  const { id, name, room, status, checkIn, checkOut } = guest;
+  const { id, name, roomNumber, status, checkIn, checkOut } = guest;
   const [updatedStatus, setUpdatedStatus] = useState("");
+
   const { updateGuestStatus } = useContext(HotelContext);
 
   const guestStyle = () => {
@@ -52,10 +53,9 @@ const Guest = ({ guest }) => {
     setUpdatedStatus(event.target.value);
     updateGuestStatus(id, event.target.value);
   };
-
   return (
     <tr style={guestStyle()}>
-      <td>{room}</td>
+      <td>{roomNumber}</td>
       <td>{checkIn}</td>
       <td>{name}</td>
       <td>{checkOut}</td>

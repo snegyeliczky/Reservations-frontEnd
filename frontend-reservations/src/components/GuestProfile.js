@@ -2,6 +2,7 @@ import React, { useContext, useState, useEffect } from "react";
 import { Button, Table } from "react-bootstrap";
 import { HotelContext } from "./HotelContext";
 import { Link } from "react-router-dom";
+import SearchField from "./search/SearchField";
 
 const GuestProfile = props => {
   const { guestList, roomList } = useContext(HotelContext);
@@ -50,25 +51,33 @@ const GuestProfile = props => {
   //   event.preventDefault();
   //   room = event.target.value;
   // };
+
+  const divStyle = {
+    margin: "0 auto"
+  };
+
   return (
-    <Table>
-      {getGuestById}
-      <thead>
-        <tr>
-          <th>Name</th>
-          <th>Check In Date</th>
-          <th>Check Out Date</th>
-          <th>Status</th>
-          <th>Set Room</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr style={guestStyle()}>
-          <td>{guest.name}</td>
-          <td>{guest.checkIn}</td>
-          <td>{guest.checkOut}</td>
-          <td>{guest.status}</td>
-          {/* <td>
+    <div>
+      <Table style={divStyle}>
+        {getGuestById}
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Check In Date</th>
+            <th>Check Out Date</th>
+            <th>Status</th>
+            <th>Room Number</th>
+            {/* <th>Set Room</th> */}
+          </tr>
+        </thead>
+        <tbody>
+          <tr style={guestStyle()}>
+            <td>{guest.name}</td>
+            <td>{guest.checkIn}</td>
+            <td>{guest.checkOut}</td>
+            <td>{guest.status}</td>
+            <td>{guest.roomNumber}</td>
+            {/* <td>
             <select style={dropDownBtn} value={room} onChange={handleChange}>
               {roomList.map(room => generateRoomOption(room))}
             </select>
@@ -81,9 +90,10 @@ const GuestProfile = props => {
               Save
             </Button>
           </td> */}
-        </tr>
-      </tbody>
-    </Table>
+          </tr>
+        </tbody>
+      </Table>
+    </div>
   );
 
   const dropDownBtn = {

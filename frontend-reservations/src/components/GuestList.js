@@ -2,6 +2,7 @@ import React, { useContext, useEffect } from "react";
 import Guest from "./Guest";
 import { Table } from "react-bootstrap";
 import { HotelContext } from "./HotelContext";
+import SearchField from "./search/SearchField";
 
 const GuestList = () => {
   const { guestList, fetchGuestList } = useContext(HotelContext);
@@ -10,10 +11,14 @@ const GuestList = () => {
     fetchGuestList();
   }, []);
 
+  const divStyle = {
+    margin: "0 auto"
+  };
+
   return (
     <div>
-      {" "}
-      <Table striped bordered hover>
+      <SearchField />{" "}
+      <Table style={divStyle}>
         <thead>
           <tr>
             <th>Room</th>
