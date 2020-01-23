@@ -21,7 +21,7 @@ const Guest = ({ guest }) => {
         statusColor = "lightcoral";
         break;
       default:
-        statusColor = "white";
+        statusColor = "beige";
     }
 
     return {

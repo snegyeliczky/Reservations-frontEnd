@@ -3,41 +3,37 @@ import DateTimePicker from "react-datetime-picker";
 import { Button } from "react-bootstrap";
 import { HotelContext } from "../HotelContext";
 
+const SearchField = () => {
+  const { date } = useContext(HotelContext);
+  const [updatedDate, setUpdatedDate] = useState(new Date());
+  const { fetchForDate } = useContext(HotelContext);
 
-const SearchFild = ()=>{
-  const {date} = useContext(HotelContext)
-  const [updatedDate, setUpdatedDate] = useState(new Date())
-  const {fetchForDate} = useContext(HotelContext)
+  const handleChange = date => setUpdatedDate(date);
 
-  const handleChange = date => 
-    setUpdatedDate( date);
-
-
-  const onSubmit = event =>{
+  const onSubmit = event => {
     event.preventDefault();
-    fetchForDate(updatedDate)
-  }
+    fetchForDate(updatedDate);
+  };
 
+  return (
+    <div>
+      <br />
+      <DateTimePicker onChange={handleChange} value={updatedDate} />
+      <Button
+        variant="dark"
+        style={{ margin: "5px" }}
+        type="submit"
+        onClick={onSubmit}
+      >
+        Submit
+      </Button>
+    </div>
+  );
+};
 
-    return (
-      <div>
-        <br/>
-        <DateTimePicker onChange={handleChange} value={updatedDate} />
-        <Button variant="dark"
-          style={{margin: '5px'}}
-          type="submit"
-          onClick={onSubmit}
-        >
-          Submit
-        </Button>
-      </div>
-    );
-}
+export default SearchField;
 
-export default SearchFild;
-
-
-//  }  
+//  }
 
 //   onChange = date => this.setState({ date });
 
@@ -57,4 +53,3 @@ export default SearchFild;
 //       </div>
 //     );
 //   }
-

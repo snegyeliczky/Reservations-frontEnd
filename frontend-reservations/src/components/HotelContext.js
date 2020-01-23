@@ -1,6 +1,6 @@
 import React, { useState, createContext } from "react";
 import axios from "axios";
-import {Redirect} from "react-router-dom";
+import { Redirect } from "react-router-dom";
 
 export const HotelContext = createContext();
 
@@ -46,21 +46,23 @@ export const HotelProvider = props => {
   };
 
   const addNewGuest = async (data, checkInDate, checkOutDate) => {
-    const url = '/add/guest';
-    axios.post(url, {
-      name: data.name,
-      checkIn: checkInDate,
-      checkOut: checkOutDate,
-      address: {
-        email: data.email,
-        country: data.country,
-        zipCode: data.zipcode,
-        city: data.city,
-        street: data.street
-      }
-    }).then(response => {
-      console.log("ok");
-    });
+    const url = "/add/guest";
+    axios
+      .post(url, {
+        name: data.name,
+        checkIn: checkInDate,
+        checkOut: checkOutDate,
+        address: {
+          email: data.email,
+          country: data.country,
+          zipCode: data.zipcode,
+          city: data.city,
+          street: data.street
+        }
+      })
+      .then(response => {
+        console.log("ok");
+      });
   };
 
   return (
