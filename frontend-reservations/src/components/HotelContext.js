@@ -44,6 +44,24 @@ export const HotelProvider = props => {
     });
   };
 
+  const addNewGuest = async (data, checkInDate, checkOutDate) => {
+    const url = '/add/guest';
+    axios.post(url, {
+      name: data.name,
+      checkIn: checkInDate,
+      checkOut: checkOutDate,
+      address: {
+        email: data.email,
+        country: data.country,
+        zipCode: data.zipcode,
+        city: data.city,
+        street: data.street
+      }
+    }).then(response => {
+      console.log("ok");
+    });
+  };
+
   return (
     <HotelContext.Provider
       value={{
@@ -53,7 +71,8 @@ export const HotelProvider = props => {
         fetchRoomList,
         updateGuestStatus,
         date,
-        fetchForDate
+        fetchForDate,
+        addNewGuest
       }}
     >
       {props.children}

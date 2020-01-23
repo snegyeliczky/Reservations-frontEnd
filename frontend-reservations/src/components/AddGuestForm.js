@@ -8,10 +8,10 @@ import Typography from '@material-ui/core/Typography';
 import DateTimePicker from "react-datetime-picker";
 
 const AddGuestForm = () => {
-  const { register, handleSubmit, errors } = useForm()
+  const { register, handleSubmit, errors } = useForm();
   const { addNewGuest } = useContext(HotelContext);
-  const [checkInDate, setCheckInDate] = useState(new Date())
-  const [checkOutDate, setCheckOutDate] = useState(new Date())
+  const [checkInDate, setCheckInDate] = useState(new Date());
+  const [checkOutDate, setCheckOutDate] = useState(new Date());
   
   
   const onSubmit = data => {

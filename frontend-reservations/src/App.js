@@ -9,6 +9,7 @@ import SearchField from "./components/search/SearchField";
 
 import { BrowserRouter as Router, Route } from "react-router-dom";
 import { HotelProvider } from "./components/HotelContext";
+import AddGuestForm from "./components/AddGuestForm";
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
             <Route exact path="/" render={() => <GuestList />} />
             <Route exact path="/rooms" render={() => <RoomList />} />
             <Route exact path="/guest/:guestId" component={GuestProfile} />
+            <Route exact path="/newguest" render={() => <AddGuestForm />} />
           </div>
         </div>
       </HotelProvider>
