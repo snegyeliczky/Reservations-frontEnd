@@ -7,7 +7,7 @@ const RoomList = () => {
 
   useEffect(() => {
     fetchRoomList();
-  }, []);
+  }, [fetchRoomList]);
 
   return roomList.map(room => <Room room={room} key={room.id} />);
 };

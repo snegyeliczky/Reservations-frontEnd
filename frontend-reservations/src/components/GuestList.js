@@ -9,7 +9,7 @@ const GuestList = () => {
 
   useEffect(() => {
     fetchGuestList();
-  }, []);
+  }, [fetchGuestList]);
 
   const divStyle = {
     margin: "0 auto"

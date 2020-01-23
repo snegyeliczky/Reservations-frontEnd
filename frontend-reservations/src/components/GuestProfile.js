@@ -1,19 +1,39 @@
-import React, { useContext, useState, useEffect } from "react";
-import { Button, Table } from "react-bootstrap";
+import React, { useContext, useState, useEffect, useCallback } from "react";
+import { Table } from "react-bootstrap";
 import { HotelContext } from "./HotelContext";
-import { Link } from "react-router-dom";
-import SearchField from "./search/SearchField";
+import { Button } from "react-bootstrap";
 
 const GuestProfile = props => {
-  const { guestList, roomList } = useContext(HotelContext);
+  const { guestList, roomList, fetchRoomList, updateGuestRoom } = useContext(
+    HotelContext
+  );
   const [guest, setGuest] = useState({});
+  let [selectedRoom, setSelectedRoom] = useState({});
+  let [selectedRoomId, setSelectedRoomId] = useState("");
 
-  const getGuestById = () => {
+  const getGuestById = useCallback(() => {
     for (let g of guestList) {
       if (parseInt(props.match.params.guestId) === g.id) {
         setGuest(g);
       }
     }
+  }, [guestList, props.match.params.guestId]);
+
+  const dropDownBtn = {
+    lineHeight: "1.5",
+    padding: ".375rem .75rem",
+    textAlign: "center",
+    verticalAlign: "middle",
+    userSelect: "none",
+    fonstSize: "1rem",
+    cursor: "pointer",
+    fontWeight: "400",
+    color: "#fff",
+    background: "#17a2b8",
+    bordelColor: "#17a2b8",
+    border: "1px solid transparent",
+    borderRadius: ".25rem",
+    margin: "5px"
   };
 
   const guestStyle = () => {
@@ -39,18 +59,37 @@ const GuestProfile = props => {
 
   useEffect(() => {
     getGuestById();
-  }, []);
+    fetchRoomList();
+  }, [getGuestById]);
 
-  // const generateRoomOption = room => {
-  //   if (room.reserved === false) {
-  //     return <option value={room.roomNumber}>{room.roomNumber}</option>;
-  //   }
-  // };
+  const filterAvailableRooms = room => {
+    if (room.guest === null) {
+      return (
+        <option value={room.roomNumber} key={room.id}>
+          {room.roomNumber}
+        </option>
+      );
+    }
+  };
 
-  // const handleChange = event => {
-  //   event.preventDefault();
-  //   room = event.target.value;
-  // };
+  const getRoomIdByRoomNumber = roomNumber => {
+    roomList.map(room => {
+      if (room.roomNumber === parseInt(roomNumber)) {
+        setSelectedRoomId(room.id);
+      }
+    });
+  };
+
+  const handleChange = event => {
+    event.preventDefault();
+    setSelectedRoom(event.target.value);
+    getRoomIdByRoomNumber(event.target.value);
+  };
+
+  const handleSubmit = event => {
+    event.preventDefault();
+    updateGuestRoom(selectedRoomId, guest.id);
+  };
 
   const divStyle = {
     margin: "0 auto"
@@ -67,7 +106,7 @@ const GuestProfile = props => {
             <th>Check Out Date</th>
             <th>Status</th>
             <th>Room Number</th>
-            {/* <th>Set Room</th> */}
+            <th>Set Room</th>
           </tr>
         </thead>
         <tbody>
@@ -77,41 +116,28 @@ const GuestProfile = props => {
             <td>{guest.checkOut}</td>
             <td>{guest.status}</td>
             <td>{guest.roomNumber}</td>
-            {/* <td>
-            <select style={dropDownBtn} value={room} onChange={handleChange}>
-              {roomList.map(room => generateRoomOption(room))}
-            </select>
-            <Button
-              style={{ margin: "5px" }}
-              variant="dark"
-              type="submit"
-              onClick={setRoom.bind(this, this.state.room, this.state.guest)}
-            >
-              Save
-            </Button>
-          </td> */}
+            <td>
+              <select
+                style={dropDownBtn}
+                value={selectedRoom}
+                onChange={handleChange}
+              >
+                {roomList.map(room => filterAvailableRooms(room))}
+              </select>
+              <Button
+                style={{ margin: "5px" }}
+                variant="dark"
+                type="submit"
+                onClick={handleSubmit}
+              >
+                Save
+              </Button>
+            </td>
           </tr>
         </tbody>
       </Table>
     </div>
   );
-
-  const dropDownBtn = {
-    lineHeight: "1.5",
-    padding: ".375rem .75rem",
-    textAlign: "center",
-    verticalAlign: "middle",
-    userSelect: "none",
-    fonstSize: "1rem",
-    cursor: "pointer",
-    fontWeight: "400",
-    color: "#fff",
-    background: "#17a2b8",
-    bordelColor: "#17a2b8",
-    border: "1px solid transparent",
-    borderRadius: ".25rem",
-    margin: "5px"
-  };
 };
 
 export default GuestProfile;

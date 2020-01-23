@@ -1,6 +1,5 @@
 import React, { useState, createContext } from "react";
 import axios from "axios";
-import { Redirect } from "react-router-dom";
 
 export const HotelContext = createContext();
 
@@ -34,7 +33,6 @@ export const HotelProvider = props => {
         : "0" + updatedDate.getDate();
     let dateUrl = updatedDate.getFullYear() + "-" + month + "-" + day;
     const url = `/guest/checkin?date=${dateUrl}`;
-    console.log(dateUrl);
     axios.get(url).then(response => setGuestList(response.data));
   };
 
@@ -42,6 +40,14 @@ export const HotelProvider = props => {
     const url = `/guest/changestatus?id=${guestId}&status=${updatedGuestStatus}`;
     axios.put(url).then(response => {
       filter ? fetchForDate(date) : fetchGuestList();
+    });
+  };
+
+  const updateGuestRoom = async (roomId, guestId) => {
+    const url = `/guest/setroom?roomId=${roomId}&guestId=${guestId}`;
+    axios.put(url).then(response => {
+      fetchGuestList();
+      fetchRoomList();
     });
   };
 
@@ -75,7 +81,8 @@ export const HotelProvider = props => {
         updateGuestStatus,
         date,
         fetchForDate,
-        addNewGuest
+        addNewGuest,
+        updateGuestRoom
       }}
     >
       {props.children}

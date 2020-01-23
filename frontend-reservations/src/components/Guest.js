@@ -1,6 +1,5 @@
-import React, { useState, useContext, useEffect } from "react";
+import React, { useState, useContext } from "react";
 import { Button, ButtonToolbar } from "react-bootstrap";
-import GuestProfile from "./GuestList";
 import { HotelContext } from "./HotelContext";
 import { Link } from "react-router-dom";
 
@@ -53,6 +52,7 @@ const Guest = ({ guest }) => {
     setUpdatedStatus(event.target.value);
     updateGuestStatus(id, event.target.value);
   };
+
   return (
     <tr style={guestStyle()}>
       <td>{roomNumber}</td>

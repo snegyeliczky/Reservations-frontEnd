@@ -4,7 +4,6 @@ import { Button } from "react-bootstrap";
 import { HotelContext } from "../HotelContext";
 
 const SearchField = () => {
-  const { date } = useContext(HotelContext);
   const [updatedDate, setUpdatedDate] = useState(new Date());
   const { fetchForDate } = useContext(HotelContext);
 
