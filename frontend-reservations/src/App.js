@@ -4,6 +4,7 @@ import "./App.css";
 import Nav from "./components/Nav";
 import GuestList from "./components/GuestList";
 import RoomList from "./components/RoomList";
+import GuestProfile from "./components/GuestProfile";
 
 import { BrowserRouter as Router, Route } from "react-router-dom";
 import { HotelProvider } from "./components/HotelContext";
@@ -17,6 +18,7 @@ function App() {
             <Nav />
             <Route exact path="/" render={() => <GuestList />} />
             <Route exact path="/rooms" render={() => <RoomList />} />
+            <Route exact path="/guest/:guestId" component={GuestProfile} />
           </div>
         </div>
       </HotelProvider>

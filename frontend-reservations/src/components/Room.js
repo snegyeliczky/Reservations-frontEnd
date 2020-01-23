@@ -18,24 +18,33 @@ export const Room = ({ room }) => {
     color: "black"
   };
 
-  return (
-    <div
-      style={roomStyle}
-      //   onClick={this.props.getGuestProfile.bind(
-      //     this,
-      //     guest != null ? guest.id : null
-      //   )}
-    >
-      {" "}
-      {/* <Link style={linkStyle} to={"/guest/" + guest.id}> */}
-      <p>
-        Room
-        <br />
-        {roomNumber}
-      </p>
-      {/* </Link> */}
-    </div>
-  );
+  let roomElement;
+
+  if (guests.length !== 0) {
+    roomElement = (
+      <div style={roomStyle}>
+        <Link style={linkStyle} to={"/guest/" + guests[0].id}>
+          <p>
+            Room
+            <br />
+            {roomNumber}
+          </p>
+        </Link>
+      </div>
+    );
+  } else {
+    roomElement = (
+      <div style={roomStyle}>
+        <p>
+          Room
+          <br />
+          {roomNumber}
+        </p>
+      </div>
+    );
+  }
+
+  return roomElement;
 };
 
 export default Room;

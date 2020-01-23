@@ -1,7 +1,8 @@
 import React, { useState, useContext } from "react";
 import { Button, ButtonToolbar } from "react-bootstrap";
-import { Link } from "react-router-dom";
+import GuestProfile from "./GuestList";
 import { HotelContext } from "./HotelContext";
+import { Link } from "react-router-dom";
 
 const Guest = ({ guest }) => {
   const { id, name, room, status, checkIn, checkOut } = guest;
@@ -52,10 +53,6 @@ const Guest = ({ guest }) => {
     updateGuestStatus(id, event.target.value);
   };
 
-  // const changeStatus = (id, updatedStatus) => {
-  //   updateGuestStatus()
-  // };
-
   return (
     <tr style={guestStyle()}>
       <td>{room}</td>
@@ -74,18 +71,10 @@ const Guest = ({ guest }) => {
             <option value="IN">IN</option>
             <option value="CHECKOUT">CHECKOUT</option>
           </select>
-          {/* <Button
-            style={{ margin: "5px" }}
-            variant="dark"
-            type="submit"
-            onClick={changeStatus(id, updatedStatus)}
-          >
-            Save
-          </Button> */}
         </ButtonToolbar>
       </td>
       <td>
-        <Link to={"/guest/" + id} role="button">
+        <Link to={"/guest/" + guest.id}>
           <Button variant="dark">Edit</Button>
         </Link>
       </td>
