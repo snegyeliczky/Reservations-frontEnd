@@ -12,7 +12,7 @@ const Nav = () => {
   return (
     <header style={headerStyle}>
       <h1>Reservations</h1>
-      <Link style={linkStyle} to="/" onClick={onClickHandlerForHome}>
+      <Link style={linkStyle} to="/home" onClick={onClickHandlerForHome}>
         Home
       </Link>{" "}
       |

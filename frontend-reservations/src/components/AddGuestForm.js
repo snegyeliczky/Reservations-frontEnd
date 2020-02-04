@@ -100,7 +100,7 @@ const AddGuestForm = () => {
 
             {/* errors will return when field validation fails  */}
             {errors.exampleRequired && <span>This field is required</span>}
-            {toHome ? <Redirect to={"/"}/> : null}
+            {toHome ? <Redirect to={"/home"}/> : null}
             <input type="submit"/>
         </form>
     );
