@@ -3,7 +3,7 @@ import {Redirect} from "react-router-dom";
 
 import {useForm} from 'react-hook-form';
 
-import axios from "axios";
+import Axios from "axios";
 
 const Login = () => {
     const {register, handleSubmit, errors} = useForm();
@@ -13,15 +13,15 @@ const Login = () => {
         sendUserLogin(data);
     };
 
-    const sendUserLogin = async (data) => {
+    const sendUserLogin = data => {
         const url = "http://localhost:8080/auth/signin";
-        axios
+        Axios
             .post(url, {
                 username: data.username,
                 password: data.password
             })
             .then(response => {
-                document.cookie = 'access_token=' + response.data.token;
+                //document.cookie = 'access_token=' + response.data.token;
                 setToHome(true)
             });
     };
