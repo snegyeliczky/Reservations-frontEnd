@@ -1,22 +1,15 @@
-import React, { Component } from "react";
-import PropTypes from "prop-types";
+import React, { useContext, useEffect } from "react";
 import Room from "./Room";
+import { HotelContext } from "./HotelContext";
 
-export class RoomList extends Component {
-  render() {
-    return this.props.roomList.map(room => (
-      <Room
-        key={room.roomNumber}
-        room={room}
-        getGuestProfile={this.props.getGuestProfile}
-      />
-    ));
-  }
-}
+const RoomList = () => {
+  const { roomList, fetchRoomList } = useContext(HotelContext);
 
-//PropTypes
-RoomList.protoTypes = {
-  RoomList: PropTypes.array.isRequired
+  useEffect(() => {
+    fetchRoomList();
+  }, [fetchRoomList]);
+
+  return roomList.map(room => <Room room={room} key={room.id} />);
 };
 
 export default RoomList;

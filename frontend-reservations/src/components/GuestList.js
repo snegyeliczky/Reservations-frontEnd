@@ -1,22 +1,42 @@
-import React, { Component } from "react";
-import PropTypes from "prop-types";
+import React, { useContext, useEffect } from "react";
 import Guest from "./Guest";
+import { Table } from "react-bootstrap";
+import { HotelContext } from "./HotelContext";
+import SearchField from "./search/SearchField";
 
-export class GuestList extends Component {
-  render() {
-    return this.props.guestList.map(guest => (
-      <Guest
-        key={guest.id}
-        guest={guest}
-        changeStatus={this.props.changeStatus}
-      />
-    ));
-  }
-}
+const GuestList = () => {
+  const { guestList, fetchGuestList } = useContext(HotelContext);
 
-//PropTypes
-GuestList.protoTypes = {
-  GuestList: PropTypes.array.isRequired
+  useEffect(() => {
+    fetchGuestList();
+  }, [fetchGuestList]);
+
+  const divStyle = {
+    margin: "0 auto"
+  };
+
+  return (
+    <div>
+      <SearchField />{" "}
+      <Table style={divStyle}>
+        <thead>
+          <tr>
+            <th>Room</th>
+            <th>Check In Date</th>
+            <th>Name</th>
+            <th>Check Out Date</th>
+            <th>Edit Status</th>
+            <th>Profile</th>
+          </tr>
+        </thead>
+        <tbody>
+          {guestList.map(guest => (
+            <Guest guest={guest} key={guest.id} />
+          ))}
+        </tbody>
+      </Table>
+    </div>
+  );
 };
 
 export default GuestList;

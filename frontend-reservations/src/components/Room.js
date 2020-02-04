@@ -1,31 +1,29 @@
-import React, { Component } from "react";
-import PropTypes from "prop-types";
+import React from "react";
 import { Link } from "react-router-dom";
 
-export class Room extends Component {
-  render() {
-    const { roomNumber, reserved, guest } = this.props.room;
+export const Room = ({ room }) => {
+  const { roomNumber, guest } = room;
 
-    const roomStyle = {
-      boxShadow: "0 4px 8px 0 rgba(0,0,0,0.2)",
-      transition: "0.3s",
-      backgroundColor: reserved ? "orangered" : "lightgreen",
-      display: "inline-flex",
-      padding: "1.5%",
-      margin: "1.5%",
-      borderRadius: "15px"
-    };
+  const roomStyle = {
+    boxShadow: "0 4px 8px 0 rgba(0,0,0,0.2)",
+    transition: "0.3s",
+    backgroundColor: guest != null ? "orangered" : "lightgreen",
+    display: "inline-flex",
+    padding: "1.5%",
+    margin: "1.5%",
+    borderRadius: "15px"
+  };
 
-    return (
-      <div
-        style={roomStyle}
-        onClick={this.props.getGuestProfile.bind(
-          this,
-          guest != null ? guest.id : null
-        )}
-      >
-        {" "}
-        <Link to={"/guest/" + guest.id}>
+  const linkStyle = {
+    color: "black"
+  };
+
+  let roomElement;
+
+  if (guest != null) {
+    roomElement = (
+      <div style={roomStyle}>
+        <Link style={linkStyle} to={"/guest/" + guest.id}>
           <p>
             Room
             <br />
@@ -34,12 +32,19 @@ export class Room extends Component {
         </Link>
       </div>
     );
+  } else {
+    roomElement = (
+      <div style={roomStyle}>
+        <p>
+          Room
+          <br />
+          {roomNumber}
+        </p>
+      </div>
+    );
   }
-}
 
-//PropTypes
-Room.protoTypes = {
-  room: PropTypes.object.isRequired
+  return roomElement;
 };
 
 export default Room;
