@@ -12,14 +12,15 @@ const GuestList = () => {
   }, [fetchGuestList]);
 
   const divStyle = {
-    margin: "0 auto"
+    margin: "0 auto",
+    border: "1px solid black"
   };
 
   return (
-    <div>
+    <div className="mx-5">
       <SearchField />{" "}
-      <Table style={divStyle}>
-        <thead>
+      <Table style={divStyle} className="table-bordered">
+        <thead className="thead-dark">
           <tr>
             <th>Room</th>
             <th>Check In Date</th>
