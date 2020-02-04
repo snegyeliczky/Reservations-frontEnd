@@ -3,18 +3,27 @@ import {Redirect} from "react-router-dom";
 
 import {useForm} from 'react-hook-form';
 
-import TextField from '@material-ui/core/TextField';
-import Typography from '@material-ui/core/Typography';
+import axios from "axios";
 
 const Login = () => {
     const {register, handleSubmit, errors} = useForm();
     const [toHome, setToHome] = useState(false);
 
-
     const onSubmit = data => {
-        console.log(data);
-        console.log(data.password);
-        //setToHome(true);
+        sendUserLogin(data);
+    };
+
+    const sendUserLogin = async (data) => {
+        const url = "http://localhost:8080/auth/signin";
+        axios
+            .post(url, {
+                username: data.username,
+                password: data.password
+            })
+            .then(response => {
+                document.cookie = 'access_token=' + response.data.token;
+                setToHome(true)
+            });
     };
 
 
