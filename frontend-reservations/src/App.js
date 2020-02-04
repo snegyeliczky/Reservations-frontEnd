@@ -15,7 +15,7 @@ function App() {
     return (
         <Router>
             <div className="App">
-                <div className="container">
+                <div className="container-fluid">
                     <Route exact path="/" component={Login}/>
                     <HotelProvider>
                         <Route exact path="/home" component={Nav}/>
