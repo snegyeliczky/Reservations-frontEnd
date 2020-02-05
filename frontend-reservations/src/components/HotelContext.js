@@ -2,6 +2,8 @@ import React, {useState, createContext} from "react";
 import axios from "axios";
 import {Redirect} from "react-router-dom";
 
+import Cookies from 'js-cookie'
+
 export const HotelContext = createContext();
 
 export const HotelProvider = props => {
@@ -11,11 +13,11 @@ export const HotelProvider = props => {
     const [filter, setFilter] = useState(false);
     const [toLogin, setToLogin] = useState(false);
 
-  async function fetchGuestList() {
-    setFilter(false);
-    const result = await axios("/guest/all");
-    setGuestList(result.data);
-  }
+    async function fetchGuestList() {
+        setFilter(false);
+        const result = await axios("/guest/all");
+        setGuestList(result.data);
+    }
 
     const fetchRoomList = async () => {
         const result = await axios("/rooms/list");
@@ -74,27 +76,32 @@ export const HotelProvider = props => {
     };
 
     const logout = () => {
-        const url = '/logout';
-        axios.delete(url).then(response => {
-
-        });
+        console.log(Cookies.get('token'));
+        const url = 'http://localhost:8080/auth/logout';
+        axios.post(url)
+            .then(response => {
+                console.log(response);
+            })
+            .catch(reason => console.log(reason))
+        ;
     };
 
-  return (
-    <HotelContext.Provider
-      value={{
-        guestList,
-        fetchGuestList,
-        roomList,
-        fetchRoomList,
-        updateGuestStatus,
-        date,
-        fetchForDate,
-        addNewGuest,
-        updateGuestRoom
-      }}
-    >
-      {props.children}
-    </HotelContext.Provider>
-  );
+    return (
+        <HotelContext.Provider
+            value={{
+                guestList,
+                fetchGuestList,
+                roomList,
+                fetchRoomList,
+                updateGuestStatus,
+                date,
+                fetchForDate,
+                addNewGuest,
+                updateGuestRoom,
+                logout
+            }}
+        >
+            {props.children}
+        </HotelContext.Provider>
+    );
 };
