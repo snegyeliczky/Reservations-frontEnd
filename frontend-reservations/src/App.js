@@ -16,6 +16,7 @@ function App() {
         <Router>
             <div className="App">
                 <div className="container-fluid">
+                    <Route exact path="/" component={Login}/>
                     <Route exact path="/login" component={Login}/>
 
                     <HotelProvider>
