@@ -1,8 +1,5 @@
 import React, {useState, createContext} from "react";
 import axios from "axios";
-import {Redirect} from "react-router-dom";
-
-import Cookies from 'js-cookie'
 
 export const HotelContext = createContext();
 
@@ -11,7 +8,6 @@ export const HotelProvider = props => {
     const [roomList, setRoomList] = useState([]);
     const [date, setDate] = useState(new Date());
     const [filter, setFilter] = useState(false);
-    const [toLogin, setToLogin] = useState(false);
 
     async function fetchGuestList() {
         setFilter(false);
@@ -76,14 +72,12 @@ export const HotelProvider = props => {
     };
 
     const logout = () => {
-        console.log(Cookies.get('token'));
         const url = 'http://localhost:8080/auth/logout';
         axios.post(url)
             .then(response => {
-                console.log(response);
+
             })
-            .catch(reason => console.log(reason))
-        ;
+            .catch(reason => console.log(reason));
     };
 
     return (
