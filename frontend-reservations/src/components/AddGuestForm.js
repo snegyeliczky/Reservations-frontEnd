@@ -18,6 +18,7 @@ const AddGuestForm = () => {
 
     const onSubmit = data => {
         addNewGuest(data, checkInDate, checkOutDate);
+
         setToHome(true);
     };
 

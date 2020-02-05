@@ -9,7 +9,7 @@ const GuestList = () => {
 
     useEffect(() => {
         fetchGuestList();
-    }, [fetchGuestList]);
+    }, []);
 
     const divStyle = {
         border: "1px solid black"

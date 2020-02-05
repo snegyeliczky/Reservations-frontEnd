@@ -67,7 +67,7 @@ export const HotelProvider = props => {
                 }
             })
             .then(response => {
-                console.log("ok");
+                fetchGuestList();
             });
     };
 

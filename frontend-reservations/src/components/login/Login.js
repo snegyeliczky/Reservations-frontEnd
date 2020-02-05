@@ -3,7 +3,7 @@ import {Redirect} from "react-router-dom";
 
 import {useForm} from 'react-hook-form';
 
-import Axios from "axios";
+import axios from "axios";
 
 const Login = () => {
     const {register, handleSubmit, errors} = useForm();
@@ -15,7 +15,7 @@ const Login = () => {
 
     const sendUserLogin = data => {
         const url = "http://localhost:8080/auth/signin";
-        Axios
+        axios
             .post(url, {
                 username: data.username,
                 password: data.password
