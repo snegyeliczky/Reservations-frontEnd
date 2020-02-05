@@ -1,5 +1,6 @@
 import React, {useState, createContext} from "react";
 import axios from "axios";
+import {Redirect} from "react-router-dom";
 
 export const HotelContext = createContext();
 
@@ -8,6 +9,7 @@ export const HotelProvider = props => {
     const [roomList, setRoomList] = useState([]);
     const [date, setDate] = useState(new Date());
     const [filter, setFilter] = useState(false);
+    const [toLogin, setToLogin] = useState(false);
 
   async function fetchGuestList() {
     setFilter(false);
@@ -69,6 +71,13 @@ export const HotelProvider = props => {
             .then(response => {
                 fetchGuestList();
             });
+    };
+
+    const logout = () => {
+        const url = '/logout';
+        axios.delete(url).then(response => {
+
+        });
     };
 
   return (

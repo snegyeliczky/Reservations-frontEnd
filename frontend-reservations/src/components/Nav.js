@@ -3,10 +3,14 @@ import {Link} from "react-router-dom";
 import {HotelContext} from "./HotelContext";
 
 const Nav = () => {
-    const {fetchGuestList} = useContext(HotelContext);
+    const {fetchGuestList, logout} = useContext(HotelContext);
 
     const onClickHandlerForHome = () => {
         fetchGuestList();
+    };
+
+    const onClickLogout = () => {
+        logout();
     };
 
     const backgroundColor = {
@@ -46,7 +50,7 @@ const Nav = () => {
                             </Link>
                         </li>
                     </ul>
-                    <button className="btn btn-outline-light my-2 my-sm-0" type="submit">Logout</button>
+                    <button className="btn btn-outline-light my-2 my-sm-0" type="submit" onClick={onClickLogout}>Logout</button>
                 </div>
             </nav>
         </header>
