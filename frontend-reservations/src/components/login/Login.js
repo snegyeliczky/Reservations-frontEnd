@@ -21,9 +21,9 @@ const Login = () => {
                 password: data.password
             })
             .then(response => {
-                //document.cookie = 'access_token=' + response.data.token;
                 setToHome(true)
-            });
+            })
+            .catch(reason => console.log(reason));
     };
 
 

@@ -17,18 +17,19 @@ function App() {
             <div className="App">
                 <div className="container-fluid">
                     <Route exact path="/login" component={Login}/>
+
                     <HotelProvider>
                         <Route exact path="/home" component={Nav}/>
-                        <Route exact path="/home" component={GuestList}/>
-
                         <Route exact path="/rooms" component={Nav}/>
-                        <Route exact path="/rooms" component={RoomList}/>
-
                         <Route exact path="/guest/:guestId" component={Nav}/>
-                        <Route exact path="/guest/:guestId" component={GuestProfile}/>
-
                         <Route exact path="/newguest" component={Nav}/>
-                        <Route exact path="/newguest" component={AddGuestForm}/>
+
+                        <div className="container">
+                            <Route exact path="/home" component={GuestList}/>
+                            <Route exact path="/rooms" component={RoomList}/>
+                            <Route exact path="/guest/:guestId" component={GuestProfile}/>
+                            <Route exact path="/newguest" component={AddGuestForm}/>
+                        </div>
                     </HotelProvider>
                 </div>
             </div>
