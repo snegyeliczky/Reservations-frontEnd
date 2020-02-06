@@ -9,8 +9,10 @@ const Guest = ({ guest }) => {
 
   const { updateGuestStatus } = useContext(HotelContext);
 
-  const guestStyle = () => {
-    let statusColor = "";
+
+  const dropDownBtn =  () => {
+
+    let statusColor = " ";
 
     switch (status) {
       case "IN":
@@ -20,31 +22,25 @@ const Guest = ({ guest }) => {
         statusColor = "lightcoral";
         break;
       default:
-        statusColor = "beige";
+        statusColor = "lightblue";
     }
 
     return {
-      padding: "10px",
-      borderBottom: "1px #ccc dotted",
-      background: statusColor
+      lineHeight: "1.5",
+      padding: ".375rem .75rem",
+      textAlign: "center",
+      verticalAlign: "middle",
+      userSelect: "none",
+      fontSize: "1rem",
+      cursor: "pointer",
+      fontWeight: "400",
+      color: "rgba(0, 0, 0, 0.68)",
+      background: statusColor,
+      borderColor: statusColor,
+      border: "1px solid transparent",
+      borderRadius: ".25rem",
+      margin: "5px"
     };
-  };
-
-  const dropDownBtn = {
-    lineHeight: "1.5",
-    padding: ".375rem .75rem",
-    textAlign: "center",
-    verticalAlign: "middle",
-    userSelect: "none",
-    fontSize: "1rem",
-    cursor: "pointer",
-    fontWeight: "400",
-    color: "#fff",
-    background: "#17a2b8",
-    borderColor: "#17a2b8",
-    border: "1px solid transparent",
-    borderRadius: ".25rem",
-    margin: "5px"
   };
 
   const handleChange = event => {
@@ -54,7 +50,7 @@ const Guest = ({ guest }) => {
   };
 
   return (
-    <tr style={guestStyle()}>
+    <tr className="tr-color" style={{backgroundColor: "rgba(229, 227, 227, 0.5)"}}>
       <td>{roomNumber}</td>
       <td>{checkIn}</td>
       <td>{name}</td>
@@ -62,14 +58,14 @@ const Guest = ({ guest }) => {
       <td>
         <ButtonToolbar>
           <select
-            style={dropDownBtn}
+            style={dropDownBtn()}
             value={updatedStatus}
             onChange={handleChange}
           >
             <option>{status}</option>
-            <option value="CHECKIN">CHECKIN</option>
-            <option value="IN">IN</option>
-            <option value="CHECKOUT">CHECKOUT</option>
+            <option value="CHECKIN" style={{backgroundColor: "lightblue"}}>CHECKIN</option>
+            <option value="IN" style={{backgroundColor: "lightgreen"}}>IN</option>
+            <option value="CHECKOUT" style={{backgroundColor: "lightcoral"}}>CHECKOUT</option>
           </select>
         </ButtonToolbar>
       </td>
