@@ -17,15 +17,16 @@ const SearchField = () => {
   return (
     <div>
       <br />
-      <DateTimePicker onChange={handleChange} value={updatedDate} />
-      <Button
-        variant="dark"
-        style={{ margin: "5px" }}
-        type="submit"
-        onClick={onSubmit}
-      >
-        Submit
-      </Button>
+          <DateTimePicker onChange={handleChange} value={updatedDate} className="date-background"/>
+          <Button
+              variant="dark"
+              style={{ margin: "5px" }}
+              type="submit"
+              onClick={onSubmit}
+          >
+              Submit
+          </Button>
+
     </div>
   );
 };
