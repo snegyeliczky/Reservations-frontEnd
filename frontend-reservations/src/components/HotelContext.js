@@ -8,15 +8,6 @@ export const HotelProvider = props => {
     const [roomList, setRoomList] = useState([]);
     const [date, setDate] = useState(new Date());
     const [filter, setFilter] = useState(false);
-   // const [isLoggedIn, setLoggedIn] = useState(false);
-
-/*
-    const changeLoginStatus = () => {
-        setLoggedIn(!isLoggedIn);
-        console.log("change login to: "+ isLoggedIn)
-    };
-
- */
 
     async function fetchGuestList() {
         setFilter(false);
@@ -80,16 +71,21 @@ export const HotelProvider = props => {
             });
     };
 
-   /* const logout = () => {
-        const url = 'http://localhost:8080/auth/logout';
-        axios.post(url)
-            .then(response => {
-                changeLoginStatus()
+
+    const addNewUser = async (data, role) => {
+        const url = "/admin/newuser";
+        await axios
+            .post(url, {
+                username: data.username,
+                password: data.password,
+                roles: [role]
             })
-            .catch(reason => console.log(reason));
+            .then(response => {
+                console.log("ok")
+            });
     };
 
-    */
+
 
     return (
         <HotelContext.Provider
@@ -103,9 +99,7 @@ export const HotelProvider = props => {
                 fetchForDate,
                 addNewGuest,
                 updateGuestRoom,
-               // logout,
-               // isLoggedIn,
-                // changeLoginStatus
+                addNewUser
             }}
         >
             {props.children}

@@ -10,12 +10,11 @@ import Login from "./components/login/Login";
 import {BrowserRouter as Router, Route} from "react-router-dom";
 import {HotelProvider} from "./components/HotelContext";
 import AddGuestForm from "./components/AddGuestForm";
+import AddUserForm from "./components/AddUserForm";
 import {UserProvider} from "./components/Context/UserContext";
 
 
 function App() {
-
-
     return (
         <Router>
             <div className="App">
@@ -32,6 +31,7 @@ function App() {
                                 <Route exact path="/rooms" component={RoomList}/>
                                 <Route exact path="/guest/:guestId" component={GuestProfile}/>
                                 <Route exact path="/newguest" component={AddGuestForm}/>
+                                <Route exact path="/adduser" component={AddUserForm}/>
                             </div>
                         </HotelProvider>
                     </UserProvider>
