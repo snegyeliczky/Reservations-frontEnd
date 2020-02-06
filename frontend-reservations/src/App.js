@@ -15,7 +15,6 @@ function App() {
     return (
         <Router>
             <div className="App">
-                <div className="container-fluid">
                     <Route exact path="/" component={Login}/>
                     <Route exact path="/login" component={Login}/>
 
@@ -33,7 +32,6 @@ function App() {
                         </div>
                     </HotelProvider>
                 </div>
-            </div>
         </Router>
     )
         ;

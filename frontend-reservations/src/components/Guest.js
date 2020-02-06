@@ -50,7 +50,7 @@ const Guest = ({ guest }) => {
   };
 
   return (
-    <tr className="tr-color" style={{backgroundColor: "rgba(229, 227, 227, 0.5)"}}>
+    <tr className="tr-color" style={{backgroundColor: "#f5f5f5"}}>
       <td>{roomNumber}</td>
       <td>{checkIn}</td>
       <td>{name}</td>
