@@ -4,8 +4,10 @@ import {useForm} from 'react-hook-form';
 
 import axios from "axios";
 import {UserContext} from "../Context/UserContext";
+import Cookies from "universal-cookie";
 
 const Login = () => {
+
 
     const {changeLoginStatus} = useContext(UserContext);
     const {register, handleSubmit, errors} = useForm();
@@ -14,6 +16,14 @@ const Login = () => {
     const onSubmit = data => {
         sendUserLogin(data);
     };
+
+    const setCookieForLogin = () =>{
+        let cookie = new Cookies();
+        let date = new Date()
+        date.setHours(date.getHours()+8)
+        cookie.set("isLoggedIn",true,{expires:date})
+
+    }
 
     const sendUserLogin = data => {
         const url = "http://localhost:8080/auth/signin";
@@ -24,6 +34,7 @@ const Login = () => {
             })
             .then(response => {
                 //document.cookie = 'access_token=' + response.data.token;
+                setCookieForLogin();
                 changeLoginStatus();
                 setToHome(true)
             })

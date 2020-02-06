@@ -1,12 +1,19 @@
 import React, {useState, createContext} from "react";
 import axios from "axios";
 import {HotelContext} from "../HotelContext";
+import Cookies from "universal-cookie";
 
 export const UserContext = createContext();
 
 export const UserProvider = props => {
 
-    const [isLoggedIn, setLoggedIn] = useState(false);
+    const checkStatusInCookie = () =>{
+        let cookie = new Cookies();
+        let status =  cookie.get("isLoggedIn");
+        return status ? JSON.parse(status) : false;
+    };
+
+    const [isLoggedIn, setLoggedIn] = useState(checkStatusInCookie());
 
 
     const changeLoginStatus = () => {
@@ -18,10 +25,12 @@ export const UserProvider = props => {
         const url = 'http://localhost:8080/auth/logout';
         axios.post(url)
             .then(response => {
-                changeLoginStatus()
+                changeLoginStatus();
+                new Cookies().remove("isLoggedIn");
             })
             .catch(reason => console.log(reason));
     };
+
 
     return (
         <UserContext.Provider
