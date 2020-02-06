@@ -75,9 +75,9 @@ export const HotelProvider = props => {
         const url = "/admin/newuser";
         await axios
             .post(url, {
-                username: data.name,
+                username: data.username,
                 password: data.password,
-                role: role
+                roles: [role]
             })
             .then(response => {
                 console.log("ok")
@@ -105,7 +105,8 @@ export const HotelProvider = props => {
                 fetchForDate,
                 addNewGuest,
                 updateGuestRoom,
-                logout
+                logout,
+                addNewUser
             }}
         >
             {props.children}
