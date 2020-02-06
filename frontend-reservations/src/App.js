@@ -26,6 +26,8 @@ function App() {
                             <Route exact path="/rooms" component={Nav}/>
                             <Route exact path="/guest/:guestId" component={Nav}/>
                             <Route exact path="/newguest" component={Nav}/>
+                            <Route exact path="/adduser" component={Nav}/>
+
                             <div className="container">
                                 <Route exact path="/home" component={GuestList}/>
                                 <Route exact path="/rooms" component={RoomList}/>

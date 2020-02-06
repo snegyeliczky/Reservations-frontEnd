@@ -53,6 +53,11 @@ const Nav = () => {
                                 New Guest
                             </Link>
                         </li>
+                        <li className="nav-item">
+                            <Link className="nav-link" style={btnColor} to="/adduser">
+                                New User
+                            </Link>
+                        </li>
                     </ul>
                     <button className="btn btn-outline-light my-2 my-sm-0" type="submit" onClick={onClickLogout}>Logout</button>
 
