@@ -1,9 +1,11 @@
 import React, {useContext, useState} from "react";
 import {Link, Redirect} from "react-router-dom";
 import {HotelContext} from "./HotelContext";
+import {UserContext} from "./Context/UserContext";
 
 const Nav = () => {
-    const {fetchGuestList, logout} = useContext(HotelContext);
+    const {fetchGuestList} = useContext(HotelContext);
+    const {logout,isLoggedIn} = useContext(UserContext);
     const [toLogin, setToLogin] = useState(false);
 
     const onClickHandlerForHome = () => {
@@ -52,10 +54,12 @@ const Nav = () => {
                             </Link>
                         </li>
                     </ul>
-                    {toLogin ? <Redirect to={"/login"}/> : null}
                     <button className="btn btn-outline-light my-2 my-sm-0" type="submit" onClick={onClickLogout}>Logout</button>
+
                 </div>
             </nav>
+
+            {isLoggedIn ? null : <Redirect to={"/login"}/>}
         </header>
     );
 };

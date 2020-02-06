@@ -1,17 +1,29 @@
-import React, {useState} from "react";
+import React, {useContext, useState} from "react";
 import {Redirect} from "react-router-dom";
-
 import {useForm} from 'react-hook-form';
 
 import axios from "axios";
+import {UserContext} from "../Context/UserContext";
+import Cookies from "universal-cookie";
 
 const Login = () => {
+
+
+    const {changeLoginStatus} = useContext(UserContext);
     const {register, handleSubmit, errors} = useForm();
     const [toHome, setToHome] = useState(false);
 
     const onSubmit = data => {
         sendUserLogin(data);
     };
+
+    const setCookieForLogin = () =>{
+        let cookie = new Cookies();
+        let date = new Date()
+        date.setHours(date.getHours()+8)
+        cookie.set("isLoggedIn",true,{expires:date})
+
+    }
 
     const sendUserLogin = data => {
         const url = "http://localhost:8080/auth/signin";
@@ -21,6 +33,9 @@ const Login = () => {
                 password: data.password
             })
             .then(response => {
+                //document.cookie = 'access_token=' + response.data.token;
+                setCookieForLogin();
+                changeLoginStatus();
                 setToHome(true)
             })
             .catch(reason => console.log(reason));
