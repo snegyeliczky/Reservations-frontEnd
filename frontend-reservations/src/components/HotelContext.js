@@ -71,6 +71,19 @@ export const HotelProvider = props => {
             });
     };
 
+    const addNewUser = async (data, role) => {
+        const url = "/admin/newuser";
+        await axios
+            .post(url, {
+                username: data.name,
+                password: data.password,
+                role: role
+            })
+            .then(response => {
+                console.log("ok")
+            });
+    };
+
     const logout = () => {
         const url = 'http://localhost:8080/auth/logout';
         axios.post(url)
