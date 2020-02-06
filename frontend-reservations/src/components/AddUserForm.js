@@ -75,8 +75,8 @@ const AddUserForm = () => {
                     name="role-native-required"
                     onChange={handleChange}
                 >
-                    <MenuItem value={"USER"}>User</MenuItem>
-                    <MenuItem value={"ADMIN"}>Admin</MenuItem>
+                    <MenuItem value={"RECEPTIONIST"}>RECEPTIONIST</MenuItem>
+                    <MenuItem value={"ADMIN"}>ADMIN</MenuItem>
                 </Select>
                 <FormHelperText>Required</FormHelperText>
             </FormControl>
