@@ -1,11 +1,13 @@
-import React, {useState} from "react";
+import React, {useContext, useState} from "react";
 import {Redirect} from "react-router-dom";
-
 import {useForm} from 'react-hook-form';
 
 import axios from "axios";
+import {UserContext} from "../Context/UserContext";
 
 const Login = () => {
+
+    const {changeLoginStatus} = useContext(UserContext);
     const {register, handleSubmit, errors} = useForm();
     const [toHome, setToHome] = useState(false);
 
@@ -21,6 +23,8 @@ const Login = () => {
                 password: data.password
             })
             .then(response => {
+                //document.cookie = 'access_token=' + response.data.token;
+                changeLoginStatus();
                 setToHome(true)
             })
             .catch(reason => console.log(reason));
