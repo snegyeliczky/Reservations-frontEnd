@@ -77,3 +77,20 @@ html {
 .date-background {
   background-color: #f5f5f5 !important
 }
+
+.form-background {
+
+  margin-top: 2.5rem;
+  padding: 3rem;
+  border-radius:20px ;
+  background-color: rgba(255, 246, 241, 0.72);
+}
+
+.send{
+  margin: 1.5rem;
+  border-radius: 15px;
+}
+
+.send:hover{
+  background-color: rgba(207, 255, 232, 0.72);
+}

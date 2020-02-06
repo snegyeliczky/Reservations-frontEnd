@@ -31,7 +31,7 @@ const AddGuestForm = () => {
     };
 
     return (
-        <form onSubmit={handleSubmit(onSubmit)}>
+        <form onSubmit={handleSubmit(onSubmit)} className="form-background">
             <Typography variant="h6" gutterBottom>
                 New guest registration
             </Typography>
@@ -102,7 +102,7 @@ const AddGuestForm = () => {
             {/* errors will return when field validation fails  */}
             {errors.exampleRequired && <span>This field is required</span>}
             {toHome ? <Redirect to={"/home"}/> : null}
-            <input type="submit"/>
+            <input className="send" type="submit"/>
         </form>
     );
 };
