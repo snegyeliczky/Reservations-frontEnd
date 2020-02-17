@@ -9,7 +9,7 @@ const Nav = () => {
     const {logout, isLoggedIn} = useContext(UserContext);
     const [toLogin, setToLogin] = useState(false);
     const [isAdmin, setAdmin] = useState(false);
-    const [toHome,setToHome] = useState(false);
+    const [toHome, setToHome] = useState(false);
 
 
     const onClickHandlerForHome = () => {
@@ -18,12 +18,15 @@ const Nav = () => {
     };
 
     useEffect(() => {
+
         let roles = localStorage.getItem("roles");
-        let rolesArray = roles.split(",");
-        let isAdmin = rolesArray.includes("ROLE_ADMIN");
-        console.log(" logged in user roles: " + roles);
-        console.log("is Admin: " + isAdmin);
-        setAdmin(isAdmin);
+        if (roles != null) {
+            let rolesArray = roles.split(",");
+            let isAdmin = rolesArray.includes("ROLE_ADMIN");
+            console.log(" logged in user roles: " + roles);
+            console.log("is Admin: " + isAdmin);
+            setAdmin(isAdmin);
+        }
     }, []);
 
 
@@ -99,8 +102,8 @@ const Nav = () => {
                 </div>
             </nav>
 
-            {toHome ? <Redirect to={"/home"}/> : null }
-            {isLoggedIn ? null :<Redirect to={"/login"}/>}
+            {toHome ? <Redirect to={"/home"}/> : null}
+            {isLoggedIn ? null : <Redirect to={"/login"}/>}
         </header>
     );
 };

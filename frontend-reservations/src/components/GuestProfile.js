@@ -19,6 +19,11 @@ const GuestProfile = props => {
     }
   }, [guestList, props.match.params.guestId]);
 
+  const list = {
+    background:"white",
+    margin : "25px"
+  };
+
   const dropDownBtn = {
     lineHeight: "1.5",
     padding: ".375rem .75rem",
@@ -88,18 +93,21 @@ const GuestProfile = props => {
 
   const handleSubmit = event => {
     event.preventDefault();
+    setSelectedRoom(event.target.value);
     updateGuestRoom(selectedRoomId, guest.id);
+    getRoomIdByRoomNumber(event.target.value);
   };
 
   const divStyle = {
-    margin: "0 auto"
+    marginTop: "4rem",
+    borderRadius: "20px"
   };
 
   return (
-    <div>
-      <Table style={divStyle}>
+    <div style={divStyle}>
+      <Table >
         {getGuestById}
-        <thead>
+        <thead style={list}>
           <tr>
             <th>Name</th>
             <th>Check In Date</th>
@@ -119,19 +127,12 @@ const GuestProfile = props => {
             <td>
               <select
                 style={dropDownBtn}
-                value={selectedRoom}
-                onChange={handleChange}
+                value={selectedRoomId}
+                onChange={handleSubmit}
               >
                 {roomList.map(room => filterAvailableRooms(room))}
               </select>
-              <Button
-                style={{ margin: "5px" }}
-                variant="dark"
-                type="submit"
-                onClick={handleSubmit}
-              >
-                Save
-              </Button>
+
             </td>
           </tr>
         </tbody>
