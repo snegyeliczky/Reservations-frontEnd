@@ -1,31 +1,50 @@
-import React, {useContext, useState} from "react";
+import React, {useContext, useEffect, useState} from "react";
 import {Link, Redirect} from "react-router-dom";
 import {HotelContext} from "./HotelContext";
 import {UserContext} from "./Context/UserContext";
-import base64 from 'react-native-base64';
-import Cookies from "universal-cookie";
 
 
 const Nav = () => {
     const {fetchGuestList} = useContext(HotelContext);
-    const {logout,isLoggedIn} = useContext(UserContext);
+    const {logout, isLoggedIn} = useContext(UserContext);
     const [toLogin, setToLogin] = useState(false);
+    const [isAdmin, setAdmin] = useState(false);
+    const [toHome,setToHome] = useState(false);
+
 
     const onClickHandlerForHome = () => {
         fetchGuestList();
+        setToHome(true);
     };
 
-    const checkUserRole  = () => {
-            const cookie = new Cookies();
-            let token = cookie.get("token")
-            let body =  base64.decode(token.split(".")[1]);
-            console.log(body)
+    useEffect(() => {
+        let roles = localStorage.getItem("roles");
+        let rolesArray = roles.split(",");
+        let isAdmin = rolesArray.includes("ROLE_ADMIN");
+        console.log(" logged in user roles: " + roles);
+        console.log("is Admin: " + isAdmin);
+        setAdmin(isAdmin);
+    }, []);
 
-    };
+
+    /*
+        const checkUserRole = () => {
+            let roles = localStorage.getItem("roles");
+            let rolesArray = roles.split(",");
+            let isAdmin = rolesArray.includes("ROLE_ADMIN");
+            console.log(" logged in user roles: " + roles);
+            console.log("is Admin: " + isAdmin);
+            return isAdmin;
+
+        };
+
+     */
 
     const onClickLogout = () => {
         logout();
         setToLogin(true);
+        localStorage.removeItem("roles");
+        setAdmin(false);
     };
 
     const backgroundColor = {
@@ -39,7 +58,7 @@ const Nav = () => {
     return (
         <header>
             <nav className="navbar navbar-expand-lg navbar-dark bg-dark" style={backgroundColor}>
-                <a className="navbar-brand">Reservations</a>
+                <div className="navbar-brand" onClick={onClickHandlerForHome}>Reservations</div>
                 <button className="navbar-toggler" type="button" data-toggle="collapse"
                         data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
                         aria-expanded="false"
@@ -50,7 +69,7 @@ const Nav = () => {
                 <div className="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul className="navbar-nav mr-auto">
                         <li className="nav-item">
-                            <Link className="nav-link" style={btnColor} to="/home" onClick={onClickHandlerForHome}>
+                            <Link className="nav-link" style={btnColor} to="/home">
                                 Home
                             </Link>
                         </li>
@@ -64,19 +83,24 @@ const Nav = () => {
                                 New Guest
                             </Link>
                         </li>
-                        {checkUserRole()}
-                        <li className="nav-item">
-                            <Link className="nav-link" style={btnColor} to="/adduser">
-                                New User
-                            </Link>
-                        </li>
+                        {isAdmin ?
+                            <li className="nav-item">
+                                <Link className="nav-link" style={btnColor} to="/adduser">
+                                    New User
+                                </Link>
+                            </li>
+                            : null
+                        }
                     </ul>
-                    <button className="btn btn-outline-light my-2 my-sm-0" type="submit" onClick={onClickLogout}>Logout</button>
+                    <button className="btn btn-outline-light my-2 my-sm-0" type="submit"
+                            onClick={onClickLogout}>Logout
+                    </button>
 
                 </div>
             </nav>
 
-            {isLoggedIn ? null : <Redirect to={"/login"}/>}
+            {toHome ? <Redirect to={"/home"}/> : null }
+            {isLoggedIn ? null :<Redirect to={"/login"}/>}
         </header>
     );
 };

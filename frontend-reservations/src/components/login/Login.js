@@ -17,13 +17,13 @@ const Login = () => {
         sendUserLogin(data);
     };
 
-    const setCookieForLogin = () =>{
+    const setCookieForLogin = () => {
         let cookie = new Cookies();
-        let date = new Date()
-        date.setHours(date.getHours()+8)
-        cookie.set("isLoggedIn",true,{expires:date})
+        let date = new Date();
+        date.setHours(date.getHours() + 8);
+        cookie.set("isLoggedIn", true, {expires: date})
 
-    }
+    };
 
     const sendUserLogin = data => {
         const url = "http://localhost:8080/auth/signin";
@@ -34,6 +34,8 @@ const Login = () => {
             })
             .then(response => {
                 //document.cookie = 'access_token=' + response.data.token;
+                console.log(response.data);
+                localStorage.setItem("roles" , response.data);
                 setCookieForLogin();
                 changeLoginStatus();
                 setToHome(true)

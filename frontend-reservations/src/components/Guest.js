@@ -59,10 +59,9 @@ const Guest = ({ guest }) => {
         <ButtonToolbar>
           <select
             style={dropDownBtn()}
-            value={updatedStatus}
+            value={status}
             onChange={handleChange}
           >
-            <option>{status}</option>
             <option value="CHECKIN" style={{backgroundColor: "lightblue"}}>CHECKIN</option>
             <option value="IN" style={{backgroundColor: "lightgreen"}}>IN</option>
             <option value="CHECKOUT" style={{backgroundColor: "lightcoral"}}>CHECKOUT</option>

@@ -5,10 +5,13 @@ import {HotelContext} from "./HotelContext";
 import SearchField from "./search/SearchField";
 
 const GuestList = () => {
-    const {guestList, fetchGuestList} = useContext(HotelContext);
+    const {guestList, fetchGuestList, fetchForDate} = useContext(HotelContext);
+    const {filter, setFilter} = useContext(HotelContext);
+    const {date} = useContext(HotelContext);
 
     useEffect(() => {
-        fetchGuestList();
+        console.log("filter status" + filter);
+        filter ? fetchForDate(date) : fetchGuestList();
     }, []);
 
     const divStyle = {

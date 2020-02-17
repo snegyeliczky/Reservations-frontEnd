@@ -99,7 +99,9 @@ export const HotelProvider = props => {
                 fetchForDate,
                 addNewGuest,
                 updateGuestRoom,
-                addNewUser
+                addNewUser,
+                filter,
+                setFilter
             }}
         >
             {props.children}
