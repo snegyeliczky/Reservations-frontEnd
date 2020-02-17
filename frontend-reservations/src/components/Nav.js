@@ -2,6 +2,9 @@ import React, {useContext, useState} from "react";
 import {Link, Redirect} from "react-router-dom";
 import {HotelContext} from "./HotelContext";
 import {UserContext} from "./Context/UserContext";
+import base64 from 'react-native-base64';
+import Cookies from "universal-cookie";
+
 
 const Nav = () => {
     const {fetchGuestList} = useContext(HotelContext);
@@ -10,6 +13,14 @@ const Nav = () => {
 
     const onClickHandlerForHome = () => {
         fetchGuestList();
+    };
+
+    const checkUserRole  = () => {
+            const cookie = new Cookies();
+            let token = cookie.get("token")
+            let body =  base64.decode(token.split(".")[1]);
+            console.log(body)
+
     };
 
     const onClickLogout = () => {
@@ -53,6 +64,7 @@ const Nav = () => {
                                 New Guest
                             </Link>
                         </li>
+                        {checkUserRole()}
                         <li className="nav-item">
                             <Link className="nav-link" style={btnColor} to="/adduser">
                                 New User
