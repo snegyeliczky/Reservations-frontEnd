@@ -2,7 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 
 export const Room = ({ room }) => {
-  const { roomNumber, guest } = room;
+  const { number, guest } = room;
 
   const roomStyle = {
     boxShadow: "0 4px 8px 0 rgba(0,0,0,0.2)",
@@ -27,7 +27,7 @@ export const Room = ({ room }) => {
           <p>
             Room
             <br />
-            {roomNumber}
+            {number}
           </p>
         </Link>
       </div>
@@ -38,7 +38,7 @@ export const Room = ({ room }) => {
         <p>
           Room
           <br />
-          {roomNumber}
+          {number}
         </p>
       </div>
     );

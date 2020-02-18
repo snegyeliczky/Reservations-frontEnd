@@ -17,39 +17,21 @@ const SearchField = () => {
   return (
     <div>
       <br />
-          <DateTimePicker onChange={handleChange} value={updatedDate} className="date-background"/>
-          <Button
-              variant="dark"
-              style={{ margin: "5px" }}
-              type="submit"
-              onClick={onSubmit}
-          >
-              Submit
-          </Button>
-
+      <DateTimePicker
+        onChange={handleChange}
+        value={updatedDate}
+        className="date-background"
+      />
+      <Button
+        variant="dark"
+        style={{ margin: "5px" }}
+        type="submit"
+        onClick={onSubmit}
+      >
+        Submit
+      </Button>
     </div>
   );
 };
 
 export default SearchField;
-
-//  }
-
-//   onChange = date => this.setState({ date });
-
-//   render() {
-//     const { date } = this.state;
-//     return (
-//       <div>
-//         <br/>
-//         <DateTimePicker onChange={this.onChange} value={this.state.date} />
-//         <Button variant="dark"
-//           style={{margin: '5px'}}
-//           type="submit"
-//           onClick={this.props.checkForActualDate.bind(this, date)}
-//         >
-//           Submit
-//         </Button>
-//       </div>
-//     );
-//   }
