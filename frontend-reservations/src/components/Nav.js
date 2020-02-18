@@ -4,7 +4,7 @@ import { HotelContext } from "./HotelContext";
 import { UserContext } from "./Context/UserContext";
 
 const Nav = () => {
-  const { fetchReservationList } = useContext(HotelContext);
+  const { fetchReservationList, setDate, setFilter } = useContext(HotelContext);
   const { logout, isLoggedIn } = useContext(UserContext);
   const [toLogin, setToLogin] = useState(false);
   const [isAdmin, setAdmin] = useState(false);
@@ -39,6 +39,7 @@ const Nav = () => {
 
   const onClickLogout = () => {
     logout();
+    setFilter(false);
     setToLogin(true);
     localStorage.removeItem("roles");
     setAdmin(false);

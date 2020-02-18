@@ -1,37 +1,41 @@
-import React, { useContext, useState } from "react";
-import DateTimePicker from "react-datetime-picker";
-import { Button } from "react-bootstrap";
-import { HotelContext } from "../HotelContext";
+import React, {useContext, useState} from "react";
+import {Button} from "react-bootstrap";
+import {HotelContext} from "../HotelContext";
+import {DatePicker} from 'antd';
+import 'antd/dist/antd.css';
+
 
 const SearchField = () => {
-  const [updatedDate, setUpdatedDate] = useState(new Date());
-  const { fetchForDate } = useContext(HotelContext);
+    const {date, setDate} = useContext(HotelContext);
+    const {fetchForDate} = useContext(HotelContext);
 
-  const handleChange = date => setUpdatedDate(date);
+    const handleChange = (date) => {
+        setDate(date);
+    };
 
-  const onSubmit = event => {
-    event.preventDefault();
-    fetchForDate(updatedDate);
-  };
+    const onSubmit = () => {
+        fetchForDate(date);
+    };
 
-  return (
-    <div>
-      <br />
-      <DateTimePicker
-        onChange={handleChange}
-        value={updatedDate}
-        className="date-background"
-      />
-      <Button
-        variant="dark"
-        style={{ margin: "5px" }}
-        type="submit"
-        onClick={onSubmit}
-      >
-        Submit
-      </Button>
-    </div>
-  );
+    return (
+        <div>
+            <br/>
+
+            <DatePicker
+                onChange={handleChange}
+                placeholder="Select Date"
+            />
+
+            <Button
+                variant="dark"
+                style={{margin: "5px"}}
+                type="submit"
+                onClick={onSubmit}
+            >
+                Submit
+            </Button>
+        </div>
+    );
 };
 
 export default SearchField;
