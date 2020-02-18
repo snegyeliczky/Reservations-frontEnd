@@ -1,5 +1,5 @@
 import React, { useContext, useState } from "react";
-import DateTimePicker from "react-datetime-picker";
+import {DatePicker} from "antd";
 import { Button } from "react-bootstrap";
 import { HotelContext } from "../HotelContext";
 
