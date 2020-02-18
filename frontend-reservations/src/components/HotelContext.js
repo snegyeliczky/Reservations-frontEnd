@@ -11,12 +11,12 @@ export const HotelProvider = props => {
 
     async function fetchGuestList() {
         setFilter(false);
-        const result = await axios("/guest/all");
+        const result = await axios("/reservation/get-all");
         setGuestList(result.data);
     }
 
     const fetchRoomList = async () => {
-        const result = await axios("/rooms/list");
+        const result = await axios("/rooms/list/get-all");
         setRoomList(result.data);
     };
 
@@ -32,19 +32,19 @@ export const HotelProvider = props => {
                 ? updatedDate.getDate()
                 : "0" + updatedDate.getDate();
         let dateUrl = updatedDate.getFullYear() + "-" + month + "-" + day;
-        const url = `/guest/checkin?date=${dateUrl}`;
+        const url = `/reservation/checkin?date=${dateUrl}`;
         axios.get(url).then(response => setGuestList(response.data));
     };
 
     const updateGuestStatus = async (guestId, updatedGuestStatus) => {
-        const url = `/guest/changestatus?id=${guestId}&status=${updatedGuestStatus}`;
+        const url = `/reservation/changestatus?id=${guestId}&status=${updatedGuestStatus}`;
         axios.put(url).then(response => {
             filter ? fetchForDate(date) : fetchGuestList();
         });
     };
 
     const updateGuestRoom = async (roomId, guestId) => {
-        const url = `/guest/setroom?roomId=${roomId}&guestId=${guestId}`;
+        const url = `/reservation/setroom?roomId=${roomId}&guestId=${guestId}`;
         axios.put(url).then(response => {
             fetchGuestList();
             fetchRoomList();
@@ -52,19 +52,25 @@ export const HotelProvider = props => {
     };
 
     const addNewGuest = async (data, checkInDate, checkOutDate) => {
-        const url = "/add/guest";
+        const url = "/add/add-reservation";
         axios
             .post(url, {
-                name: data.name,
+
                 checkIn: checkInDate,
                 checkOut: checkOutDate,
-                address: {
+                status: "CHECKIN",
+                isCityTaxIncluded:true,
+                guest: {
+                    firstName: data.firstName,
+                    lastName: data.lastName,
                     email: data.email,
-                    country: data.country,
-                    zipCode: data.zipcode,
-                    city: data.city,
-                    street: data.street
-                }
+                    address: {
+                        country: data.country,
+                        zipCode: data.zipcode,
+                        city: data.city,
+                        street: data.street
+                    }
+                },
             })
             .then(response => {
                 fetchGuestList();
@@ -84,7 +90,6 @@ export const HotelProvider = props => {
                 console.log("ok")
             });
     };
-
 
 
     return (
