@@ -23,7 +23,7 @@ const Login = () => {
   };
 
   const sendUserLogin = data => {
-    const url = "http://10.44.1.182:8762/auth/signin";
+    const url = "http://localhost:8762/auth/signin";
     axios
       .post(url, {
         username: data.username,
