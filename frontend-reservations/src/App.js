@@ -24,7 +24,7 @@ function App() {
             <Route exact path="/home" component={Nav} />
             <Route exact path="/rooms" component={Nav} />
             <Route exact path="/guest/:guestId" component={Nav} />
-            <Route exact path="/newguest" component={Nav} />
+            <Route exact path="/newreservation" component={Nav} />
             <Route exact path="/adduser" component={Nav} />
 
             <div className="container">
