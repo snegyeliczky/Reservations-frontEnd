@@ -17,7 +17,7 @@ export const HotelProvider = props => {
     }
 
     const fetchRoomList = async () => {
-        const result = await axios("/rooms/get-all");
+        const result = await axios("/reservation/rooms/get-all");
         setRoomList(result.data);
         console.log(result);
     };
@@ -58,7 +58,7 @@ export const HotelProvider = props => {
     };
 
     const addNewGuest = async (data, checkInDate, checkOutDate) => {
-        const url = "/add/add-reservation";
+        const url = "/reservation/add/add-reservation";
         axios
             .post(url, {
                 checkIn: checkInDate,
