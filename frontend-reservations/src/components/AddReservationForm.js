@@ -13,7 +13,7 @@ import Select from "@material-ui/core/Select";
 import MenuItem from "@material-ui/core/MenuItem";
 import FormHelperText from "@material-ui/core/FormHelperText";
 import FormControl from "@material-ui/core/FormControl";
-import Checkbox from "@material-ui/core/Checkbox";
+import {Alert} from 'antd';
 import {makeStyles} from "@material-ui/core/styles";
 
 const useStyles = makeStyles(theme => ({
@@ -31,14 +31,28 @@ const AddReservationForm = () => {
     const {addNewReservation} = useContext(HotelContext);
     const classes = useStyles();
     const [toHome, setToHome] = useState(false);
+    const [error, setError] = useState(false)
 
     const [checkInDate, setCheckInDate] = useState(new Date());
     const [checkOutDate, setCheckOutDate] = useState(new Date());
     const [paymentMethod, setPaymentMethod] = useState();
 
     const onSubmit = data => {
+        if (checkInDate > checkOutDate) {
+            wrongLogIn();
+            return;
+        }
         addNewReservation(data, checkInDate, checkOutDate, paymentMethod);
-        //setToHome(true);
+        setToHome(true);
+    };
+
+    const wrongLogIn = () => {
+        setError(true);
+        document.querySelector(".WarningMessageForLogin").setAttribute("id","alert");
+    };
+
+    const setErrorBack = () => {
+        setError(false)
     };
 
     const handleCheckInChange = date => {
@@ -53,7 +67,6 @@ const AddReservationForm = () => {
         event.preventDefault();
         setPaymentMethod(event.target.value);
     };
-
 
     return (
         <form onSubmit={handleSubmit(onSubmit)} className="form-background">
@@ -138,7 +151,7 @@ const AddReservationForm = () => {
                 name="price"
                 label="€"
                 type="number"
-                inputProps={{ min: "0"}}
+                inputProps={{min: "0"}}
                 autoComplete="fname"
                 inputRef={register({required: true})}
             />
@@ -162,6 +175,14 @@ const AddReservationForm = () => {
 
             {/* errors will return when field validation fails  */}
             {errors.exampleRequired && <span>This field is required</span>}
+            {error ? <Alert
+                message="Invalid Dates"
+                description="Check Out Date can't be lower than Check In Date"
+                type="error"
+                className="WarningMessageForLogin"
+                closable
+                onClose={setErrorBack}
+            /> : null}
             {toHome ? <Redirect to={"/home"}/> : null}
             <input className="send" value="Submit" type="submit"/>
         </form>
