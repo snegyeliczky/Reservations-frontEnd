@@ -9,7 +9,7 @@ import Login from "./components/login/Login";
 
 import { BrowserRouter as Router, Route } from "react-router-dom";
 import { HotelProvider } from "./components/HotelContext";
-import AddGuestForm from "./components/AddGuestForm";
+import AddReservationForm from "./components/AddReservationForm";
 import AddUserForm from "./components/AddUserForm";
 import { UserProvider } from "./components/Context/UserContext";
 
@@ -31,7 +31,7 @@ function App() {
               <Route exact path="/home" component={ReservationList} />
               <Route exact path="/rooms" component={RoomList} />
               <Route exact path="/guest/:guestId" component={GuestProfile} />
-              <Route exact path="/newguest" component={AddGuestForm} />
+              <Route exact path="/newguest" component={AddReservationForm} />
               <Route exact path="/adduser" component={AddUserForm} />
             </div>
           </HotelProvider>

@@ -8,7 +8,7 @@ import TextField from '@material-ui/core/TextField';
 import Typography from '@material-ui/core/Typography';
 import DateTimePicker from "react-datetime-picker";
 
-const AddGuestForm = () => {
+const AddReservationForm = () => {
     const {register, handleSubmit, errors} = useForm();
     const {addNewGuest} = useContext(HotelContext);
     const [checkInDate, setCheckInDate] = useState(new Date());
@@ -108,4 +108,4 @@ const AddGuestForm = () => {
     );
 };
 
-export default AddGuestForm;
+export default AddReservationForm;
