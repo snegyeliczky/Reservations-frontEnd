@@ -61,7 +61,7 @@ const Nav = () => {
         style={backgroundColor}
       >
         <div className="navbar-brand" onClick={onClickHandlerForHome}>
-          Reservations
+          <a>Reservations</a>
         </div>
         <button
           className="navbar-toggler"
