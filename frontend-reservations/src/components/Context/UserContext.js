@@ -19,7 +19,7 @@ export const UserProvider = props => {
   };
 
   const logout = () => {
-    const url = "http://localhost:8762/auth/logout";
+    const url = "http://10.44.1.182:8762/auth/logout";
     axios
       .post(url)
       .then(response => {

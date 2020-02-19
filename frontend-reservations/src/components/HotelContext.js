@@ -11,13 +11,13 @@ export const HotelProvider = props => {
 
     async function fetchReservationList() {
         setFilter(false);
-        const result = await axios("/reservation/reservation/get-all");
+        const result = await axios("/reservation/get-all");
         setReservationList(result.data);
         console.log(result);
     }
 
     const fetchRoomList = async () => {
-        const result = await axios("/users/rooms/get-all");
+        const result = await axios("/reservation/rooms/get-all");
         setRoomList(result.data);
         console.log(result);
     };
@@ -38,19 +38,19 @@ export const HotelProvider = props => {
                 : "0" + updatedDate.getDate();
         let dateUrl = updatedDate.getFullYear() + "-" + month + "-" + day;
         console.log(dateUrl);
-        const url = `/reservation/reservation/checkin?date=${dateUrl}`;
+        const url = `/reservation/checkin?date=${dateUrl}`;
         axios.get(url).then(response => setReservationList(response.data));
     };
 
     const updateGuestStatus = async (guestId, updatedGuestStatus) => {
-        const url = `/reservation/reservation/changestatus?id=${guestId}&status=${updatedGuestStatus}`;
+        const url = `/reservation/changestatus?id=${guestId}&status=${updatedGuestStatus}`;
         axios.put(url).then(response => {
             filter ? fetchForDate(date) : fetchReservationList();
         });
     };
 
     const updateGuestRoom = async (roomId, guestId) => {
-        const url = `/reservation/reservation/setroom?roomId=${roomId}&guestId=${guestId}`;
+        const url = `/reservation/setroom?roomId=${roomId}&guestId=${guestId}`;
         axios.put(url).then(response => {
             fetchReservationList();
             fetchRoomList();
@@ -58,7 +58,7 @@ export const HotelProvider = props => {
     };
 
     const addNewGuest = async (data, checkInDate, checkOutDate) => {
-        const url = "/reservation/reservation/add-reservation";
+        const url = "/reservation/add/add-reservation";
         axios
             .post(url, {
                 checkIn: checkInDate,
@@ -83,7 +83,7 @@ export const HotelProvider = props => {
     };
 
     const addNewUser = async (data, role) => {
-        const url = "/reservation/admin/newuser";
+        const url = "users/admin/newuser";
         await axios
             .post(url, {
                 username: data.username,

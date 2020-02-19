@@ -2,6 +2,7 @@ import React, { useContext, useState } from "react";
 import {DatePicker} from "antd";
 import { Button } from "react-bootstrap";
 import { HotelContext } from "../HotelContext";
+import 'antd/dist/antd.css';
 
 const SearchField = () => {
     const {date, setDate} = useContext(HotelContext);
