@@ -48,7 +48,7 @@ const AddReservationForm = () => {
 
     const wrongLogIn = () => {
         setError(true);
-        document.querySelector(".WarningMessageForLogin").setAttribute("id","alert");
+        document.querySelector(".WarningMessageForLogin").setAttribute("id", "alert");
     };
 
     const setErrorBack = () => {
@@ -69,112 +69,7 @@ const AddReservationForm = () => {
     };
 
     return (
-        <form onSubmit={handleSubmit(onSubmit)} className="form-background">
-            <Typography variant="h6" gutterBottom>
-                New Reservation
-            </Typography>
-            <TextField
-                required
-                id="firstname"
-                name="firstname"
-                label="FirstName"
-                autoComplete="fname"
-                inputRef={register({required: true})}
-            />
-            <br/>
-            <TextField
-                required
-                id="lastname"
-                name="lastname"
-                label="LastName"
-                autoComplete="fname"
-                inputRef={register({required: true})}
-            />
-            <br/>
-            <TextField
-                required
-                id="email"
-                name="email"
-                label="E-mail"
-                autoComplete="fname"
-                inputRef={register({required: true})}
-            />
-            <br/>
-            <TextField
-                required
-                id="country"
-                name="country"
-                label="Country"
-                autoComplete="fname"
-                inputRef={register({required: true})}
-            />
-            <br/>
-            <TextField
-                required
-                id="zipcode"
-                name="zipcode"
-                label="ZipCode"
-                autoComplete="fname"
-                inputRef={register({required: true})}
-            />
-            <br/>
-            <TextField
-                required
-                id="city"
-                name="city"
-                label="City"
-                autoComplete="fname"
-                inputRef={register({required: true})}
-            />
-            <br/>
-            <TextField
-                required
-                id="street"
-                name="street"
-                label="Street"
-                autoComplete="fname"
-                inputRef={register({required: true})}
-            />
-            <br/>
-            <label>Check In Date</label>
-            {" "}
-            <label>Check Out Date</label>
-
-            <br/>
-            <DatePicker onChange={handleCheckInChange}/>
-            {" "}
-            <DatePicker onChange={handleCheckOutChange}/>
-            <br/>
-            <TextField
-                required
-                id="price"
-                name="price"
-                label="€"
-                type="number"
-                inputProps={{min: "0"}}
-                autoComplete="fname"
-                inputRef={register({required: true})}
-            />
-            <br/>
-            <FormControl required className={classes.formControl}>
-                <InputLabel id="payment-method-label">Payment Method</InputLabel>
-                <Select
-                    required
-                    labelId="payment-method-label"
-                    id="payment"
-                    name="payment-native-required"
-                    onChange={handleChangePayment}
-                >
-                    <MenuItem value={"CASH"}>CASH</MenuItem>
-                    <MenuItem value={"CARD"}>CARD</MenuItem>
-                    <MenuItem value={"TRANSFER"}>TRANSFER</MenuItem>
-                </Select>
-                <FormHelperText>Required</FormHelperText>
-            </FormControl>
-            <br/>
-
-            {/* errors will return when field validation fails  */}
-            {errors.exampleRequired && <span>This field is required</span>}
+        <div>
             {error ? <Alert
                 message="Invalid Dates"
                 description="Check Out Date can't be lower than Check In Date"
@@ -183,9 +78,117 @@ const AddReservationForm = () => {
                 closable
                 onClose={setErrorBack}
             /> : null}
-            {toHome ? <Redirect to={"/home"}/> : null}
-            <input className="send" value="Submit" type="submit"/>
-        </form>
+            <form onSubmit={handleSubmit(onSubmit)} className="form-background">
+
+                <Typography variant="h6" gutterBottom>
+                    New Reservation
+                </Typography>
+                <TextField
+                    required
+                    id="firstname"
+                    name="firstname"
+                    label="FirstName"
+                    autoComplete="fname"
+                    inputRef={register({required: true})}
+                />
+                <br/>
+                <TextField
+                    required
+                    id="lastname"
+                    name="lastname"
+                    label="LastName"
+                    autoComplete="fname"
+                    inputRef={register({required: true})}
+                />
+                <br/>
+                <TextField
+                    required
+                    id="email"
+                    name="email"
+                    label="E-mail"
+                    autoComplete="fname"
+                    inputRef={register({required: true})}
+                />
+                <br/>
+                <TextField
+                    required
+                    id="country"
+                    name="country"
+                    label="Country"
+                    autoComplete="fname"
+                    inputRef={register({required: true})}
+                />
+                <br/>
+                <TextField
+                    required
+                    id="zipcode"
+                    name="zipcode"
+                    label="ZipCode"
+                    autoComplete="fname"
+                    inputRef={register({required: true})}
+                />
+                <br/>
+                <TextField
+                    required
+                    id="city"
+                    name="city"
+                    label="City"
+                    autoComplete="fname"
+                    inputRef={register({required: true})}
+                />
+                <br/>
+                <TextField
+                    required
+                    id="street"
+                    name="street"
+                    label="Street"
+                    autoComplete="fname"
+                    inputRef={register({required: true})}
+                />
+                <br/>
+                <label>Check In Date</label>
+                {" "}
+                <label>Check Out Date</label>
+
+                <br/>
+                <DatePicker onChange={handleCheckInChange}/>
+                {" "}
+                <DatePicker onChange={handleCheckOutChange}/>
+                <br/>
+                <TextField
+                    required
+                    id="price"
+                    name="price"
+                    label="€"
+                    type="number"
+                    inputProps={{min: "0"}}
+                    autoComplete="fname"
+                    inputRef={register({required: true})}
+                />
+                <br/>
+                <FormControl required className={classes.formControl}>
+                    <InputLabel id="payment-method-label">Payment Method</InputLabel>
+                    <Select
+                        required
+                        labelId="payment-method-label"
+                        id="payment"
+                        name="payment-native-required"
+                        onChange={handleChangePayment}
+                    >
+                        <MenuItem value={"CASH"}>CASH</MenuItem>
+                        <MenuItem value={"CARD"}>CARD</MenuItem>
+                        <MenuItem value={"TRANSFER"}>TRANSFER</MenuItem>
+                    </Select>
+                    <FormHelperText>Required</FormHelperText>
+                </FormControl>
+                <br/>
+
+                {/* errors will return when field validation fails  */}
+                {errors.exampleRequired && <span>This field is required</span>}
+                {toHome ? <Redirect to={"/home"}/> : null}
+                <input className="send" value="Submit" type="submit"/>
+            </form>
+        </div>
     );
 };
 
