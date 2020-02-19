@@ -9,7 +9,13 @@ const SearchField = () => {
     const {fetchForDate} = useContext(HotelContext);
 
     const handleChange = (date) => {
-        setDate(date);
+        if (date==null){
+            setDate(new Date())
+        }
+        else {
+            setDate(date);
+        }
+
     };
 
     const onSubmit = () => {
@@ -22,7 +28,7 @@ const SearchField = () => {
 
             <DatePicker
                 onChange={handleChange}
-                placeholder="Select Date"
+                placeholder="Checkin Date"
             />
 
             <Button
