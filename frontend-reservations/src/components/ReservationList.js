@@ -15,7 +15,7 @@ const ReservationList = () => {
     const {date} = useContext(HotelContext);
 
     useEffect(() => {
-        filter ? fetchForDate(date) : fetchReservationList();
+        fetchForDate(date);
         fetchRoomList();
     }, []);
 
