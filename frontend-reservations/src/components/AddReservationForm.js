@@ -28,22 +28,16 @@ const useStyles = makeStyles(theme => ({
 
 const AddReservationForm = () => {
     const {register, handleSubmit, errors} = useForm();
-    const {addNewGuest} = useContext(HotelContext);
+    const {addNewReservation} = useContext(HotelContext);
     const classes = useStyles();
     const [toHome, setToHome] = useState(false);
 
     const [checkInDate, setCheckInDate] = useState(new Date());
     const [checkOutDate, setCheckOutDate] = useState(new Date());
     const [paymentMethod, setPaymentMethod] = useState();
-    const [checked, setChecked] = React.useState(false);
 
     const onSubmit = data => {
-        console.log(data)
-        console.log(checkInDate)
-        console.log(checkOutDate)
-        console.log(paymentMethod)
-        console.log(checked)
-        //addNewGuest(data, checkInDate, checkOutDate);
+        addNewReservation(data, checkInDate, checkOutDate, paymentMethod);
         //setToHome(true);
     };
 
@@ -60,31 +54,30 @@ const AddReservationForm = () => {
         setPaymentMethod(event.target.value);
     };
 
-    const handleChangeTax = event => {
-        setChecked(event.target.checked);
-    };
 
     return (
         <form onSubmit={handleSubmit(onSubmit)} className="form-background">
             <Typography variant="h6" gutterBottom>
-                New guest registration
+                New Reservation
             </Typography>
             <TextField
                 required
                 id="firstname"
                 name="firstname"
-                label="First Name"
+                label="FirstName"
                 autoComplete="fname"
                 inputRef={register({required: true})}
             />
+            <br/>
             <TextField
                 required
                 id="lastname"
                 name="lastname"
-                label="Last Name"
+                label="LastName"
                 autoComplete="fname"
                 inputRef={register({required: true})}
             />
+            <br/>
             <TextField
                 required
                 id="email"
@@ -93,6 +86,7 @@ const AddReservationForm = () => {
                 autoComplete="fname"
                 inputRef={register({required: true})}
             />
+            <br/>
             <TextField
                 required
                 id="country"
@@ -109,7 +103,8 @@ const AddReservationForm = () => {
                 label="ZipCode"
                 autoComplete="fname"
                 inputRef={register({required: true})}
-            /> {" "}
+            />
+            <br/>
             <TextField
                 required
                 id="city"
@@ -117,7 +112,8 @@ const AddReservationForm = () => {
                 label="City"
                 autoComplete="fname"
                 inputRef={register({required: true})}
-            /> {" "}
+            />
+            <br/>
             <TextField
                 required
                 id="street"
@@ -126,8 +122,6 @@ const AddReservationForm = () => {
                 autoComplete="fname"
                 inputRef={register({required: true})}
             />
-            <br/>
-            <br/>
             <br/>
             <label>Check In Date</label>
             {" "}
@@ -142,12 +136,12 @@ const AddReservationForm = () => {
                 required
                 id="price"
                 name="price"
-                label="Price"
+                label="€"
                 type="number"
                 inputProps={{ min: "0"}}
                 autoComplete="fname"
                 inputRef={register({required: true})}
-            />{"EUR"}
+            />
             <br/>
             <FormControl required className={classes.formControl}>
                 <InputLabel id="payment-method-label">Payment Method</InputLabel>
@@ -164,13 +158,7 @@ const AddReservationForm = () => {
                 </Select>
                 <FormHelperText>Required</FormHelperText>
             </FormControl>
-            <Checkbox
-                checked={checked}
-                onChange={handleChangeTax}
-                value="primary"
-                inputProps={{ 'aria-label': 'primary checkbox' }}
-            />
-
+            <br/>
 
             {/* errors will return when field validation fails  */}
             {errors.exampleRequired && <span>This field is required</span>}

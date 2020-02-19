@@ -31,7 +31,7 @@ function App() {
               <Route exact path="/home" component={ReservationList} />
               <Route exact path="/rooms" component={RoomList} />
               <Route exact path="/guest/:guestId" component={GuestProfile} />
-              <Route exact path="/newguest" component={AddReservationForm} />
+              <Route exact path="/newreservation" component={AddReservationForm} />
               <Route exact path="/adduser" component={AddUserForm} />
             </div>
           </HotelProvider>

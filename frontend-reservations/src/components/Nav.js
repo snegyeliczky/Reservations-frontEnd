@@ -88,8 +88,8 @@ const Nav = () => {
               </Link>
             </li>
             <li className="nav-item">
-              <Link className="nav-link" style={btnColor} to="/newguest">
-                New Guest
+              <Link className="nav-link" style={btnColor} to="/newreservation">
+                New Reservation
               </Link>
             </li>
             {isAdmin ? (

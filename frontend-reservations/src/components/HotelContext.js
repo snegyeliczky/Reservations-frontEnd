@@ -57,17 +57,17 @@ export const HotelProvider = props => {
         });
     };
 
-    const addNewGuest = async (data, checkInDate, checkOutDate) => {
-        const url = "/reservation/add/add-reservation";
+    const addNewReservation = async (data, checkInDate, checkOutDate, paymentMethod) => {
+        const url = "/reservation/add-reservation";
         axios
             .post(url, {
                 checkIn: checkInDate,
                 checkOut: checkOutDate,
-                status: "CHECKIN",
-                isCityTaxIncluded: true,
+                price: data.price,
+                paymentMethod: paymentMethod,
                 guest: {
-                    firstName: data.firstName,
-                    lastName: data.lastName,
+                    firstName: data.firstname,
+                    lastName: data.lastname,
                     email: data.email,
                     address: {
                         country: data.country,
@@ -106,7 +106,7 @@ export const HotelProvider = props => {
                 setDate,
                 date,
                 fetchForDate,
-                addNewGuest,
+                addNewReservation,
                 updateGuestRoom,
                 addNewUser,
                 filter,
