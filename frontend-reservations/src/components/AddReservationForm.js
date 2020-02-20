@@ -31,7 +31,7 @@ const AddReservationForm = () => {
     const {addNewReservation} = useContext(HotelContext);
     const classes = useStyles();
     const [toHome, setToHome] = useState(false);
-    const [error, setError] = useState(false)
+    const [error, setError] = useState(false);
 
     const [checkInDate, setCheckInDate] = useState(new Date());
     const [checkOutDate, setCheckOutDate] = useState(new Date());
