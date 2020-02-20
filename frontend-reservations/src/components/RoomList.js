@@ -16,13 +16,22 @@ const RoomList = () => {
         return null;
     };
 
+    const getReservationIdForRoom = (reservations, roomId)=>{
+        for (let reservation of reservations){
+            if (reservation.roomId === roomId ){
+                return reservation.id;
+            }
+        }
+        return null;
+    };
+
     useEffect(() => {
         fetchRoomList();
         fetchAvailableRoomsForToday().then(result => setAvailableRooms(result));
         getReservationsForActualDate(new Date()).then( result => setReservations(result));
     }, []);
 
-    return roomList.map(room => <Room room={room} availableRooms = {availableRooms} guestId = {getGuestId(reservations,room.id)} key={room.id}/>);
+    return roomList.map(room => <Room room={room} availableRooms = {availableRooms} reservationId = {getReservationIdForRoom(reservations,room.id)} key={room.id}/>);
 };
 
 export default RoomList;

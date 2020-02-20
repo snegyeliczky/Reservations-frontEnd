@@ -2,7 +2,7 @@ import React from "react";
 import {Link} from "react-router-dom";
 import {forEach} from "react-bootstrap/cjs/ElementChildren";
 
-export const Room = ({room, availableRooms, guestId}) => {
+export const Room = ({room, availableRooms, reservationId}) => {
     const {number, guest, id} = room;
 
 
@@ -34,7 +34,7 @@ export const Room = ({room, availableRooms, guestId}) => {
     if (!isAvailable()) {
         roomElement = (
             <div style={roomStyle}>
-                <Link style={linkStyle} to={"/guest/"+guestId }>
+                <Link style={linkStyle} to={"/reservation/"+reservationId }>
                     <p>
                         Room
                         <br/>
