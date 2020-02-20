@@ -65,7 +65,9 @@ html {
 
 
 
-
+.container {
+  margin-top: 50px;
+}
 .thead-dark {
   background-color: #5a6268;
 }
@@ -80,7 +82,7 @@ html {
 }
 
 .form-background {
-  margin-top: 2.5rem;
+  margin-top: 5rem;
   padding: 3rem;
   border-radius:20px ;
   background-color: rgba(255, 246, 241, 0.72);
