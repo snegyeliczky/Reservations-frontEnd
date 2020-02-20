@@ -125,7 +125,7 @@ const ReservationRow = ({ reservation }) => {
         </ButtonToolbar>
       </td>
       <td>
-        <Link to={"/guest/" + reservation.id}>
+        <Link to={"/reservation/" + reservation.id}>
           <Button variant="dark">Edit</Button>
         </Link>
       </td>
