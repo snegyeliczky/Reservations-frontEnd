@@ -31,22 +31,32 @@ const AddReservationForm = () => {
     const {addNewReservation} = useContext(HotelContext);
     const classes = useStyles();
     const [toHome, setToHome] = useState(false);
-    const [error, setError] = useState(false)
+    const [error, setError] = useState(false);
 
     const [checkInDate, setCheckInDate] = useState(new Date());
     const [checkOutDate, setCheckOutDate] = useState(new Date());
     const [paymentMethod, setPaymentMethod] = useState();
+    const [message, setMessage] = useState("Sorry, something went wrong");
+    const [description, setDescription] = useState("Sorry, something went wrong");
 
     const onSubmit = data => {
+        if (paymentMethod === undefined) {
+            setMessage("Invalid Payment Method");
+            setDescription("Please select a payment method");
+            popUpError();
+            return;
+        }
         if (checkInDate > checkOutDate) {
-            wrongLogIn();
+            setMessage("Invalid Dates");
+            setDescription("Check Out Date can't be lower than Check In Date");
+            popUpError();
             return;
         }
         addNewReservation(data, checkInDate, checkOutDate, paymentMethod);
         setToHome(true);
     };
 
-    const wrongLogIn = () => {
+    const popUpError = () => {
         setError(true);
         document.querySelector(".WarningMessageForLogin").setAttribute("id", "alert");
     };
@@ -71,8 +81,8 @@ const AddReservationForm = () => {
     return (
         <div>
             {error ? <Alert
-                message="Invalid Dates"
-                description="Check Out Date can't be lower than Check In Date"
+                message={message}
+                description={description}
                 type="error"
                 className="WarningMessageForLogin"
                 closable
@@ -169,11 +179,12 @@ const AddReservationForm = () => {
                 <FormControl required className={classes.formControl}>
                     <InputLabel id="payment-method-label">Payment Method</InputLabel>
                     <Select
-                        required
                         labelId="payment-method-label"
                         id="payment"
                         name="payment-native-required"
+                        value={paymentMethod}
                         onChange={handleChangePayment}
+                        className={classes.selectEmpty}
                     >
                         <MenuItem value={"CASH"}>CASH</MenuItem>
                         <MenuItem value={"CARD"}>CARD</MenuItem>

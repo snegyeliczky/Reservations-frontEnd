@@ -12,6 +12,7 @@ import Select from '@material-ui/core/Select';
 import Typography from '@material-ui/core/Typography';
 import MenuItem from "@material-ui/core/MenuItem";
 import FormControl from '@material-ui/core/FormControl';
+import {Alert} from "antd";
 
 const useStyles = makeStyles(theme => ({
     formControl: {
@@ -32,14 +33,30 @@ const AddUserForm = () => {
     const [role, setRole] = useState();
     const classes = useStyles();
 
+    const [error, setError] = useState(false);
+    const [message, setMessage] = useState("Sorry, something went wrong");
+    const [description, setDescription] = useState("Sorry, something went wrong");
+
 
     const onSubmit = data => {
-        if (addNewUser(data, role)){
-            console.log( "in true ");
-            setToHome(true);
-        }else {
-            console.log("nem jóóó");
+        if (role === undefined) {
+            setMessage("Invalid Role");
+            setDescription("Please select a role");
+            popUpError();
+            return;
         }
+
+        addNewUser(data, role);
+        setToHome(true);
+    };
+
+    const popUpError = () => {
+        setError(true);
+        document.querySelector(".WarningMessageForLogin").setAttribute("id", "alert");
+    };
+
+    const setErrorBack = () => {
+        setError(false)
     };
 
     const handleChange = event => {
@@ -48,48 +65,58 @@ const AddUserForm = () => {
     };
 
     return (
-        <form onSubmit={handleSubmit(onSubmit)} className="form-background">
-            <Typography variant="h6" gutterBottom>
-                New User Registration
-            </Typography>
-            <TextField
-                required
-                id="username"
-                name="username"
-                label="Username"
-                autoComplete="fname"
-                inputRef={register({required: true})}
-            />
-            <br/>
-            <TextField
-                required
-                id="password"
-                name="password"
-                label="Password"
-                autoComplete="fname"
-                inputRef={register({required: true})}
-            />
-            <br/>
-            <FormControl required className={classes.formControl}>
-                <InputLabel id="role-label">Role</InputLabel>
-                <Select
+        <div>
+            {error ? <Alert
+                message={message}
+                description={description}
+                type="error"
+                className="WarningMessageForLogin"
+                closable
+                onClose={setErrorBack}
+            /> : null}
+            <form onSubmit={handleSubmit(onSubmit)} className="form-background">
+                <Typography variant="h6" gutterBottom>
+                    New User Registration
+                </Typography>
+                <TextField
                     required
-                    labelId="role-label"
-                    id="role"
-                    name="role-native-required"
-                    onChange={handleChange}
-                >
-                    <MenuItem value={"RECEPTIONIST"}>RECEPTIONIST</MenuItem>
-                    <MenuItem value={"ADMIN"}>ADMIN</MenuItem>
-                </Select>
-                <FormHelperText>Required</FormHelperText>
-            </FormControl>
-            <br/>
-            {/* errors will return when field validation fails  */}
-            {errors.exampleRequired && <span>This field is required</span>}
-            {toHome ? <Redirect to={"/home"}/> : null}
-            <input className="send" value="Submit" type="submit"/>
-        </form>
+                    id="username"
+                    name="username"
+                    label="Username"
+                    autoComplete="fname"
+                    inputRef={register({required: true})}
+                />
+                <br/>
+                <TextField
+                    required
+                    id="password"
+                    name="password"
+                    label="Password"
+                    autoComplete="fname"
+                    inputRef={register({required: true})}
+                />
+                <br/>
+                <FormControl required className={classes.formControl}>
+                    <InputLabel id="role-label">Role</InputLabel>
+                    <Select
+                        required
+                        labelId="role-label"
+                        id="role"
+                        name="role-native-required"
+                        onChange={handleChange}
+                    >
+                        <MenuItem value={"RECEPTIONIST"}>RECEPTIONIST</MenuItem>
+                        <MenuItem value={"ADMIN"}>ADMIN</MenuItem>
+                    </Select>
+                    <FormHelperText>Required</FormHelperText>
+                </FormControl>
+                <br/>
+                {/* errors will return when field validation fails  */}
+                {errors.exampleRequired && <span>This field is required</span>}
+                {toHome ? <Redirect to={"/home"}/> : null}
+                <input className="send" value="Submit" type="submit"/>
+            </form>
+        </div>
     );
 };
 
