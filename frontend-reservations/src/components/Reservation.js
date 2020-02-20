@@ -10,7 +10,6 @@ import "antd/dist/antd.css";
 import InputLabel from "@material-ui/core/InputLabel";
 import Select from "@material-ui/core/Select";
 import MenuItem from "@material-ui/core/MenuItem";
-import FormHelperText from "@material-ui/core/FormHelperText";
 import FormControl from "@material-ui/core/FormControl";
 import { makeStyles } from "@material-ui/core/styles";
 
@@ -29,21 +28,17 @@ const Reservation = props => {
     fetchReservationById,
     roomList,
     reservation,
+    setReservation,
+    guest,
+    setGuest,
+    address,
+    setAddress,
     updateReservation
   } = useContext(HotelContext);
   const classes = useStyles();
   const { register, handleSubmit, errors } = useForm();
   const [error, setError] = useState(false);
   const [toHome, setToHome] = useState(false);
-  const [checkInDate, setCheckInDate] = useState(
-    reservation.checkIn || new Date()
-  );
-  const [checkOutDate, setCheckOutDate] = useState(
-    reservation.checkOut || new Date()
-  );
-  const [paymentMethod, setPaymentMethod] = useState(reservation.paymentMethod);
-  const guest = reservation.guest || {};
-  const address = guest.address || {};
 
   useEffect(() => {
     fetchReservationById(props.match.params.guestId);
@@ -57,37 +52,91 @@ const Reservation = props => {
     }
   };
 
-  const wrongLogIn = () => {
+  const myWarning = () => {
     setError(true);
-    document
-      .querySelector(".WarningMessageForLogin")
-      .setAttribute("id", "alert");
-  };
-
-  const onSubmit = data => {
-    if (checkInDate > checkOutDate) {
-      wrongLogIn();
-      return;
-    }
-    console.log(paymentMethod);
-    //updateReservation(data, checkInDate, checkOutDate, paymentMethod);
-    //setToHome(true);
+    document.querySelector(".myWarning").setAttribute("id", "alert");
   };
 
   const setErrorBack = () => {
     setError(false);
   };
 
+  const getDateStringFromDate = data => {
+    let date = new Date(data);
+    let month =
+      date.getMonth() + 1 > 10
+        ? date.getMonth() + 1
+        : "0" + (date.getMonth() + 1);
+    let day = date.getDate() > 10 ? date.getDate() : "0" + date.getDate();
+    let dateString = date.getFullYear() + "-" + month + "-" + day;
+    return dateString;
+  };
+
+  const handleFirstNameChange = e => {
+    setGuest({ ...guest, firstName: e.target.value });
+  };
+
+  const handleLastNameChange = e => {
+    setGuest({ ...guest, lastName: e.target.value });
+  };
+
+  const handleEmailChange = e => {
+    setGuest({ ...guest, email: e.target.value });
+  };
+
+  const handleCountryChange = e => {
+    setAddress({ ...address, country: e.target.value });
+  };
+
+  const handleZipCodeChange = e => {
+    setAddress({ ...address, zipCode: e.target.value });
+  };
+
+  const handleCityChange = e => {
+    setAddress({ ...address, city: e.target.value });
+  };
+
+  const handleStreetChange = e => {
+    setAddress({ ...address, street: e.target.value });
+  };
+
   const handleCheckInChange = date => {
-    setCheckInDate(date);
+    setReservation({ ...reservation, checkIn: getDateStringFromDate(date) });
   };
 
   const handleCheckOutChange = date => {
-    setCheckOutDate(date);
+    setReservation({
+      ...reservation,
+      checkOut: getDateStringFromDate(date)
+    });
+  };
+
+  const handlePriceChange = e => {
+    setReservation({ ...reservation, price: e.target.value });
   };
 
   const handleChangePayment = event => {
-    setPaymentMethod(event.target.value);
+    setReservation({ ...reservation, paymentMethod: event.target.value });
+  };
+
+  const onSubmit = () => {
+    console.log("submit reservation changes");
+    if (reservation.checkIn > reservation.checkOut) {
+      myWarning();
+      return;
+    }
+    setGuest(prevState => {
+      prevState.address = address;
+      return { ...prevState };
+    });
+
+    setReservation(prevState => {
+      prevState.guest = guest;
+      return { ...prevState };
+    });
+    updateReservation(reservation);
+
+    setToHome(true);
   };
 
   return (
@@ -95,13 +144,14 @@ const Reservation = props => {
       {error ? (
         <Alert
           message="Invalid Dates"
-          description="Check Out Date can't be lower than Check In Date"
+          description="Check Out Date can't be earlier than Check In Date"
           type="error"
-          className="WarningMessageForLogin"
+          className="myWarning"
           closable
           onClose={setErrorBack}
         />
       ) : null}
+
       <form onSubmit={handleSubmit(onSubmit)} className="form-background">
         <Typography variant="h6" gutterBottom>
           Update Reservation
@@ -110,63 +160,56 @@ const Reservation = props => {
           id="firstname"
           name="firstname"
           label={guest.firstName ? guest.firstName : "First Name"}
-          defaultValue={guest.firstName}
           autoComplete="fname"
-          inputRef={register({ required: true })}
+          onChange={handleFirstNameChange}
         />
         <br />
         <TextField
           id="lastname"
           name="lastname"
           label={guest.lastName ? guest.lastName : "Last Name"}
-          defaultValue={guest.lastName}
           autoComplete="fname"
-          inputRef={register({ required: true })}
+          onChange={handleLastNameChange}
         />
         <br />
         <TextField
           id="email"
           name="email"
           label={guest.email ? guest.email : "E-mail"}
-          defaultValue={guest.email}
           autoComplete="fname"
-          inputRef={register({ required: true })}
+          onChange={handleEmailChange}
         />
         <br />
         <TextField
           id="country"
           name="country"
           label={address.country ? address.country : "Country"}
-          defaultValue={guest.country}
           autoComplete="fname"
-          inputRef={register({ required: true })}
+          onChange={handleCountryChange}
         />
         <br />
         <TextField
           id="zipcode"
           name="zipcode"
           label={address.zipcode ? address.zipcode : "Zip Code"}
-          defaultValue={address.zipcode}
           autoComplete="fname"
-          inputRef={register({ required: true })}
+          onChange={handleZipCodeChange}
         />
         <br />
         <TextField
           id="city"
           name="city"
           label={address.city ? address.city : "City"}
-          defaultValue={address.city}
           autoComplete="fname"
-          inputRef={register({ required: true })}
+          onChange={handleCityChange}
         />
         <br />
         <TextField
           id="street"
           name="street"
           label={address.street ? address.street : "Street"}
-          defaultValue={address.street}
           autoComplete="fname"
-          inputRef={register({ required: true })}
+          onChange={handleStreetChange}
         />
         <br />
         <br />
@@ -191,18 +234,14 @@ const Reservation = props => {
           label={
             reservation.price ? `${Math.floor(reservation.price)} €` : "Price"
           }
-          defaultValue={reservation.price}
           type="number"
           inputProps={{ min: "0" }}
           autoComplete="fname"
-          inputRef={register({ required: true })}
+          onChange={handlePriceChange}
         />
         <br />
         <FormControl className={classes.formControl}>
-          <InputLabel
-            id="payment-method-label"
-            defaultValue={reservation.paymentMethod}
-          >
+          <InputLabel id="payment-method-label">
             {reservation.paymentMethod
               ? reservation.paymentMethod
               : "Payment Method"}
@@ -217,7 +256,6 @@ const Reservation = props => {
             <MenuItem value={"CARD"}>CARD</MenuItem>
             <MenuItem value={"TRANSFER"}>TRANSFER</MenuItem>
           </Select>
-          <FormHelperText>Required</FormHelperText>
         </FormControl>
         <br />
         {/* errors will return when field validation fails  */}
@@ -228,5 +266,4 @@ const Reservation = props => {
     </div>
   );
 };
-
 export default Reservation;

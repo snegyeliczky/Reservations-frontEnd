@@ -8,7 +8,10 @@ export const HotelProvider = props => {
   const [roomList, setRoomList] = useState([]);
   const [date, setDate] = useState(new Date());
   const [filter, setFilter] = useState(false);
+
   const [reservation, setReservation] = useState({});
+  const [guest, setGuest] = useState({});
+  const [address, setAddress] = useState({});
 
   async function fetchReservationList() {
     setFilter(false);
@@ -27,30 +30,30 @@ export const HotelProvider = props => {
     const result = await axios(
       `/reservation/get-reservation?reservationId=${id}`
     );
+    setGuest(result.data.guest);
+    setAddress(result.data.guest.address);
     setReservation(result.data);
-    console.log(result.data);
   }
 
-  async function updateReservation(
-    data,
-    checkInDate,
-    checkOutDate,
-    paymentMethod
-  ) {
+  async function updateReservation(reservation) {
+    const guest = reservation.guest || {};
+    const address = guest.address || {};
+
+    console.log(reservation);
     await axios.put("/reservation/update", {
-      checkIn: checkInDate,
-      checkOut: checkOutDate,
-      price: data.price,
-      paymentMethod: paymentMethod,
+      checkIn: reservation.checkIn,
+      checkOut: reservation.checkOut,
+      price: reservation.price,
+      paymentMethod: reservation.paymentMethod,
       guest: {
-        firstName: data.firstname,
-        lastName: data.lastname,
-        email: data.email,
+        firstName: guest.firstName,
+        lastName: guest.lastName,
+        email: guest.email,
         address: {
-          country: data.country,
-          zipCode: data.zipcode,
-          city: data.city,
-          street: data.street
+          country: address.country,
+          zipCode: address.zipcode,
+          city: address.city,
+          street: address.street
         }
       }
     });
@@ -151,7 +154,13 @@ export const HotelProvider = props => {
         filter,
         setFilter,
         reservation,
-        fetchReservationById
+        setReservation,
+        fetchReservationById,
+        guest,
+        setGuest,
+        address,
+        setAddress,
+        updateReservation
       }}
     >
       {props.children}
