@@ -1,8 +1,6 @@
-
-
 html {
   text-align: center;
-  background-image: url('https://images.unsplash.com/photo-1462899006636-339e08d1844e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1050&q=80');
+  background-image: url("https://images.unsplash.com/photo-1462899006636-339e08d1844e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1050&q=80");
   background-repeat: no-repeat;
   background-attachment: fixed;
 
@@ -12,10 +10,9 @@ html {
   margin-bottom: 0;
 }
 
-
 .App {
   text-align: center;
-  background-image: url('https://images.unsplash.com/photo-1462899006636-339e08d1844e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1050&q=80');
+  background-image: url("https://images.unsplash.com/photo-1462899006636-339e08d1844e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1050&q=80");
   background-repeat: no-repeat;
   background-attachment: fixed;
 
@@ -24,9 +21,7 @@ html {
   margin-bottom: 0;
 }
 
-
 .App-logo {
-
   height: 40vmin;
   pointer-events: none;
 }
@@ -36,8 +31,6 @@ html {
     animation: App-logo-spin infinite 20s linear;
   }
 }
-
-
 
 .App-header {
   background-color: #282c34;
@@ -63,8 +56,6 @@ html {
   }
 }
 
-
-
 .container {
   margin-top: 50px;
 }
@@ -74,25 +65,24 @@ html {
 
 .tr-color td {
   vertical-align: middle;
-
 }
 
 .date-background {
-  background-color: #f5f5f5 !important
+  background-color: #f5f5f5 !important;
 }
 
 .form-background {
   margin-top: 5rem;
   padding: 3rem;
-  border-radius:20px ;
+  border-radius: 20px;
   background-color: rgba(255, 246, 241, 0.72);
 }
 
-.send{
+.send {
   margin: 1.5rem;
   border-radius: 15px;
 }
 
-.send:hover{
+.send:hover {
   background-color: rgba(207, 255, 232, 0.72);
 }

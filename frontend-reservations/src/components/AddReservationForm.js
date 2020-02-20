@@ -1,19 +1,15 @@
 import React, { useContext, useState } from "react";
 import { Redirect } from "react-router-dom";
-
 import { useForm } from "react-hook-form";
 import { HotelContext } from "./HotelContext";
-
 import TextField from "@material-ui/core/TextField";
 import Typography from "@material-ui/core/Typography";
-import { DatePicker } from "antd";
+import { DatePicker, Alert } from "antd";
 import "antd/dist/antd.css";
 import InputLabel from "@material-ui/core/InputLabel";
 import Select from "@material-ui/core/Select";
 import MenuItem from "@material-ui/core/MenuItem";
-import FormHelperText from "@material-ui/core/FormHelperText";
 import FormControl from "@material-ui/core/FormControl";
-import { Alert } from "antd";
 import { makeStyles } from "@material-ui/core/styles";
 
 const useStyles = makeStyles(theme => ({
@@ -100,7 +96,7 @@ const AddReservationForm = () => {
           required
           id="firstname"
           name="firstname"
-          label="FirstName"
+          label="First Name"
           autoComplete="fname"
           inputRef={register({ required: true })}
         />
@@ -109,7 +105,7 @@ const AddReservationForm = () => {
           required
           id="lastname"
           name="lastname"
-          label="LastName"
+          label="Last Name"
           autoComplete="fname"
           inputRef={register({ required: true })}
         />
@@ -136,7 +132,7 @@ const AddReservationForm = () => {
           required
           id="zipcode"
           name="zipcode"
-          label="ZipCode"
+          label="Zip Code"
           autoComplete="fname"
           inputRef={register({ required: true })}
         />
@@ -159,6 +155,7 @@ const AddReservationForm = () => {
           inputRef={register({ required: true })}
         />
         <br />
+        <br />
         <label>Check In Date</label> <label>Check Out Date</label>
         <br />
         <DatePicker onChange={handleCheckInChange} />{" "}
@@ -176,7 +173,7 @@ const AddReservationForm = () => {
         />
         <br />
         <FormControl required className={classes.formControl}>
-          <InputLabel id="payment-method-label">Payment Method</InputLabel>
+          <InputLabel id="payment-method-label">Payment</InputLabel>
           <Select
             labelId="payment-method-label"
             id="payment"
@@ -189,7 +186,6 @@ const AddReservationForm = () => {
             <MenuItem value={"CARD"}>CARD</MenuItem>
             <MenuItem value={"TRANSFER"}>TRANSFER</MenuItem>
           </Select>
-          <FormHelperText>Required</FormHelperText>
         </FormControl>
         <br />
         {/* errors will return when field validation fails  */}

@@ -1,5 +1,4 @@
 import React, { useContext, useState, useEffect } from "react";
-import { Table } from "react-bootstrap";
 import { HotelContext } from "./HotelContext";
 import { Redirect } from "react-router-dom";
 import { useForm } from "react-hook-form";
@@ -154,7 +153,7 @@ const Reservation = props => {
 
       <form onSubmit={handleSubmit(onSubmit)} className="form-background">
         <Typography variant="h6" gutterBottom>
-          Update Reservation
+          Edit Reservation
         </Typography>
         <TextField
           id="firstname"
