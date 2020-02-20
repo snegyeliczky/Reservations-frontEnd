@@ -2,7 +2,7 @@ import React from "react";
 import "./App.css";
 
 import Nav from "./components/Nav";
-import ReservationList from "./components/ReservationList";
+import ReservationTable from "./components/ReservationTable";
 import RoomList from "./components/RoomList";
 import GuestProfile from "./components/GuestProfile";
 import Login from "./components/login/Login";
@@ -28,10 +28,14 @@ function App() {
             <Route exact path="/adduser" component={Nav} />
 
             <div className="container">
-              <Route exact path="/home" component={ReservationList} />
+              <Route exact path="/home" component={ReservationTable} />
               <Route exact path="/rooms" component={RoomList} />
               <Route exact path="/guest/:guestId" component={GuestProfile} />
-              <Route exact path="/newreservation" component={AddReservationForm} />
+              <Route
+                exact
+                path="/newreservation"
+                component={AddReservationForm}
+              />
               <Route exact path="/adduser" component={AddUserForm} />
             </div>
           </HotelProvider>
