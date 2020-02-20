@@ -34,8 +34,12 @@ const AddUserForm = () => {
 
 
     const onSubmit = data => {
-        addNewUser(data, role);
-        setToHome(true);
+        if (addNewUser(data, role)){
+            console.log( "in true ");
+            setToHome(true);
+        }else {
+            console.log("nem jóóó");
+        }
     };
 
     const handleChange = event => {

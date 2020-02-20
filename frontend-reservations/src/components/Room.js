@@ -1,50 +1,61 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import {Link} from "react-router-dom";
+import {forEach} from "react-bootstrap/cjs/ElementChildren";
 
-export const Room = ({ room }) => {
-  const { number, guest } = room;
+export const Room = ({room, availableRooms, guestId}) => {
+    const {number, guest, id} = room;
 
-  const roomStyle = {
-    boxShadow: "0 4px 8px 0 rgba(0,0,0,0.2)",
-    transition: "0.3s",
-    backgroundColor: guest != null ? "orangered" : "lightgreen",
-    display: "inline-flex",
-    padding: "1.5%",
-    margin: "1.5%",
-    borderRadius: "15px"
-  };
 
-  const linkStyle = {
-    color: "black"
-  };
+    const isAvailable = () => {
+        for(let availableRoom of availableRooms){
+            if (availableRoom.id == id){
+                return true;
+            }
+        }
+            return false
+    };
 
-  let roomElement;
+    const roomStyle = {
+        boxShadow: "0 4px 8px 0 rgba(0,0,0,0.2)",
+        transition: "0.3s",
+        backgroundColor: isAvailable() ? "lightgreen" : "orangered" ,
+        display: "inline-flex",
+        padding: "1.5%",
+        margin: "1.5%",
+        borderRadius: "15px"
+    };
 
-  if (guest != null) {
-    roomElement = (
-      <div style={roomStyle}>
-        <Link style={linkStyle} to={"/guest/" + guest.id}>
-          <p>
-            Room
-            <br />
-            {number}
-          </p>
-        </Link>
-      </div>
-    );
-  } else {
-    roomElement = (
-      <div style={roomStyle}>
-        <p>
-          Room
-          <br />
-          {number}
-        </p>
-      </div>
-    );
-  }
+    const linkStyle = {
+        color: "black"
+    };
 
-  return roomElement;
+    let roomElement;
+
+    if (!isAvailable()) {
+        roomElement = (
+            <div style={roomStyle}>
+                <Link style={linkStyle} to={"/guest/"+guestId }>
+                    <p>
+                        Room
+                        <br/>
+                        {number}
+                    </p>
+                </Link>
+            </div>
+        );
+    } else {
+        roomElement = (
+            <div style={roomStyle}>
+                <p>
+                    Room
+                    <br/>
+                    {number}
+                </p>
+            </div>
+        );
+    }
+
+    return roomElement;
 };
 
 export default Room;
