@@ -63,7 +63,7 @@ const Nav = () => {
   return (
     <header>
       <nav
-        className="navbar navbar-expand-lg navbar-dark bg-dark"
+        className="navbar fixed-top navbar-expand-lg navbar-dark bg-dark"
         style={backgroundColor}
       >
         <div className="navbar-brand" onClick={onClickHandlerForHome}>

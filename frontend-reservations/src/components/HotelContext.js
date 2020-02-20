@@ -8,7 +8,6 @@ export const HotelProvider = props => {
   const [roomList, setRoomList] = useState([]);
   const [date, setDate] = useState(new Date());
   const [filter, setFilter] = useState(false);
-
   const [reservation, setReservation] = useState({});
   const [guest, setGuest] = useState({});
   const [address, setAddress] = useState({});
@@ -20,11 +19,30 @@ export const HotelProvider = props => {
     console.log(result);
   }
 
-  async function fetchRoomList() {
+  const creatDateUrlPart = date => {
+    let month =
+      date.getMonth() + 1 > 10
+        ? date.getMonth() + 1
+        : "0" + (date.getMonth() + 1);
+    let day = date.getDate() > 10 ? date.getDate() : "0" + date.getDate();
+    let dateUrl = date.getFullYear() + "-" + month + "-" + day;
+    console.log("created date url: " + dateUrl);
+    return dateUrl;
+  };
+
+  const fetchAvailableRoomsForToday = async () => {
+    const dateUrl = creatDateUrlPart(new Date());
+    const result = await axios(
+      "/reservation/rooms/get-available-room?checkin=" + dateUrl
+    );
+    return result.data;
+  };
+
+  const fetchRoomList = async () => {
     const result = await axios("/reservation/rooms/get-all");
     setRoomList(result.data);
-    console.log(result);
-  }
+    console.log(result.data);
+  };
 
   async function fetchReservationById(id) {
     const result = await axios(
@@ -65,18 +83,17 @@ export const HotelProvider = props => {
     setDate(updatedDate);
 
     console.log("fetch for date: " + date);
-    let month =
-      updatedDate.getMonth() + 1 > 10
-        ? updatedDate.getMonth() + 1
-        : "0" + (updatedDate.getMonth() + 1);
-    let day =
-      updatedDate.getDate() > 10
-        ? updatedDate.getDate()
-        : "0" + updatedDate.getDate();
-    let dateUrl = updatedDate.getFullYear() + "-" + month + "-" + day;
+    let dateUrl = creatDateUrlPart(updatedDate);
     console.log(dateUrl);
     const url = `/reservation/checkin?date=${dateUrl}`;
     axios.get(url).then(response => setReservationList(response.data));
+  };
+
+  const getReservationsForActualDate = async Date => {
+    let dateUrl = creatDateUrlPart(Date);
+    const url = `/reservation/checkin?date=${dateUrl}`;
+    let result = await axios(url);
+    return result.data;
   };
 
   const updateGuestStatus = async (guestId, updatedGuestStatus) => {
@@ -145,14 +162,16 @@ export const HotelProvider = props => {
         roomList,
         fetchRoomList,
         updateGuestStatus,
-        date,
         setDate,
+        date,
         fetchForDate,
         addNewReservation,
         updateGuestRoom,
         addNewUser,
         filter,
         setFilter,
+        fetchAvailableRoomsForToday,
+        getReservationsForActualDate,
         reservation,
         setReservation,
         fetchReservationById,

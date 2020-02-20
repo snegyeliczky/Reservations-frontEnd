@@ -68,12 +68,7 @@ const Login = () => {
     };
 
     const loginBackground = {
-        width: "100%",
-        height: "100%",
-        background:
-            "url('https://images.unsplash.com/photo-1462899006636-339e08d1844e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1050&q=80')no-repeat center center fixed",
-        backgroundSize: "cover",
-        position: "absolute"
+        background: "transparent"
     };
 
     return (
