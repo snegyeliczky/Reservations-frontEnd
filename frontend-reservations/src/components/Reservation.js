@@ -25,16 +25,25 @@ const useStyles = makeStyles(theme => ({
 }));
 
 const Reservation = props => {
-  const { fetchReservationById, roomList, updateReservation } = useContext(
-    HotelContext
-  );
+  const {
+    fetchReservationById,
+    roomList,
+    reservation,
+    updateReservation
+  } = useContext(HotelContext);
   const classes = useStyles();
   const { register, handleSubmit, errors } = useForm();
   const [error, setError] = useState(false);
   const [toHome, setToHome] = useState(false);
-  const [checkInDate, setCheckInDate] = useState(new Date());
-  const [checkOutDate, setCheckOutDate] = useState(new Date());
-  const [paymentMethod, setPaymentMethod] = useState();
+  const [checkInDate, setCheckInDate] = useState(
+    reservation.checkIn || new Date()
+  );
+  const [checkOutDate, setCheckOutDate] = useState(
+    reservation.checkOut || new Date()
+  );
+  const [paymentMethod, setPaymentMethod] = useState(reservation.paymentMethod);
+  const guest = reservation.guest || {};
+  const address = guest.address || {};
 
   useEffect(() => {
     fetchReservationById(props.match.params.guestId);
@@ -60,8 +69,9 @@ const Reservation = props => {
       wrongLogIn();
       return;
     }
-    updateReservation(data, checkInDate, checkOutDate, paymentMethod);
-    setToHome(true);
+    console.log(paymentMethod);
+    //updateReservation(data, checkInDate, checkOutDate, paymentMethod);
+    //setToHome(true);
   };
 
   const setErrorBack = () => {
@@ -77,7 +87,6 @@ const Reservation = props => {
   };
 
   const handleChangePayment = event => {
-    event.preventDefault();
     setPaymentMethod(event.target.value);
   };
 
@@ -98,88 +107,107 @@ const Reservation = props => {
           Update Reservation
         </Typography>
         <TextField
-          required
           id="firstname"
           name="firstname"
-          label="FirstName"
+          label={guest.firstName ? guest.firstName : "First Name"}
+          defaultValue={guest.firstName}
           autoComplete="fname"
           inputRef={register({ required: true })}
         />
         <br />
         <TextField
-          required
           id="lastname"
           name="lastname"
-          label="LastName"
+          label={guest.lastName ? guest.lastName : "Last Name"}
+          defaultValue={guest.lastName}
           autoComplete="fname"
           inputRef={register({ required: true })}
         />
         <br />
         <TextField
-          required
           id="email"
           name="email"
-          label="E-mail"
+          label={guest.email ? guest.email : "E-mail"}
+          defaultValue={guest.email}
           autoComplete="fname"
           inputRef={register({ required: true })}
         />
         <br />
         <TextField
-          required
           id="country"
           name="country"
-          label="Country"
+          label={address.country ? address.country : "Country"}
+          defaultValue={guest.country}
           autoComplete="fname"
           inputRef={register({ required: true })}
         />
         <br />
         <TextField
-          required
           id="zipcode"
           name="zipcode"
-          label="ZipCode"
+          label={address.zipcode ? address.zipcode : "Zip Code"}
+          defaultValue={address.zipcode}
           autoComplete="fname"
           inputRef={register({ required: true })}
         />
         <br />
         <TextField
-          required
           id="city"
           name="city"
-          label="City"
+          label={address.city ? address.city : "City"}
+          defaultValue={address.city}
           autoComplete="fname"
           inputRef={register({ required: true })}
         />
         <br />
         <TextField
-          required
           id="street"
           name="street"
-          label="Street"
+          label={address.street ? address.street : "Street"}
+          defaultValue={address.street}
           autoComplete="fname"
           inputRef={register({ required: true })}
         />
+        <br />
         <br />
         <label>Check In Date</label> <label>Check Out Date</label>
         <br />
-        <DatePicker onChange={handleCheckInChange} />{" "}
-        <DatePicker onChange={handleCheckOutChange} />
+        <DatePicker
+          onChange={handleCheckInChange}
+          placeholder={
+            reservation.checkIn ? reservation.checkIn : "Select Date"
+          }
+        />{" "}
+        <DatePicker
+          onChange={handleCheckOutChange}
+          placeholder={
+            reservation.checkOut ? reservation.checkOut : "Select Date"
+          }
+        />
         <br />
         <TextField
-          required
           id="price"
           name="price"
-          label="€"
+          label={
+            reservation.price ? `${Math.floor(reservation.price)} €` : "Price"
+          }
+          defaultValue={reservation.price}
           type="number"
           inputProps={{ min: "0" }}
           autoComplete="fname"
           inputRef={register({ required: true })}
         />
         <br />
-        <FormControl required className={classes.formControl}>
-          <InputLabel id="payment-method-label">Payment Method</InputLabel>
+        <FormControl className={classes.formControl}>
+          <InputLabel
+            id="payment-method-label"
+            defaultValue={reservation.paymentMethod}
+          >
+            {reservation.paymentMethod
+              ? reservation.paymentMethod
+              : "Payment Method"}
+          </InputLabel>
           <Select
-            required
             labelId="payment-method-label"
             id="payment"
             name="payment-native-required"

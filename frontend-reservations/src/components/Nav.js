@@ -4,7 +4,9 @@ import { HotelContext } from "./HotelContext";
 import { UserContext } from "./Context/UserContext";
 
 const Nav = () => {
-  const { fetchReservationList, setDate, setFilter, fetchForDate } = useContext(HotelContext);
+  const { fetchReservationList, setDate, setFilter, fetchForDate } = useContext(
+    HotelContext
+  );
   const { logout, isLoggedIn } = useContext(UserContext);
   const [toLogin, setToLogin] = useState(false);
   const [isAdmin, setAdmin] = useState(false);
@@ -82,7 +84,12 @@ const Nav = () => {
         <div className="collapse navbar-collapse" id="navbarSupportedContent">
           <ul className="navbar-nav mr-auto">
             <li className="nav-item">
-              <Link className="nav-link" onClick={onClickHandleForActualDate} style={btnColor} to="/home">
+              <Link
+                className="nav-link"
+                onClick={onClickHandleForActualDate}
+                style={btnColor}
+                to="/home"
+              >
                 Home
               </Link>
             </li>
