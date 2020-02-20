@@ -8,6 +8,7 @@ export const HotelProvider = props => {
   const [roomList, setRoomList] = useState([]);
   const [date, setDate] = useState(new Date());
   const [filter, setFilter] = useState(false);
+  const [reservation, setReservation] = useState({});
 
   async function fetchReservationList() {
     setFilter(false);
@@ -16,11 +17,44 @@ export const HotelProvider = props => {
     console.log(result);
   }
 
-  const fetchRoomList = async () => {
+  async function fetchRoomList() {
     const result = await axios("/reservation/rooms/get-all");
     setRoomList(result.data);
     console.log(result);
-  };
+  }
+
+  async function fetchReservationById(id) {
+    const result = await axios(
+      `/reservation/get-reservation?reservationId=${id}`
+    );
+    setReservation(result.data);
+    console.log(result.data);
+  }
+
+  async function updateReservation(
+    data,
+    checkInDate,
+    checkOutDate,
+    paymentMethod
+  ) {
+    await axios.put("/reservation/update", {
+      checkIn: checkInDate,
+      checkOut: checkOutDate,
+      price: data.price,
+      paymentMethod: paymentMethod,
+      guest: {
+        firstName: data.firstname,
+        lastName: data.lastname,
+        email: data.email,
+        address: {
+          country: data.country,
+          zipCode: data.zipcode,
+          city: data.city,
+          street: data.street
+        }
+      }
+    });
+  }
 
   const fetchForDate = async inComeDate => {
     let updatedDate = new Date(inComeDate);
@@ -57,30 +91,35 @@ export const HotelProvider = props => {
     });
   };
 
-    const addNewReservation = async (data, checkInDate, checkOutDate, paymentMethod) => {
-        const url = "/reservation/add-reservation";
-        axios
-            .post(url, {
-                checkIn: checkInDate,
-                checkOut: checkOutDate,
-                price: data.price,
-                paymentMethod: paymentMethod,
-                guest: {
-                    firstName: data.firstname,
-                    lastName: data.lastname,
-                    email: data.email,
-                    address: {
-                        country: data.country,
-                        zipCode: data.zipcode,
-                        city: data.city,
-                        street: data.street
-                    }
-                }
-            })
-            .then(response => {
-                fetchReservationList();
-            });
-    };
+  const addNewReservation = async (
+    data,
+    checkInDate,
+    checkOutDate,
+    paymentMethod
+  ) => {
+    const url = "/reservation/add-reservation";
+    axios
+      .post(url, {
+        checkIn: checkInDate,
+        checkOut: checkOutDate,
+        price: data.price,
+        paymentMethod: paymentMethod,
+        guest: {
+          firstName: data.firstname,
+          lastName: data.lastname,
+          email: data.email,
+          address: {
+            country: data.country,
+            zipCode: data.zipcode,
+            city: data.city,
+            street: data.street
+          }
+        }
+      })
+      .then(response => {
+        fetchReservationList();
+      });
+  };
 
   const addNewUser = async (data, role) => {
     const url = "users/admin/newuser";
@@ -95,25 +134,27 @@ export const HotelProvider = props => {
       });
   };
 
-    return (
-        <HotelContext.Provider
-            value={{
-                reservationList,
-                fetchReservationList,
-                roomList,
-                fetchRoomList,
-                updateGuestStatus,
-                setDate,
-                date,
-                fetchForDate,
-                addNewReservation,
-                updateGuestRoom,
-                addNewUser,
-                filter,
-                setFilter
-            }}
-        >
-            {props.children}
-        </HotelContext.Provider>
-    );
+  return (
+    <HotelContext.Provider
+      value={{
+        reservationList,
+        fetchReservationList,
+        roomList,
+        fetchRoomList,
+        updateGuestStatus,
+        date,
+        setDate,
+        fetchForDate,
+        addNewReservation,
+        updateGuestRoom,
+        addNewUser,
+        filter,
+        setFilter,
+        reservation,
+        fetchReservationById
+      }}
+    >
+      {props.children}
+    </HotelContext.Provider>
+  );
 };

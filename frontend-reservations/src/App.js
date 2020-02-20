@@ -4,7 +4,7 @@ import "./App.css";
 import Nav from "./components/Nav";
 import ReservationTable from "./components/ReservationTable";
 import RoomList from "./components/RoomList";
-import GuestProfile from "./components/GuestProfile";
+import Reservation from "./components/Reservation";
 import Login from "./components/login/Login";
 
 import { BrowserRouter as Router, Route } from "react-router-dom";
@@ -30,7 +30,7 @@ function App() {
             <div className="container">
               <Route exact path="/home" component={ReservationTable} />
               <Route exact path="/rooms" component={RoomList} />
-              <Route exact path="/guest/:guestId" component={GuestProfile} />
+              <Route exact path="/guest/:guestId" component={Reservation} />
               <Route
                 exact
                 path="/newreservation"
