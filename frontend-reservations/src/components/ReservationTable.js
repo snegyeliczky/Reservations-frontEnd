@@ -31,6 +31,7 @@ const ReservationTable = () => {
             <th>Name</th>
             <th>Check Out Date</th>
             <th>Edit Status</th>
+            <th>Edit room</th>
             <th>Profile</th>
           </tr>
         </thead>

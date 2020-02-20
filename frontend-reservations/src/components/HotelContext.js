@@ -37,6 +37,14 @@ export const HotelProvider = props => {
 
     };
 
+    const fetchAvailableRoomsByDate = async (checkin, checkout) => {
+        const checkInDateUrl = creatDateUrlPart(checkin);
+        const checkOutDateUrl = creatDateUrlPart(checkout);
+        const result = await axios("/reservation/rooms/get-available-room?checkin=" +checkInDateUrl+"&checkout="+checkOutDateUrl);
+        return result.data;
+    };
+
+
 
     const fetchRoomList = async () => {
         const result = await axios("/reservation/rooms/get-all");
@@ -71,9 +79,9 @@ export const HotelProvider = props => {
     };
 
     const updateGuestRoom = async (roomId, guestId) => {
-        const url = `/reservation/setroom?roomId=${roomId}&guestId=${guestId}`;
+        const url = `/reservation/setroom?roomId=${roomId}&reservationId=${guestId}`;
         axios.put(url).then(response => {
-            fetchReservationList();
+            fetchForDate(date);
             fetchRoomList();
         });
     };
@@ -133,7 +141,8 @@ export const HotelProvider = props => {
                 filter,
                 setFilter,
                 fetchAvailableRoomsForToday,
-                getReservationsForActualDate
+                getReservationsForActualDate,
+                fetchAvailableRoomsByDate
             }}
         >
             {props.children}
