@@ -20,7 +20,6 @@ html {
   background-attachment: fixed;
 
   background-size: cover;
-  width: 100vw;
   min-height: 100vh;
   margin-bottom: 0;
 }
@@ -81,7 +80,6 @@ html {
 }
 
 .form-background {
-
   margin-top: 2.5rem;
   padding: 3rem;
   border-radius:20px ;
