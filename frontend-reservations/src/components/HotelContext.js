@@ -143,7 +143,7 @@ export const HotelProvider = props => {
         }
       })
       .then(response => {
-        fetchReservationList();
+        fetchForDate(date);
       });
   };
 

@@ -97,6 +97,7 @@ const AddReservationForm = () => {
           id="firstname"
           name="firstname"
           label="First Name"
+          value="Joe"
           autoComplete="fname"
           inputRef={register({ required: true })}
         />
@@ -106,6 +107,7 @@ const AddReservationForm = () => {
           id="lastname"
           name="lastname"
           label="Last Name"
+          value="Dough"
           autoComplete="fname"
           inputRef={register({ required: true })}
         />
@@ -115,6 +117,7 @@ const AddReservationForm = () => {
           id="email"
           name="email"
           label="E-mail"
+          value="joedough@codecool.com"
           autoComplete="fname"
           inputRef={register({ required: true })}
         />
@@ -124,6 +127,7 @@ const AddReservationForm = () => {
           id="country"
           name="country"
           label="Country"
+          value="Hungary"
           autoComplete="fname"
           inputRef={register({ required: true })}
         />
@@ -133,6 +137,7 @@ const AddReservationForm = () => {
           id="zipcode"
           name="zipcode"
           label="Zip Code"
+          value="1065"
           autoComplete="fname"
           inputRef={register({ required: true })}
         />
@@ -142,6 +147,7 @@ const AddReservationForm = () => {
           id="city"
           name="city"
           label="City"
+          value="Budapest"
           autoComplete="fname"
           inputRef={register({ required: true })}
         />
@@ -151,6 +157,7 @@ const AddReservationForm = () => {
           id="street"
           name="street"
           label="Street"
+          value="Nagymező 44"
           autoComplete="fname"
           inputRef={register({ required: true })}
         />
@@ -166,6 +173,7 @@ const AddReservationForm = () => {
           id="price"
           name="price"
           label="€"
+          value="999"
           type="number"
           inputProps={{ min: "0" }}
           autoComplete="fname"

@@ -31,6 +31,23 @@ const ReservationRow = ({ reservation }) => {
     }
     fetchAvailableRoomsByDate(new Date(checkIn), new Date(checkOut));
   };
+
+  const roomDownBtn = {
+    lineHeight: "1.5",
+    padding: ".375rem .75rem",
+    textAlign: "center",
+    verticalAlign: "middle",
+    userSelect: "none",
+    fontSize: "1rem",
+    cursor: "pointer",
+    fontWeight: "400",
+    color: "rgba(0, 0, 0, 0.68)",
+    background: "white",
+    border: "1px solid transparent grey",
+    borderRadius: ".25rem",
+    margin: "5px"
+  };
+
   const dropDownBtn = () => {
     let statusColor = " ";
 
@@ -57,7 +74,7 @@ const ReservationRow = ({ reservation }) => {
       color: "rgba(0, 0, 0, 0.68)",
       background: statusColor,
       borderColor: statusColor,
-      border: "1px solid transparent",
+      border: "1px solid grey",
       borderRadius: ".25rem",
       margin: "5px"
     };
@@ -114,6 +131,7 @@ const ReservationRow = ({ reservation }) => {
         <ButtonToolbar>
           <select
             //style={dropDownBtn}
+            style={roomDownBtn}
             onChange={handleSubmit}
           >
             <option value={"-"} key={0}>

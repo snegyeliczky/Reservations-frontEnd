@@ -190,7 +190,7 @@ const Reservation = props => {
         <TextField
           id="zipcode"
           name="zipcode"
-          label={address.zipcode ? address.zipcode : "Zip Code"}
+          label={address.zipCode ? address.zipCode : "Zip Code"}
           autoComplete="fname"
           onChange={handleZipCodeChange}
         />
