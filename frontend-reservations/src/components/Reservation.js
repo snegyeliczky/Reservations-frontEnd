@@ -260,7 +260,7 @@ const Reservation = props => {
         {/* errors will return when field validation fails  */}
         {errors.exampleRequired && <span>This field is required</span>}
         {toHome ? <Redirect to={"/home"} /> : null}
-        <input className="send" value="Submit" type="submit" />
+        <input className="send" value="Under construction!" type="submit" />
       </form>
     </div>
   );
