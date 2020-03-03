@@ -4,7 +4,7 @@ import { HotelContext } from "./HotelContext";
 import { UserContext } from "./Context/UserContext";
 
 const Nav = () => {
-  const { fetchReservationList, setDate, setFilter, fetchForDate } = useContext(
+  const { fetchReservationList, date, setFilter, fetchForDate } = useContext(
     HotelContext
   );
   const { logout, isLoggedIn } = useContext(UserContext);
@@ -18,7 +18,7 @@ const Nav = () => {
   };
 
   const onClickHandleForActualDate = () => {
-    fetchForDate(new Date());
+    fetchForDate(date);
   };
 
   useEffect(() => {
@@ -29,19 +29,6 @@ const Nav = () => {
       setAdmin(isAdmin);
     }
   }, []);
-
-  /*
-        const checkUserRole = () => {
-            let roles = localStorage.getItem("roles");
-            let rolesArray = roles.split(",");
-            let isAdmin = rolesArray.includes("ROLE_ADMIN");
-            console.log(" logged in user roles: " + roles);
-            console.log("is Admin: " + isAdmin);
-            return isAdmin;
-
-        };
-
-     */
 
   const onClickLogout = () => {
     logout();
@@ -94,18 +81,33 @@ const Nav = () => {
               </Link>
             </li>
             <li className="nav-item">
-              <Link className="nav-link" style={btnColor} to="/rooms">
+              <Link
+                className="nav-link"
+                style={btnColor}
+                to="/rooms"
+                onClick={onClickHandleForActualDate}
+              >
                 Rooms
               </Link>
             </li>
             <li className="nav-item">
-              <Link className="nav-link" style={btnColor} to="/newreservation">
+              <Link
+                className="nav-link"
+                style={btnColor}
+                to="/newreservation"
+                onClick={onClickHandleForActualDate}
+              >
                 New Reservation
               </Link>
             </li>
             {isAdmin ? (
               <li className="nav-item">
-                <Link className="nav-link" style={btnColor} to="/adduser">
+                <Link
+                  className="nav-link"
+                  style={btnColor}
+                  to="/adduser"
+                  onClick={onClickHandleForActualDate}
+                >
                   New User
                 </Link>
               </li>

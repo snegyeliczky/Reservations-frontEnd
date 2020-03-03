@@ -35,7 +35,7 @@ const Reservation = props => {
     updateReservation
   } = useContext(HotelContext);
   const classes = useStyles();
-  const { register, handleSubmit, errors } = useForm();
+  const { handleSubmit, errors } = useForm();
   const [error, setError] = useState(false);
   const [toHome, setToHome] = useState(false);
 
@@ -119,7 +119,6 @@ const Reservation = props => {
   };
 
   const onSubmit = () => {
-    console.log("submit reservation changes");
     if (reservation.checkIn > reservation.checkOut) {
       myWarning();
       return;
@@ -134,7 +133,6 @@ const Reservation = props => {
       return { ...prevState };
     });
     updateReservation(reservation);
-
     setToHome(true);
   };
 
@@ -260,7 +258,7 @@ const Reservation = props => {
         {/* errors will return when field validation fails  */}
         {errors.exampleRequired && <span>This field is required</span>}
         {toHome ? <Redirect to={"/home"} /> : null}
-        <input className="send" value="Under construction!" type="submit" />
+        <input className="send" value="Submit" type="submit" />
       </form>
     </div>
   );

@@ -10,7 +10,6 @@ const ReservationTable = () => {
   );
 
   useEffect(() => {
-    fetchForDate(date);
     fetchRoomList();
   }, []);
 

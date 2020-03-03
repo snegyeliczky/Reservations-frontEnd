@@ -66,17 +66,19 @@ export const HotelProvider = props => {
     const guest = reservation.guest || {};
     const address = guest.address || {};
 
-    console.log(reservation);
     await axios.put("/reservation/update", {
+      id: reservation.id,
       checkIn: reservation.checkIn,
       checkOut: reservation.checkOut,
       price: reservation.price,
       paymentMethod: reservation.paymentMethod,
       guest: {
+        id: guest.id,
         firstName: guest.firstName,
         lastName: guest.lastName,
         email: guest.email,
         address: {
+          id: address.id,
           country: address.country,
           zipCode: address.zipcode,
           city: address.city,
@@ -84,6 +86,7 @@ export const HotelProvider = props => {
         }
       }
     });
+    fetchForDate(date);
   }
 
   const fetchForDate = async inComeDate => {
