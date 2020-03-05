@@ -161,6 +161,13 @@ export const HotelProvider = props => {
       .then(response => {});
   };
 
+  const getActiveReservations = async Date => {
+    let dateUrl = createDateUrlPart(Date);
+    const url = `/reservation/active-reservations?date=${dateUrl}`;
+    let result = await axios(url);
+    return result.data;
+  };
+
   return (
     <HotelContext.Provider
       value={{
@@ -187,7 +194,8 @@ export const HotelProvider = props => {
         address,
         setAddress,
         updateReservation,
-        fetchAvailableRoomsByDate
+        fetchAvailableRoomsByDate,
+        getActiveReservations
       }}
     >
       {props.children}

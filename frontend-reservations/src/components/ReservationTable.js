@@ -5,9 +5,7 @@ import { HotelContext } from "./HotelContext";
 import SearchField from "./search/SearchField";
 
 const ReservationTable = () => {
-  const { reservationList, fetchForDate, fetchRoomList, date } = useContext(
-    HotelContext
-  );
+  const { reservationList, fetchRoomList } = useContext(HotelContext);
 
   useEffect(() => {
     fetchRoomList();

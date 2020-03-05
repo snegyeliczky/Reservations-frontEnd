@@ -1,6 +1,5 @@
 import React, { useState, createContext } from "react";
 import axios from "axios";
-import { HotelContext } from "../HotelContext";
 import Cookies from "universal-cookie";
 
 export const UserContext = createContext();
