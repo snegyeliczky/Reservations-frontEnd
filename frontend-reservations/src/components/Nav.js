@@ -21,6 +21,10 @@ const Nav = () => {
     fetchForDate(date);
   };
 
+  const onClickHandleForTodayDate = () => {
+    fetchForDate(new Date);
+  };
+
   useEffect(() => {
     let roles = localStorage.getItem("roles");
     if (roles != null) {
@@ -78,6 +82,16 @@ const Nav = () => {
                 to="/home"
               >
                 Home
+              </Link>
+            </li>
+            <li className="nav-item">
+              <Link
+                  className="nav-link"
+                  onClick={onClickHandleForTodayDate}
+                  style={btnColor}
+                  to="/home"
+              >
+                Today
               </Link>
             </li>
             <li className="nav-item">

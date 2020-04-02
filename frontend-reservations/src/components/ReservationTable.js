@@ -5,10 +5,11 @@ import { HotelContext } from "./HotelContext";
 import SearchField from "./search/SearchField";
 
 const ReservationTable = () => {
-  const { reservationList, fetchRoomList } = useContext(HotelContext);
+  const { reservationList, fetchRoomList, fetchForDate, date } = useContext(HotelContext);
 
   useEffect(() => {
     fetchRoomList();
+    fetchForDate(date);
   }, []);
 
   const divStyle = {
