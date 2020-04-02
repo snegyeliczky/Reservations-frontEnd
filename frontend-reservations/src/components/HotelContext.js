@@ -17,6 +17,10 @@ export const HotelProvider = props => {
     setReservationList(result.data);
   }
 
+  async function clearReservationList() {
+    setReservationList([]);
+  }
+
   const createDateUrlPart = date => {
     let month =
       date.getMonth() + 1 >= 10
@@ -194,6 +198,7 @@ export const HotelProvider = props => {
       value={{
         reservationList,
         fetchReservationList,
+        clearReservationList,
         roomList,
         fetchRoomList,
         updateGuestStatus,

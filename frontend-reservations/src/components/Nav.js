@@ -6,6 +6,7 @@ import { UserContext } from "./Context/UserContext";
 const Nav = () => {
   const {
     fetchReservationList,
+    clearReservationList,
     date,
     setFilter,
     fetchForDate,
@@ -49,6 +50,7 @@ const Nav = () => {
     setToLogin(true);
     localStorage.removeItem("roles");
     setAdmin(false);
+    clearReservationList();
   };
 
   const backgroundColor = {
