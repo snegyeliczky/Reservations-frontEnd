@@ -137,6 +137,7 @@ export const HotelProvider = props => {
     const url = `/reservation/setroom?roomId=${roomId}&reservationId=${guestId}`;
     axios.put(url).then(response => {
       fetchRoomList();
+      handleStatusChange();
     });
   };
 
