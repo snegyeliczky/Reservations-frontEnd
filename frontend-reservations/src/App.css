@@ -73,9 +73,12 @@ html {
 
 .form-background {
   margin-top: 5rem;
+  margin-bottom: 1rem;
   padding: 3rem;
-  border-radius: 20px;
-  background-color: rgba(255, 246, 241, 0.72);
+  background-color: lightgrey;
+  border-color: grey;
+  border-style: solid;
+  opacity: 0.93;
 }
 
 .send {
@@ -84,5 +87,8 @@ html {
 }
 
 .send:hover {
-  background-color: rgba(207, 255, 232, 0.72);
+  background-color: lightgrey;
+  border-color: grey;
+  border-style: solid;
+  opacity: 0.93;
 }
