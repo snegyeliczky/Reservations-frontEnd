@@ -43,14 +43,6 @@ const Reservation = props => {
     fetchReservationById(props.match.params.guestId);
   }, []);
 
-  const getRoomNumberByRoomId = reservation => {
-    for (let room of roomList) {
-      if (room.id === reservation.roomId) {
-        return room.number;
-      }
-    }
-  };
-
   const myWarning = () => {
     setError(true);
     document.querySelector(".myWarning").setAttribute("id", "alert");

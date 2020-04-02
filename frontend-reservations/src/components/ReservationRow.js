@@ -9,7 +9,8 @@ const ReservationRow = ({ reservation }) => {
     updateGuestStatus,
     roomList,
     fetchAvailableRoomsByDate,
-    updateGuestRoom
+    updateGuestRoom,
+    handleStatusChange
   } = useContext(HotelContext);
   const [updatedStatus, setUpdatedStatus] = useState("");
   const [availableRooms, setAvailableRooms] = useState([]);
@@ -30,6 +31,7 @@ const ReservationRow = ({ reservation }) => {
       updateGuestRoom(event.target.value, id);
     }
     fetchAvailableRoomsByDate(new Date(checkIn), new Date(checkOut));
+    handleStatusChange();
   };
 
   const roomDownBtn = {

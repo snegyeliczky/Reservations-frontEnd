@@ -4,25 +4,34 @@ import { HotelContext } from "./HotelContext";
 import { UserContext } from "./Context/UserContext";
 
 const Nav = () => {
-  const { fetchReservationList, date, setFilter, fetchForDate } = useContext(
-    HotelContext
-  );
+  const {
+    fetchReservationList,
+    date,
+    setFilter,
+    fetchForDate,
+    fetchTodaysDate
+  } = useContext(HotelContext);
   const { logout, isLoggedIn } = useContext(UserContext);
   const [toLogin, setToLogin] = useState(false);
   const [isAdmin, setAdmin] = useState(false);
   const [toHome, setToHome] = useState(false);
 
   const onClickHandlerForHome = () => {
-    fetchReservationList();
+    fetchTodaysDate();
+    setFilter("home");
     setToHome(true);
   };
 
-  const onClickHandleForActualDate = () => {
-    fetchForDate(date);
+  const onClickHandlerForReservations = () => {
+    fetchReservationList();
+    setFilter("reservations");
+    setToHome(true);
   };
 
-  const onClickHandleForTodayDate = () => {
-    fetchForDate(new Date);
+  const onClickHandleForFilteredDate = () => {
+    fetchForDate(date);
+    setFilter("filter");
+    setToHome(true);
   };
 
   useEffect(() => {
@@ -58,7 +67,7 @@ const Nav = () => {
         style={backgroundColor}
       >
         <div className="navbar-brand" onClick={onClickHandlerForHome}>
-          <a>Reservations</a>
+          <a>Home</a>
         </div>
         <button
           className="navbar-toggler"
@@ -68,6 +77,7 @@ const Nav = () => {
           aria-controls="navbarSupportedContent"
           aria-expanded="false"
           aria-label="Toggle navigation"
+          to="/home"
         >
           <span className="navbar-toggler-icon"></span>
         </button>
@@ -77,51 +87,36 @@ const Nav = () => {
             <li className="nav-item">
               <Link
                 className="nav-link"
-                onClick={onClickHandleForActualDate}
+                onClick={onClickHandlerForReservations}
                 style={btnColor}
                 to="/home"
               >
-                Home
-              </Link>
-            </li>
-            <li className="nav-item">
-              <Link
-                  className="nav-link"
-                  onClick={onClickHandleForTodayDate}
-                  style={btnColor}
-                  to="/home"
-              >
-                Today
+                Reservations
               </Link>
             </li>
             <li className="nav-item">
               <Link
                 className="nav-link"
+                onClick={onClickHandleForFilteredDate}
                 style={btnColor}
-                to="/rooms"
-                onClick={onClickHandleForActualDate}
+                to="/home"
               >
+                Filter
+              </Link>
+            </li>
+            <li className="nav-item">
+              <Link className="nav-link" style={btnColor} to="/rooms">
                 Rooms
               </Link>
             </li>
             <li className="nav-item">
-              <Link
-                className="nav-link"
-                style={btnColor}
-                to="/newreservation"
-                onClick={onClickHandleForActualDate}
-              >
+              <Link className="nav-link" style={btnColor} to="/newreservation">
                 New Reservation
               </Link>
             </li>
             {isAdmin ? (
               <li className="nav-item">
-                <Link
-                  className="nav-link"
-                  style={btnColor}
-                  to="/adduser"
-                  onClick={onClickHandleForActualDate}
-                >
+                <Link className="nav-link" style={btnColor} to="/adduser">
                   New User
                 </Link>
               </li>
