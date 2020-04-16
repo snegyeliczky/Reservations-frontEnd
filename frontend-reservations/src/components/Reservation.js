@@ -41,6 +41,7 @@ const Reservation = props => {
 
     useEffect(() => {
         fetchReservationById(props.match.params.guestId);
+        console.log()
     }, []);
 
     const myWarning = () => {
@@ -228,6 +229,7 @@ const Reservation = props => {
                     autoComplete="fname"
                     onChange={handlePriceChange}
                 />
+                <div>City Tax:<b> {reservation.cityTaxIncluded ? " Include" : " Exclude"} </b></div>
                 <br/>
                 <FormControl className={classes.formControl}>
                     <InputLabel id="payment-method-label">
