@@ -8,7 +8,7 @@ const SearchField = () => {
     const {date, setDate, setFilter, fetchForDate} = useContext(HotelContext);
 
     const handleChange = date => {
-        if (date == null) {
+        if (date === null) {
             setDate(new Date());
         } else {
             setDate(date);
