@@ -52,6 +52,12 @@ export const HotelProvider = props => {
         setRoomList(result.data);
     };
 
+    async function sortByName() {
+        let sorted = await reservationList.sort((a, b) => (a.guest.firstName > b.guest.firstName) ? 1 : -1);
+        setReservationList([]); //necessary to refresh state
+        setReservationList(sorted);
+    }
+
     async function fetchReservationById(id) {
         const result = await axios(
             `/reservation/get-reservation?reservationId=${id}`
@@ -198,7 +204,9 @@ export const HotelProvider = props => {
     return (
         <HotelContext.Provider
             value={{
+                sortByName,
                 reservationList,
+                setReservationList,
                 fetchReservationList,
                 roomList,
                 fetchRoomList,

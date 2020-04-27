@@ -5,16 +5,19 @@ import {HotelContext} from "./HotelContext";
 import SearchField from "./search/SearchField";
 
 const ReservationTable = () => {
-    const {reservationList, fetchRoomList} = useContext(HotelContext);
+    const {reservationList, fetchRoomList,sortByName} = useContext(HotelContext);
 
     useEffect(() => {
         fetchRoomList();
     }, []);
 
+
     const divStyle = {
         border: "1px solid black",
         borderBottom: "1px solid #bfbdbd"
     };
+
+
 
     return (
         <div id="reservation-table">
@@ -25,7 +28,7 @@ const ReservationTable = () => {
                 <tr>
                     <th>Room</th>
                     <th>Check In Date</th>
-                    <th>Name</th>
+                    <th id={"nameHead"} onClick={sortByName}>Name</th>
                     <th>Check Out Date</th>
                     <th>Edit Status</th>
                     <th>Edit room</th>

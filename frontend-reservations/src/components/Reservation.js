@@ -41,7 +41,6 @@ const Reservation = props => {
 
     useEffect(() => {
         fetchReservationById(props.match.params.guestId);
-        console.log()
     }, []);
 
     const myWarning = () => {
