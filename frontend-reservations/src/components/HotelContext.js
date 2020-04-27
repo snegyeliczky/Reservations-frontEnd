@@ -18,13 +18,7 @@ export const HotelProvider = props => {
     }
 
     const createDateUrlPart = date => {
-        let month =
-            date.getMonth() + 1 >= 10
-                ? date.getMonth() + 1
-                : "0" + (date.getMonth() + 1);
-        let day = date.getDate() >= 10 ? date.getDate() : "0" + date.getDate();
-        let dateUrl = date.getFullYear() + "-" + month + "-" + day;
-        return dateUrl;
+        return date.toISOString().split('T')[0];
     };
 
     const fetchAvailableRoomsForToday = async () => {
