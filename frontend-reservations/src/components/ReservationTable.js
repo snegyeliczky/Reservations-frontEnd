@@ -5,18 +5,36 @@ import {HotelContext} from "./HotelContext";
 import SearchField from "./search/SearchField";
 
 const ReservationTable = () => {
-    const {reservationList, fetchRoomList,sortByName} = useContext(HotelContext);
+    const {reservationList, fetchRoomList, sortByStatus, sortForDay, filter, date} = useContext(HotelContext);
 
     useEffect(() => {
         fetchRoomList();
     }, []);
 
+    function sortByName() {
+        switch (filter) {
+            case "home":
+                console.log("home");
+                sortForDay("firstName", new Date());
+                break;
+            case "filter":
+                console.log("filter");
+                sortForDay("firstName",date);
+                break;
+            default:
+                sortForDay("firstName",date);
+        }
+    }
 
     const divStyle = {
         border: "1px solid black",
         borderBottom: "1px solid #bfbdbd"
     };
 
+    const sortButton = {
+        cursor: "pointer",
+        backgroundColor: "rgba(245, 245, 245,0.1)"
+    };
 
 
     return (
@@ -28,9 +46,9 @@ const ReservationTable = () => {
                 <tr>
                     <th>Room</th>
                     <th>Check In Date</th>
-                    <th id={"nameHead"} onClick={sortByName}>Name</th>
+                    <th id={"nameHead"} onClick={sortByName} style={sortButton}>Name</th>
                     <th>Check Out Date</th>
-                    <th>Edit Status</th>
+                    <th onClick={sortByStatus} style={sortButton}>Status</th>
                     <th>Edit room</th>
                     <th>Profile</th>
                 </tr>

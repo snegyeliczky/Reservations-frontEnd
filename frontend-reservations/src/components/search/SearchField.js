@@ -3,6 +3,8 @@ import {DatePicker} from "antd";
 import {Button} from "react-bootstrap";
 import {HotelContext} from "../HotelContext";
 import "antd/dist/antd.css";
+import CheckBoxes from "./checkBox";
+
 
 const SearchField = () => {
     const {date, setDate, setFilter, fetchForDate} = useContext(HotelContext);
@@ -34,6 +36,8 @@ const SearchField = () => {
             >
                 Submit
             </Button>
+            <CheckBoxes/>
+
         </div>
     );
 };

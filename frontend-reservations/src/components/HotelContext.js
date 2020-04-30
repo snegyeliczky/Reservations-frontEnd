@@ -12,6 +12,7 @@ export const HotelProvider = props => {
     const [guest, setGuest] = useState({});
     const [address, setAddress] = useState({});
 
+
     async function fetchReservationList() {
         const result = await axios("/reservation/get-all");
         setReservationList(result.data);
@@ -58,6 +59,13 @@ export const HotelProvider = props => {
         setReservationList(sorted);
     }
 
+    async function sortByStatus() {
+        console.log("date sort");
+        let sorted = await reservationList.sort((a, b) => (a.status > b.status) ? 1 : -1);
+        setReservationList([]); //necessary to refresh state
+        setReservationList(sorted);
+    }
+
     async function fetchReservationById(id) {
         const result = await axios(
             `/reservation/get-reservation?reservationId=${id}`
@@ -96,12 +104,21 @@ export const HotelProvider = props => {
         handleStatusChange();
     }
 
+
+
     const fetchForDate = async inComeDate => {
         let updatedDate = new Date(inComeDate);
         setDate(updatedDate);
         let dateUrl = createDateUrlPart(updatedDate);
         const url = `/reservation/checkin?date=${dateUrl}`;
         axios.get(url).then(response => setReservationList(response.data));
+    };
+
+    const sortForDay = async (sort, date) => {
+        let dateUrl = createDateUrlPart(date);
+        const url = `/reservation/sort?date=${dateUrl}&sort=${sort}`;
+        let axiosResponse = await axios(url);
+        setReservationList(axiosResponse.data)
     };
 
     const fetchTodaysDate = async () => {
@@ -204,7 +221,9 @@ export const HotelProvider = props => {
     return (
         <HotelContext.Provider
             value={{
+                sortForDay,
                 sortByName,
+                sortByStatus,
                 reservationList,
                 setReservationList,
                 fetchReservationList,
