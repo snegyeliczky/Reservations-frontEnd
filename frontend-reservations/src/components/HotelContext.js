@@ -12,10 +12,30 @@ export const HotelProvider = props => {
     const [guest, setGuest] = useState({});
     const [address, setAddress] = useState({});
 
+    const[limitIn,setLimitIn]=useState(true);
+    const[limitCheckin,setLimitCheckin]=useState(true);
+    const[limitOut,setLimitOut]=useState(true);
+
+
+    const statusLimit = (reservationList) =>{
+        let limitedList = [];
+        for (let reservation of reservationList){
+            if (limitIn && reservation.status ==="IN"){
+                limitedList.push(reservation)
+            }else if (limitCheckin && reservation.status==="CHECKIN"){
+                limitedList.push(reservation)
+            }else if (limitOut && reservation.status==="CHECKOUT"){
+                limitedList.push(reservation)
+            }
+        }
+        return limitedList;
+    };
+
 
     async function fetchReservationList() {
         const result = await axios("/reservation/get-all");
-        setReservationList(result.data);
+        let limited = statusLimit(result.data);
+        setReservationList(limited);
     }
 
     const createDateUrlPart = date => {
@@ -111,20 +131,32 @@ export const HotelProvider = props => {
         setDate(updatedDate);
         let dateUrl = createDateUrlPart(updatedDate);
         const url = `/reservation/checkin?date=${dateUrl}`;
-        axios.get(url).then(response => setReservationList(response.data));
+        let axiosResponse = await axios(url);
+        let limited = statusLimit(axiosResponse.data);
+        setReservationList(limited);
     };
 
     const sortForDay = async (sort, date) => {
         let dateUrl = createDateUrlPart(date);
         const url = `/reservation/sort?date=${dateUrl}&sort=${sort}`;
         let axiosResponse = await axios(url);
-        setReservationList(axiosResponse.data)
+        let limited = statusLimit(axiosResponse.data);
+        setReservationList(limited);
+    };
+
+    const sortForAll = async (sort) => {
+        let axiosResponse = await axios(`/reservation/sort/all?sort=${sort}`);
+        let limited = statusLimit(axiosResponse.data);
+        setReservationList(limited);
     };
 
     const fetchTodaysDate = async () => {
         let dateUrl = createDateUrlPart(new Date());
         const url = `/reservation/checkin?date=${dateUrl}`;
-        axios.get(url).then(response => setReservationList(response.data));
+        let axiosResponse = await axios(url);
+        console.log(limitCheckin);
+        let limited =statusLimit(axiosResponse.data);
+        setReservationList(limited);
     };
 
     const getReservationsForActualDate = async Date => {
@@ -221,6 +253,15 @@ export const HotelProvider = props => {
     return (
         <HotelContext.Provider
             value={{
+                limitIn,
+                setLimitIn,
+                limitCheckin,
+                setLimitCheckin,
+                limitOut,
+                setLimitOut,
+
+
+                sortForAll,
                 sortForDay,
                 sortByName,
                 sortByStatus,

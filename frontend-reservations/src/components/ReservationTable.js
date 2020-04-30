@@ -5,7 +5,7 @@ import {HotelContext} from "./HotelContext";
 import SearchField from "./search/SearchField";
 
 const ReservationTable = () => {
-    const {reservationList, fetchRoomList, sortByStatus, sortForDay, filter, date} = useContext(HotelContext);
+    const {reservationList, fetchRoomList, sortByStatus, sortForDay, filter, date, sortForAll} = useContext(HotelContext);
 
     useEffect(() => {
         fetchRoomList();
@@ -21,6 +21,9 @@ const ReservationTable = () => {
                 console.log("filter");
                 sortForDay("firstName",date);
                 break;
+            case "reservations":
+                console.log("all");
+                sortForAll("firstName");
             default:
                 sortForDay("firstName",date);
         }
