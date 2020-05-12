@@ -254,6 +254,7 @@ const Reservation = props => {
                 <input className="send" value="Submit" type="submit"/>
             </form>
         </div>
+
     );
 };
 export default Reservation;
