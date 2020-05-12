@@ -7,46 +7,46 @@ import RoomList from "./components/RoomList";
 import Reservation from "./components/Reservation";
 import Login from "./components/login/Login";
 
-import { BrowserRouter as Router, Route } from "react-router-dom";
-import { HotelProvider } from "./components/HotelContext";
+import {BrowserRouter as Router, Route} from "react-router-dom";
+import {HotelProvider} from "./components/HotelContext";
 import AddReservationForm from "./components/AddReservationForm";
 import AddUserForm from "./components/AddUserForm";
-import { UserProvider } from "./components/Context/UserContext";
+import {UserProvider} from "./components/Context/UserContext";
 
 function App() {
-  return (
-    <Router>
-      <div className="App">
-        <UserProvider>
-          <HotelProvider>
-            <Route exact path="/" component={Login} />
-            <Route exact path="/login" component={Login} />
-            <Route exact path="/home" component={Nav} />
-            <Route exact path="/rooms" component={Nav} />
-            <Route exact path="/reservation/:guestId" component={Nav} />
-            <Route exact path="/newreservation" component={Nav} />
-            <Route exact path="/adduser" component={Nav} />
+    return (
+        <Router>
+            <div className="App">
+                <UserProvider>
+                    <HotelProvider>
+                        <Route exact path="/" component={Login}/>
+                        <Route exact path="/login" component={Login}/>
+                        <Route exact path="/home" component={Nav}/>
+                        <Route exact path="/rooms" component={Nav}/>
+                        <Route exact path="/reservation/:guestId" component={Nav}/>
+                        <Route exact path="/newreservation" component={Nav}/>
+                        <Route exact path="/adduser" component={Nav}/>
 
-            <div className="container">
-              <Route exact path="/home" component={ReservationTable} />
-              <Route exact path="/rooms" component={RoomList} />
-              <Route
-                exact
-                path="/reservation/:guestId"
-                component={Reservation}
-              />
-              <Route
-                exact
-                path="/newreservation"
-                component={AddReservationForm}
-              />
-              <Route exact path="/adduser" component={AddUserForm} />
+                        <div className="container">
+                            <Route exact path="/home" component={ReservationTable}/>
+                            <Route exact path="/rooms" component={RoomList}/>
+                            <Route
+                                exact
+                                path="/reservation/:guestId"
+                                component={Reservation}
+                            />
+                            <Route
+                                exact
+                                path="/newreservation"
+                                component={AddReservationForm}
+                            />
+                            <Route exact path="/adduser" component={AddUserForm}/>
+                        </div>
+                    </HotelProvider>
+                </UserProvider>
             </div>
-          </HotelProvider>
-        </UserProvider>
-      </div>
-    </Router>
-  );
+        </Router>
+    );
 }
 
 export default App;
