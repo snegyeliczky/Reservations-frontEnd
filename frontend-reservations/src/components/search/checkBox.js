@@ -6,17 +6,13 @@ import {HotelContext} from "../HotelContext";
 const CheckBoxes = () => {
 
     const {
-        limitIn,
         setLimitIn,
-        limitCheckin,
         setLimitCheckin,
-        limitOut,
         setLimitOut,
-        handleStatusChange
     } = useContext(HotelContext);
 
 
-    const changeLimitIn = async (e) => {
+    const changeLimitIn = (e) => {
         setLimitIn(e.target.checked);
     };
 
@@ -25,8 +21,8 @@ const CheckBoxes = () => {
     };
 
 
-    async function changeLimitCheckin(e) {
-        await setLimitCheckin(e.target.checked);
+    function changeLimitCheckin(e) {
+        setLimitCheckin(e.target.checked);
 
     };
 
@@ -48,7 +44,6 @@ const CheckBoxes = () => {
             <Checkbox defaultChecked style={inStyle} onChange={changeLimitIn} />
             <Checkbox defaultChecked style={checkinStyle} onChange={changeLimitCheckin}/>
             <Checkbox defaultChecked style={outStyle} onChange={changeLimitOut}/>
-            <button onClick={handleStatusChange}>filter</button>
         </div>
 
     )

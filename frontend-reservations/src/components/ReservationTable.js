@@ -24,8 +24,10 @@ const ReservationTable = () => {
             case "reservations":
                 console.log("all");
                 sortForAll("firstName");
+                break;
             default:
                 sortForDay("firstName",date);
+                break;
         }
     }
 

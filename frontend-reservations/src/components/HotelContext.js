@@ -1,4 +1,4 @@
-import React, {useState, createContext} from "react";
+import React, {useState, createContext, useEffect} from "react";
 import axios from "axios";
 
 export const HotelContext = createContext();
@@ -30,6 +30,10 @@ export const HotelProvider = props => {
         }
         return limitedList;
     };
+
+    useEffect(()=>{
+        handleStatusChange();
+    },[limitIn,limitCheckin,limitOut]);
 
 
     async function fetchReservationList() {
