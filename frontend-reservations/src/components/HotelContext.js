@@ -301,5 +301,6 @@ export const HotelProvider = props => {
         >
             {props.children}
         </HotelContext.Provider>
+
     );
 };
